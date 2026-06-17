@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <h1 th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></h1>
+    <p th:text="${lang == 'ja'}
+        ? 'メール本文を入力して、詐欺の可能性を確認できます。'
+        : '메일 내용을 입력하여 사기 가능성을 확인할 수 있습니다.'">
+    </p>
+</header>
+
+<main>
+
+<section class="card">
+    <textarea
+        id="mailText"
+        rows="10"
+        th:placeholder="${lang == 'ja'} ? 'メール本文を貼り付けてください' : '메일 내용을 붙여넣어 주세요'">
+    </textarea>
+
+    <br><br>
+
+    <button
+        id="fraudButton"
+        type="button"
+        th:text="${lang == 'ja'} ? '診断する' : '진단하기'">
+    </button>
+</section>
+
+<section class="card">
+    <h2 th:text="${lang == 'ja'} ? '診断結果' : '진단 결과'"></h2>
+    <div id="fraudResult"></div>
+</section>
+
+<a class="card" th:href="@{/(lang=${lang})}">
+    <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
+</a>
+
+</main>
+
+<script src="/fraud.js"></script>
+
+</body>
+</html>

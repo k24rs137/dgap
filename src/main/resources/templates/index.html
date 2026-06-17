@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html
+    th:lang="${lang}"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>D-Gap</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <h1>D-Gap</h1>
+
+    <p th:if="${lang == 'ja'}">
+        デジタル機器の使い方を、やさしく学べるサービス
+    </p>
+
+    <p th:if="${lang == 'ko'}">
+        디지털 기기 사용법을 쉽게 배울 수 있는 서비스
+    </p>
+
+    <div class="lang-switch">
+        <a th:href="@{/(lang='ja')}">日本語</a>
+        <a th:href="@{/(lang='ko')}">한국어</a>
+    </div>
+
+    <div class="menu-links">
+        <a th:href="@{/fraud(lang=${lang})}">
+    <span th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></span>
+</a>
+        <a th:href="@{/ai(lang=${lang})}">
+    <span th:text="${lang == 'ja'} ? 'AI相談' : 'AI 상담'"></span>
+</a>
+
+        <p id="loginStatus"></p>
+
+        <a id="loginLink" th:href="@{/login(lang=${lang})}">
+            <span th:text="${lang == 'ja'} ? 'ログイン' : '로그인'"></span>
+        </a>
+
+        <a id="registerLink" th:href="@{/register(lang=${lang})}">
+            <span th:text="${lang == 'ja'} ? '会員登録' : '회원가입'"></span>
+        </a>
+
+        <a th:href="@{/diagnosis(lang=${lang})}">
+            <span th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'"></span>
+        </a>
+
+        <a th:href="@{/community(lang=${lang})}">
+            <span th:text="${lang == 'ja'} ? 'コミュニティ' : '커뮤니티'"></span>
+        </a>
+
+        <button
+            type="button"
+            id="topLogoutButton"
+            style="display: none;"
+            th:text="${lang == 'ja'} ? 'ログアウト' : '로그아웃'">
+        </button>
+
+    </div>
+</header>
+
+<main>
+
+    <form action="/search" method="get">
+        <input type="hidden" name="lang" th:value="${lang}">
+
+        <input
+            type="text"
+            name="keyword"
+            th:placeholder="${lang == 'ja'}
+                ? '検索ワードを入力'
+                : '검색어를 입력하세요'">
+
+        <button
+            type="submit"
+            th:text="${lang == 'ja'} ? '検索' : '검색'">
+        </button>
+    </form>
+
+    <section class="card">
+
+        <h2 th:text="${lang == 'ja'} ? '学習進捗' : '학습 진행 상황'"></h2>
+
+        <div class="progress-bar">
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+        </div>
+
+        <p id="progressText">
+            0 / 0
+        </p>
+
+    </section>
+    <section class="card">
+
+    <h2 th:text="${lang == 'ja'} ? 'お気に入りレッスン' : '즐겨찾기 레슨'"></h2>
+
+    <div id="favoriteList">
+        <p th:text="${lang == 'ja'} ? 'お気に入りはまだありません。' : '아직 즐겨찾기가 없습니다.'"></p>
+    </div>
+
+</section>
+    <section class="card">
+
+    <h2 th:text="${lang == 'ja'} ? '学習履歴' : '학습 기록'"></h2>
+
+    <div id="historyList">
+
+        <p th:text="${lang == 'ja'}
+            ? 'まだ履歴がありません。'
+            : '아직 기록이 없습니다.'">
+        </p>
+
+    </div>
+
+</section>
+    <div th:each="category : ${categories}">
+
+        <a class="card" th:href="${category.url + '?lang=' + lang}">
+
+            <h2 th:if="${lang == 'ja'}" th:text="${category.titleJa}"></h2>
+            <h2 th:if="${lang == 'ko'}" th:text="${category.titleKo}"></h2>
+
+            <p th:if="${lang == 'ja'}" th:text="${category.descriptionJa}"></p>
+            <p th:if="${lang == 'ko'}" th:text="${category.descriptionKo}"></p>
+
+        </a>
+
+    </div>
+
+</main>
+
+<script src="/script.js"></script>
+<script src="/auth.js"></script>
+
+</body>
+</html>
+menu-links

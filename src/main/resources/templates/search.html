@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${lang == 'ja'} ? '検索結果' : '검색 결과'">検索結果</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <h1 th:text="${lang == 'ja'} ? '検索結果' : '검색 결과'"></h1>
+</header>
+
+<main>
+
+    <section class="card">
+        <h2 th:text="${lang == 'ja'} ? '検索ワード' : '검색어'"></h2>
+        <p th:text="${keyword}"></p>
+    </section>
+
+    <section class="card">
+        <h2 th:text="${lang == 'ja'} ? '該当するカテゴリ' : '해당 카테고리'"></h2>
+
+        <div th:if="${#lists.isEmpty(results)}">
+            <p th:text="${lang == 'ja'} ? '該当するカテゴリはありません。' : '해당하는 카테고리가 없습니다.'"></p>
+        </div>
+
+        <div th:each="result : ${results}" class="result-card">
+            <h3 th:if="${lang == 'ja'}" th:text="${result.titleJa}"></h3>
+<h3 th:if="${lang == 'ko'}" th:text="${result.titleKo}"></h3>
+
+<p th:if="${lang == 'ja'}" th:text="${result.descriptionJa}"></p>
+<p th:if="${lang == 'ko'}" th:text="${result.descriptionKo}"></p>
+
+<a th:href="${result.url + '?lang=' + lang}"
+   th:text="${lang == 'ja'} ? '詳細を見る' : '자세히 보기'">
+</a>
+        </div>
+    </section>
+
+    <a class="card" href="/">
+        <a class="card" th:href="${'/?lang=' + lang}">
+    <h2 th:text="${lang == 'ja'} ? 'トップへ戻る' : '메인으로 돌아가기'"></h2>
+</a>
+    </a>
+
+</main>
+
+</body>
+</html>

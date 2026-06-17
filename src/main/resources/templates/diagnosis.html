@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'">
+        困りごと診断
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header>
+    <h1 th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'"></h1>
+    <p th:text="${lang == 'ja'}
+        ? '検索ワードが分からなくても、目的に合うレッスンを探せます。'
+        : '검색어를 몰라도 목적에 맞는 레슨을 찾을 수 있습니다.'">
+    </p>
+</header>
+
+<main>
+
+    <section class="card">
+
+        <h2 th:text="${lang == 'ja'} ? '何に困っていますか？' : '무엇이 어려우신가요?'"></h2>
+
+        <a class="card" th:href="@{/lesson/gmail(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? 'メールを送りたい' : '메일을 보내고 싶어요'"></h3>
+        </a>
+
+        <a class="card" th:href="@{/lesson/google-map(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? '道順を調べたい' : '길찾기를 하고 싶어요'"></h3>
+        </a>
+
+        <a class="card" th:href="@{/lesson/camera-photo(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? '写真を撮りたい' : '사진을 찍고 싶어요'"></h3>
+        </a>
+
+        <a class="card" th:href="@{/lesson/phone-call(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? '電話をかけたい' : '전화를 걸고 싶어요'"></h3>
+        </a>
+
+        <a class="card" th:href="@{/lesson/money-safety(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? '銀行アプリや詐欺が不安' : '은행 앱이나 사기가 걱정돼요'"></h3>
+        </a>
+
+        <a class="card" th:href="@{/lesson/line-message(lang=${lang})}">
+            <h3 th:text="${lang == 'ja'} ? 'LINEで連絡したい' : 'LINE으로 연락하고 싶어요'"></h3>
+        </a>
+
+    </section>
+
+    <a class="card" th:href="@{/(lang=${lang})}">
+        <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
+    </a>
+
+</main>
+
+</body>
+</html>
