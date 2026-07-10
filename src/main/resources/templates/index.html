@@ -1,142 +1,485 @@
 <!DOCTYPE html>
-<html
-    th:lang="${lang}"
-    xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : 'ja'}">
+
 <head>
     <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>D-Gap</title>
-    <link rel="stylesheet" href="/style.css">
+
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
 
-<header>
-    <h1>D-Gap</h1>
+<body class="home-page">
 
-    <p th:if="${lang == 'ja'}">
-        デジタル機器の使い方を、やさしく学べるサービス
-    </p>
+<header class="site-header">
+    <div class="header-inner">
 
-    <p th:if="${lang == 'ko'}">
-        디지털 기기 사용법을 쉽게 배울 수 있는 서비스
-    </p>
+        <a class="site-logo"
+           th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
 
-    <div class="lang-switch">
-        <a th:href="@{/(lang='ja')}">日本語</a>
-        <a th:href="@{/(lang='ko')}">한국어</a>
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a href="#learning">学習カテゴリ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
+            <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+            <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="header-search"
+               th:href="@{/search(lang=${lang})}">
+                検索
+            </a>
+
+            <a class="button button-small button-secondary"
+               th:href="@{/(lang='ja')}"
+               data-ripple>
+                日本語
+            </a>
+
+            <a class="button button-small button-secondary"
+               th:href="@{/(lang='ko')}"
+               data-ripple>
+                한국어
+            </a>
+
+            <a class="button button-small button-primary"
+               th:href="@{/login(lang=${lang})}"
+               data-ripple>
+                ログイン
+            </a>
+
+            <button type="button"
+                    class="mobile-menu-button"
+                    id="dgapMenuButton"
+                    aria-controls="dgapMobileMenu"
+                    aria-expanded="false">
+                メニュー
+            </button>
+        </div>
     </div>
 
-    <div class="menu-links">
-        <a th:href="@{/fraud(lang=${lang})}">
-    <span th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></span>
-</a>
-        <a th:href="@{/ai(lang=${lang})}">
-    <span th:text="${lang == 'ja'} ? 'AI相談' : 'AI 상담'"></span>
-</a>
-
-        <p id="loginStatus"></p>
-
-        <a id="loginLink" th:href="@{/login(lang=${lang})}">
-            <span th:text="${lang == 'ja'} ? 'ログイン' : '로그인'"></span>
-        </a>
-
-        <a id="registerLink" th:href="@{/register(lang=${lang})}">
-            <span th:text="${lang == 'ja'} ? '会員登録' : '회원가입'"></span>
-        </a>
-
-        <a th:href="@{/diagnosis(lang=${lang})}">
-            <span th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'"></span>
-        </a>
-
-        <a th:href="@{/community(lang=${lang})}">
-            <span th:text="${lang == 'ja'} ? 'コミュニティ' : '커뮤니티'"></span>
-        </a>
-
-        <button
-            type="button"
-            id="topLogoutButton"
-            style="display: none;"
-            th:text="${lang == 'ja'} ? 'ログアウト' : '로그아웃'">
-        </button>
-
-    </div>
+    <nav class="mobile-nav"
+         id="dgapMobileMenu"
+         aria-label="スマートフォン用メニュー">
+        <a href="#learning">学習カテゴリ</a>
+        <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
+        <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+        <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        <a th:href="@{/search(lang=${lang})}">検索</a>
+        <a th:href="@{/login(lang=${lang})}">ログイン</a>
+    </nav>
 </header>
 
 <main>
 
-    <form action="/search" method="get">
-        <input type="hidden" name="lang" th:value="${lang}">
+    <section class="hero-section">
 
-        <input
-            type="text"
-            name="keyword"
-            th:placeholder="${lang == 'ja'}
-                ? '検索ワードを入力'
-                : '검색어를 입력하세요'">
+        <div class="hero-decoration hero-decoration-one"></div>
+        <div class="hero-decoration hero-decoration-two"></div>
 
-        <button
-            type="submit"
-            th:text="${lang == 'ja'} ? '検索' : '검색'">
-        </button>
-    </form>
+        <div class="hero-inner">
 
-    <section class="card">
+            <div class="hero-content reveal">
 
-        <h2 th:text="${lang == 'ja'} ? '学習進捗' : '학습 진행 상황'"></h2>
+                <p class="hero-label">
+                    DIGITAL LEARNING SERVICE
+                </p>
 
-        <div class="progress-bar">
-            <div
-                class="progress-fill"
-                id="progressFill">
+                <h1>
+                    デジタルの「分からない」を、<br>
+                    一つずつ「できる」に。
+                </h1>
+
+                <p class="hero-description">
+                    D-Gapは、スマートフォン、SNS、メール、地図、金融アプリなどを、
+                    やさしい手順で学べるデジタル学習サービスです。
+                    老若男女が安心して使えるように、見やすさ・分かりやすさ・操作しやすさを大切にしています。
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button type="button"
+                            class="button button-primary button-large"
+                            data-scroll-target="#learning"
+                            data-ripple>
+                        学習を始める
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                    <a class="button button-secondary button-large"
+                       th:href="@{/diagnosis(lang=${lang})}"
+                       data-ripple>
+                        困りごとを診断する
+                    </a>
+
+                </div>
+
+                <div class="hero-support">
+                    <span>大きく読みやすい文字</span>
+                    <span>音声読み上げ対応</span>
+                    <span>日本語・韓国語対応</span>
+                    <span>スマホでも使いやすい</span>
+                </div>
+
             </div>
+
+            <div class="hero-visual reveal">
+
+                <div class="demo-window">
+
+                    <div class="demo-window-header">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="demo-window-body">
+
+                        <p class="demo-small-title">
+                            今日のおすすめ学習
+                        </p>
+
+                        <div class="demo-card">
+                            <div class="demo-icon">01</div>
+
+                            <div>
+                                <strong>スマートフォンの基本</strong>
+                                <p>画面操作、電話、カメラ、文字入力を学びます。</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-card">
+                            <div class="demo-icon">02</div>
+
+                            <div>
+                                <strong>地図で経路を検索</strong>
+                                <p>目的地までの行き方を調べます。</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-card">
+                            <div class="demo-icon">03</div>
+
+                            <div>
+                                <strong>詐欺メール対策</strong>
+                                <p>危険なメールの特徴を確認できます。</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-progress">
+                            <div class="demo-progress-info">
+                                <span>学習の進み具合</span>
+                                <strong>60%</strong>
+                            </div>
+
+                            <div class="demo-progress-track">
+                                <span></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
-        <p id="progressText">
-            0 / 0
-        </p>
+        <button type="button"
+                class="scroll-guide"
+                data-scroll-target="#learning">
+            <span>下へスクロール</span>
+            <span class="scroll-guide-line"></span>
+        </button>
 
     </section>
-    <section class="card">
 
-    <h2 th:text="${lang == 'ja'} ? 'お気に入りレッスン' : '즐겨찾기 레슨'"></h2>
+    <section class="section learning-section"
+             id="learning">
 
-    <div id="favoriteList">
-        <p th:text="${lang == 'ja'} ? 'お気に入りはまだありません。' : '아직 즐겨찾기가 없습니다.'"></p>
-    </div>
+        <div class="section-inner">
 
-</section>
-    <section class="card">
+            <div class="section-heading reveal">
+                <p class="section-label">
+                    LEARNING
+                </p>
 
-    <h2 th:text="${lang == 'ja'} ? '学習履歴' : '학습 기록'"></h2>
+                <h2>
+                    学びたい内容を選ぶ
+                </h2>
 
-    <div id="historyList">
+                <p>
+                    目的に合ったカテゴリから、すぐに学習を始められます。
+                    はじめて使う人でも迷いにくいように、身近な操作から順番に学べます。
+                </p>
+            </div>
 
-        <p th:text="${lang == 'ja'}
-            ? 'まだ履歴がありません。'
-            : '아직 기록이 없습니다.'">
-        </p>
+            <div class="category-grid">
 
-    </div>
+                <a class="category-card reveal"
+                   th:href="@{/category/smartphone(lang=${lang})}">
 
-</section>
-    <div th:each="category : ${categories}">
+                    <div class="category-number">01</div>
 
-        <a class="card" th:href="${category.url + '?lang=' + lang}">
+                    <div>
+                        <h3>スマートフォン操作</h3>
 
-            <h2 th:if="${lang == 'ja'}" th:text="${category.titleJa}"></h2>
-            <h2 th:if="${lang == 'ko'}" th:text="${category.titleKo}"></h2>
+                        <p>
+                            電話、カメラ、文字入力、画面操作など、スマートフォンの基本を学びます。
+                        </p>
+                    </div>
 
-            <p th:if="${lang == 'ja'}" th:text="${category.descriptionJa}"></p>
-            <p th:if="${lang == 'ko'}" th:text="${category.descriptionKo}"></p>
+                    <span class="category-arrow">→</span>
+                </a>
 
-        </a>
+                <a class="category-card reveal"
+                   th:href="@{/category/sns(lang=${lang})}">
 
-    </div>
+                    <div class="category-number">02</div>
+
+                    <div>
+                        <h3>SNS・メッセージ</h3>
+
+                        <p>
+                            LINEやカカオトークなど、家族や友人とつながるための使い方を学びます。
+                        </p>
+                    </div>
+
+                    <span class="category-arrow">→</span>
+                </a>
+
+                <a class="category-card reveal"
+                   th:href="@{/category/google(lang=${lang})}">
+
+                    <div class="category-number">03</div>
+
+                    <div>
+                        <h3>Googleサービス</h3>
+
+                        <p>
+                            Gmail、Googleマップ、検索、翻訳など、日常で役立つサービスを学びます。
+                        </p>
+                    </div>
+
+                    <span class="category-arrow">→</span>
+                </a>
+
+                <a class="category-card reveal"
+                   th:href="@{/category/money(lang=${lang})}">
+
+                    <div class="category-number">04</div>
+
+                    <div>
+                        <h3>金融・決済アプリ</h3>
+
+                        <p>
+                            決済アプリや金融アプリを安全に使うための基本を学びます。
+                        </p>
+                    </div>
+
+                    <span class="category-arrow">→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section feature-section">
+
+        <div class="section-inner">
+
+            <div class="section-heading reveal">
+                <p class="section-label">
+                    FEATURES
+                </p>
+
+                <h2>
+                    誰でも安心して使える工夫
+                </h2>
+
+                <p>
+                    D-Gapは、若い人だけでなく、高齢者やデジタル機器に不慣れな人にも使いやすい画面を目指しています。
+                </p>
+            </div>
+
+            <div class="feature-grid">
+
+                <article class="feature-card reveal">
+                    <span class="feature-index">01</span>
+
+                    <h3>見やすい画面設計</h3>
+
+                    <p>
+                        大きめの文字、十分な余白、分かりやすいボタン配置により、
+                        初めて使う人でも迷いにくい画面にしています。
+                    </p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <span class="feature-index">02</span>
+
+                    <h3>音声でサポート</h3>
+
+                    <p>
+                        文章の読み上げや音声入力に対応し、
+                        文字を読むことや入力することが苦手な人も学習できます。
+                    </p>
+                </article>
+
+                <article class="feature-card reveal">
+                    <span class="feature-index">03</span>
+
+                    <h3>進捗を確認できる</h3>
+
+                    <p>
+                        学習完了やお気に入り機能によって、
+                        自分がどこまで学んだかを確認しながら進められます。
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="section support-section">
+
+        <div class="section-inner">
+
+            <div class="support-layout">
+
+                <div class="support-content reveal">
+                    <p class="section-label">
+                        SUPPORT
+                    </p>
+
+                    <h2>
+                        困ったときも、すぐに次の行動が分かる
+                    </h2>
+
+                    <p>
+                        何から学べばよいか分からない場合は、困りごと診断やAI相談から始められます。
+                        入力した内容に合わせて、必要な学習につながるように設計しています。
+                    </p>
+
+                    <div class="support-buttons">
+
+                        <a class="button button-primary"
+                           th:href="@{/diagnosis(lang=${lang})}"
+                           data-ripple>
+                            困りごと診断を使う
+                        </a>
+
+                        <a class="button button-secondary"
+                           th:href="@{/ai(lang=${lang})}"
+                           data-ripple>
+                            AI相談を使う
+                        </a>
+
+                        <a class="button button-secondary"
+                           th:href="@{/fraud(lang=${lang})}"
+                           data-ripple>
+                            詐欺メール診断
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="support-panel reveal">
+
+                    <div class="support-panel-item">
+                        <span>STEP 1</span>
+                        <strong>困っていることを選ぶ</strong>
+                        <p>スマホ操作、SNS、地図、メールなどから選択できます。</p>
+                    </div>
+
+                    <div class="support-panel-item">
+                        <span>STEP 2</span>
+                        <strong>おすすめの学習を見る</strong>
+                        <p>必要なレッスンへすぐに移動できます。</p>
+                    </div>
+
+                    <div class="support-panel-item">
+                        <span>STEP 3</span>
+                        <strong>自分のペースで練習する</strong>
+                        <p>何度でも確認しながら、少しずつ学習できます。</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="cta-section reveal">
+
+        <div class="cta-inner">
+
+            <div>
+                <p class="section-label">
+                    START
+                </p>
+
+                <h2>
+                    今日からデジタル学習を始めよう
+                </h2>
+
+                <p>
+                    分からないことを、一つずつ一緒に解決します。
+                    まずは無料登録して、学習履歴を残しながら進めてみましょう。
+                </p>
+            </div>
+
+            <a class="button button-light button-large"
+               th:href="@{/register(lang=${lang})}"
+               data-ripple>
+                無料で会員登録する
+                <span aria-hidden="true">→</span>
+            </a>
+
+        </div>
+
+    </section>
 
 </main>
 
-<script src="/script.js"></script>
-<script src="/auth.js"></script>
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div>
+            <a class="site-logo footer-logo"
+               th:href="@{/(lang=${lang})}">
+                <span class="site-logo-mark">D</span>
+                <span>D-Gap</span>
+            </a>
+
+            <p>
+                デジタルの不安を、学びと安心に変えるサービス。
+            </p>
+        </div>
+
+        <p class="copyright">
+            © 2026 D-Gap
+        </p>
+
+    </div>
+
+</footer>
+
+<script th:src="@{/script.js}"></script>
 
 </body>
 </html>
-menu-links
