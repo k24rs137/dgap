@@ -6,13 +6,13 @@ function getDgapCurrentLang() {
     const params = new URLSearchParams(window.location.search);
     const urlLang = params.get("lang");
 
-    if (urlLang === "ja" || urlLang === "ko" || urlLang === "en" || urlLang === "hira") {
+    if (["ja", "ko", "en", "hira"].includes(urlLang)) {
         return urlLang;
     }
 
     const savedLang = localStorage.getItem("dgapLanguage");
 
-    if (savedLang === "ja" || savedLang === "ko" || savedLang === "en" || savedLang === "hira") {
+    if (["ja", "ko", "en", "hira"].includes(savedLang)) {
         return savedLang;
     }
 
@@ -34,6 +34,71 @@ function getDgapCompleteMessage() {
 
     return "学習完了です。お疲れさまでした。";
 }
+
+function getDgapProgressText(completed, total) {
+    if (lang === "ko") {
+        return completed + " / " + total + " 레슨 완료";
+    }
+
+    if (lang === "en") {
+        return completed + " / " + total + " lessons completed";
+    }
+
+    if (lang === "hira") {
+        return completed + " / " + total + " れっすん かんりょう";
+    }
+
+    return completed + " / " + total + " レッスン完了";
+}
+
+function getDgapDoneStatusText() {
+    if (lang === "ko") {
+        return "완료됨";
+    }
+
+    if (lang === "en") {
+        return "Completed";
+    }
+
+    if (lang === "hira") {
+        return "かんりょうずみ";
+    }
+
+    return "完了済み";
+}
+
+function getDgapFavoriteAddText() {
+    if (lang === "ko") {
+        return "즐겨찾기에 추가";
+    }
+
+    if (lang === "en") {
+        return "Add to favorites";
+    }
+
+    if (lang === "hira") {
+        return "おきにいりについか";
+    }
+
+    return "お気に入りに追加";
+}
+
+function getDgapFavoriteRemoveText() {
+    if (lang === "ko") {
+        return "즐겨찾기 해제";
+    }
+
+    if (lang === "en") {
+        return "Remove from favorites";
+    }
+
+    if (lang === "hira") {
+        return "おきにいりをはずす";
+    }
+
+    return "お気に入り解除";
+}
+
 if (checkbox) {
     const key = checkbox.dataset.key;
 
@@ -105,10 +170,7 @@ if (progressText) {
         }
     }
 
-progressText.textContent =
-    lang === "ko"
-        ? completed + " / " + lessonKeys.length + " 레슨 완료"
-        : completed + " / " + lessonKeys.length + " レッスン完了";
+progressText.textContent = getDgapProgressText(completed, lessonKeys.length);
 
 const percent =
     (completed / lessonKeys.length) * 100;
@@ -124,10 +186,7 @@ if (lessonStatuses) {
         const key = status.dataset.key;
 
         if (localStorage.getItem(key) === "done") {
-            status.textContent =
-                lang === "ko"
-                    ? "완료됨"
-                    : "完了済み";
+            status.textContent = getDgapDoneStatusText();
         }
     });
     const quizArea = document.getElementById("quizArea");
@@ -182,10 +241,7 @@ if (favoriteButton) {
         JSON.parse(localStorage.getItem("favoriteLessons")) || [];
 
     if (favorites.includes(favoriteKey)) {
-        favoriteButton.textContent =
-            lang === "ko"
-                ? "즐겨찾기 해제"
-                : "お気に入り解除";
+        favoriteButton.textContent = getDgapFavoriteRemoveText();
     }
 
     favoriteButton.addEventListener("click", function () {
@@ -203,10 +259,7 @@ if (favoriteButton) {
                 JSON.stringify(newFavorites)
             );
 
-            favoriteButton.textContent =
-                lang === "ko"
-                    ? "즐겨찾기에 추가"
-                    : "お気に入りに追加";
+            favoriteButton.textContent = getDgapFavoriteAddText();
 
         } else {
             favorites.push(favoriteKey);
@@ -216,10 +269,7 @@ if (favoriteButton) {
                 JSON.stringify(favorites)
             );
 
-            favoriteButton.textContent =
-                lang === "ko"
-                    ? "즐겨찾기 해제"
-                    : "お気に入り解除";
+            favoriteButton.textContent = getDgapFavoriteRemoveText();
         }
     });
 }
@@ -1601,4 +1651,49 @@ document.addEventListener("DOMContentLoaded", function () {
             .replaceAll("'", "&#039;");
     }
 });
+}
+
+/* ==============================
+   D-Gap redesigned pages effects
+================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    initializeDgapTiltCards();
+    initializeDgapPageEntryClass();
+});
+
+function initializeDgapPageEntryClass() {
+    document.body.classList.add("dgap-page-ready");
+}
+
+function initializeDgapTiltCards() {
+    const cards = document.querySelectorAll("[data-tilt-card]");
+
+    if (cards.length === 0) {
+        return;
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+        return;
+    }
+
+    cards.forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -4;
+            const rotateY = ((x - centerX) / centerX) * 4;
+
+            card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener("pointerleave", () => {
+            card.style.transform = "";
+        });
+    });
 }
