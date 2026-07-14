@@ -38,22 +38,10 @@
                 検索
             </a>
 
-            <a class="button button-small button-secondary"
-               th:href="@{/(lang='ja')}"
-               data-ripple>
-                日本語
-            </a>
-
-            <a class="button button-small button-secondary"
-               th:href="@{/(lang='ko')}"
-               data-ripple>
-                한국어
-            </a>
-
             <a class="button button-small button-primary"
                th:href="@{/login(lang=${lang})}"
                data-ripple>
-                ログイン
+                <span data-dgap-text="login">ログイン</span>
             </a>
 
             <button type="button"
@@ -65,7 +53,59 @@
             </button>
         </div>
     </div>
+<div class="accessibility-toolbar">
 
+    <div class="accessibility-group">
+        <span class="accessibility-label">表示言語</span>
+
+        <button type="button"
+                class="accessibility-button dgap-language-button"
+                data-dgap-lang="ja">
+            日本語
+        </button>
+
+        <button type="button"
+                class="accessibility-button dgap-language-button"
+                data-dgap-lang="ko">
+            한국어
+        </button>
+
+        <button type="button"
+                class="accessibility-button dgap-language-button"
+                data-dgap-lang="en">
+            English
+        </button>
+
+        <button type="button"
+                class="accessibility-button dgap-language-button"
+                data-dgap-lang="hira">
+            ひらがな
+        </button>
+    </div>
+
+    <div class="accessibility-group">
+        <span class="accessibility-label">文字サイズ</span>
+
+        <button type="button"
+                class="accessibility-button font-size-button"
+                data-font-size="normal">
+            標準
+        </button>
+
+        <button type="button"
+                class="accessibility-button font-size-button"
+                data-font-size="large">
+            大
+        </button>
+
+        <button type="button"
+                class="accessibility-button font-size-button"
+                data-font-size="xlarge">
+            特大
+        </button>
+    </div>
+
+</div>
     <nav class="mobile-nav"
          id="dgapMobileMenu"
          aria-label="スマートフォン用メニュー">

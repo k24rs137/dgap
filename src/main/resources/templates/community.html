@@ -1,69 +1,94 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? 'コミュニティ' : '커뮤니티'"></title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body class="designed-page community-redesign-page">
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? 'コミュニティ' : '커뮤니티'"></h1>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="site-logo" th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
+            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</a>
+        </nav>
+        <div class="header-actions">
+            <a class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
+        </div>
+    </div>
 </header>
 
-<main>
+<main class="designed-main community-main">
 
-<section class="card" id="notLoggedInArea">
+    <section class="community-hero reveal">
+        <div class="community-hero-card">
+            <p class="designed-kicker">COMMUNITY</p>
+            <h1 th:text="${lang == 'ko' ? '배운 것을 나누는 공간' : (lang == 'en' ? 'A place to share what you learned' : (lang == 'hira' ? 'まなんだことをわかちあうばしょ' : '学んだことを分かち合う場所'))}">学んだことを分かち合う場所</h1>
+            <p th:text="${lang == 'ko' ? '질문, 알게 된 점, 다시 보고 싶은 내용을 기록할 수 있습니다.' : (lang == 'en' ? 'You can write questions, discoveries, and things you want to review.' : (lang == 'hira' ? 'しつもん、わかったこと、あとでみたいことをかけます。' : '質問、分かったこと、あとで見たいことを記録できます。'))}">質問や学びを記録できます。</p>
+        </div>
+    </section>
 
-    <h2 th:text="${lang == 'ja'} ? 'ログインが必要です' : '로그인이 필요합니다'"></h2>
+    <section class="community-wall">
+        <div class="community-layout">
 
-    <p th:text="${lang == 'ja'}
-        ? 'コミュニティ機能を利用するにはログインしてください。'
-        : '커뮤니티 기능을 사용하려면 로그인해주세요.'">
-    </p>
+            <section class="community-login-gate reveal" id="notLoggedInArea" data-tilt-card>
+                <div class="community-lock-icon">🔒</div>
+                <h2 th:text="${lang == 'ko' ? '로그인이 필요합니다' : (lang == 'en' ? 'Login required' : (lang == 'hira' ? 'ろぐいんがひつようです' : 'ログインが必要です'))}">ログインが必要です</h2>
+                <p th:text="${lang == 'ko' ? '커뮤니티 기능을 사용하려면 로그인해주세요.' : (lang == 'en' ? 'Please log in to use community features.' : (lang == 'hira' ? 'こみゅにてぃきのうをつかうには、ろぐいんしてください。' : 'コミュニティ機能を利用するにはログインしてください。'))}">ログインしてください。</p>
+                <a class="design-button design-button-solid" th:href="@{/login(lang=${lang})}" data-ripple
+                   th:text="${lang == 'ko' ? '로그인하기' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいんする' : 'ログインする'))}">ログインする</a>
+            </section>
 
-    <a class="card" th:href="${'/login?lang=' + lang}">
-        <h3 th:text="${lang == 'ja'} ? 'ログインする' : '로그인하기'"></h3>
-    </a>
+            <section class="community-post-panel reveal" id="loggedInArea" style="display: none;">
+                <div class="community-user-banner">
+                    <div>
+                        <p class="section-label" th:text="${lang == 'ko' ? 'WELCOME' : (lang == 'en' ? 'WELCOME' : (lang == 'hira' ? 'ようこそ' : 'WELCOME'))}">WELCOME</p>
+                        <h2 th:text="${lang == 'ko' ? '커뮤니티에 오신 것을 환영합니다' : (lang == 'en' ? 'Welcome to the community' : (lang == 'hira' ? 'こみゅにてぃへようこそ' : 'コミュニティへようこそ'))}">コミュニティへようこそ</h2>
+                        <p id="userWelcome"></p>
+                    </div>
+                    <button type="button" id="logoutButton" class="logout-chip-button" data-ripple
+                            th:text="${lang == 'ko' ? '로그아웃' : (lang == 'en' ? 'Log out' : (lang == 'hira' ? 'ろぐあうと' : 'ログアウト'))}">ログアウト</button>
+                </div>
 
-</section>
+                <div class="post-composer-card">
+                    <textarea id="postInput" rows="5"
+                              th:placeholder="${lang == 'ko' ? '질문이나 배운 내용을 작성해주세요' : (lang == 'en' ? 'Write your questions or what you learned' : (lang == 'hira' ? 'しつもんやまなんだことをかいてください' : '質問や学んだことを書いてください'))}"></textarea>
+                    <button type="button" id="postButton" class="design-button design-button-solid" data-ripple
+                            th:text="${lang == 'ko' ? '게시하기' : (lang == 'en' ? 'Post' : (lang == 'hira' ? 'とうこうする' : '投稿する'))}">投稿する</button>
+                </div>
 
-<section class="card" id="loggedInArea" style="display: none;">
+                <div class="community-feed-card">
+                    <p class="section-label" th:text="${lang == 'ko' ? 'FEED' : (lang == 'en' ? 'FEED' : (lang == 'hira' ? 'とうこう' : 'FEED'))}">FEED</p>
+                    <div id="postList"></div>
+                </div>
+            </section>
 
-    <h2 th:text="${lang == 'ja'} ? 'コミュニティへようこそ' : '커뮤니티에 오신 것을 환영합니다'"></h2>
+            <aside class="community-side-note reveal" data-tilt-card>
+                <span>💡</span>
+                <h3 th:text="${lang == 'ko' ? '사용 팁' : (lang == 'en' ? 'Tips' : (lang == 'hira' ? 'つかいかたのひんと' : '使い方のヒント'))}">使い方のヒント</h3>
+                <p th:text="${lang == 'ko' ? '개인정보나 비밀번호는 게시하지 않도록 주의하세요.' : (lang == 'en' ? 'Do not post personal information or passwords.' : (lang == 'hira' ? 'こじんじょうほうやぱすわーどはとうこうしないようにしましょう。' : '個人情報やパスワードは投稿しないようにしましょう。'))}">個人情報やパスワードは投稿しないようにしましょう。</p>
+            </aside>
+        </div>
 
-    <p id="userWelcome"></p>
-    <button
-    type="button"
-    id="logoutButton"
-    th:text="${lang == 'ja'} ? 'ログアウト' : '로그아웃'">
-    </button>
-
-    <textarea
-        id="postInput"
-        rows="4"
-        th:placeholder="${lang == 'ja'} ? '質問や学んだことを書いてください' : '질문이나 배운 내용을 작성해주세요'">
-    </textarea>
-
-    <br><br>
-
-    <button
-        type="button"
-        id="postButton"
-        th:text="${lang == 'ja'} ? '投稿する' : '게시하기'">
-    </button>
-
-    <div id="postList"></div>
-
-</section>
-
-<a class="card" th:href="@{/(lang=${lang})}">
-    <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
-</a>
+        <div class="designed-back-area">
+            <a class="design-button design-button-solid" th:href="@{/(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'ほーむへもどる' : 'トップへ戻る'))}">トップへ戻る</a>
+        </div>
+    </section>
 
 </main>
 
-<script src="/community.js"></script>
-
+<script th:src="@{/community.js}"></script>
+<script th:src="@{/script.js}"></script>
 </body>
 </html>

@@ -1,100 +1,146 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja' ? category.titleJa : category.titleKo}">
-        カテゴリ詳細
-    </title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${category.getTitleByLang(lang)}">カテゴリ詳細</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body class="designed-page category-redesign-page">
 
-<header>
-    <h1 th:if="${lang == 'ja'}" th:text="${category.titleJa}"></h1>
-    <h1 th:if="${lang == 'ko'}" th:text="${category.titleKo}"></h1>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="site-logo" th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}"
+               th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}"
+               th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
+            <a th:href="@{/ai(lang=${lang})}"
+               th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</a>
+            <a th:href="@{/community(lang=${lang})}"
+               th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
+        </div>
+    </div>
 </header>
 
-<main>
+<main class="designed-main learning-main">
 
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? '学習内容' : '학습 내용'"></h2>
+    <section class="learning-hero designed-hero">
+        <div class="designed-hero-bg"></div>
+        <div class="designed-hero-grid">
+            <div class="designed-hero-copy reveal">
+                <p class="designed-kicker" th:text="${lang == 'ko' ? 'LEARNING BOARD' : (lang == 'en' ? 'LEARNING BOARD' : (lang == 'hira' ? 'がくしゅうぼーど' : 'LEARNING BOARD'))}">LEARNING BOARD</p>
+                <h1 th:text="${category.getTitleByLang(lang)}">カテゴリ名</h1>
+                <p th:text="${category.getDescriptionByLang(lang)}">カテゴリ説明</p>
+                <div class="learning-hero-actions">
+                    <a class="design-button design-button-solid" href="#lessonList" data-ripple
+                       th:text="${lang == 'ko' ? '레슨 보기' : (lang == 'en' ? 'View lessons' : (lang == 'hira' ? 'れっすんをみる' : 'レッスンを見る'))}">レッスンを見る</a>
+                    <a class="design-button design-button-soft" th:href="@{/diagnosis(lang=${lang})}" data-ripple
+                       th:text="${lang == 'ko' ? '진단에서 찾기' : (lang == 'en' ? 'Find by check' : (lang == 'hira' ? 'しんだんでさがす' : '診断で探す'))}">診断で探す</a>
+                </div>
+            </div>
 
-        <p th:if="${lang == 'ja'}" th:text="${category.descriptionJa}"></p>
-        <p th:if="${lang == 'ko'}" th:text="${category.descriptionKo}"></p>
-    </section>
-
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? 'このカテゴリで学べること' : '이 카테고리에서 배울 수 있는 것'"></h2>
-
-        <ul th:if="${lang == 'ja'}">
-            <li th:each="step : ${category.stepsJa}" th:text="${step}"></li>
-        </ul>
-
-        <ul th:if="${lang == 'ko'}">
-            <li th:each="step : ${category.stepsKo}" th:text="${step}"></li>
-        </ul>
-
-        <div class="check-area">
-            <label>
-                <input type="checkbox" id="completeCheck">
-                <span th:text="${lang == 'ja'} ? 'このカテゴリの学習を完了した' : '이 카테고리 학습을 완료했습니다'"></span>
-            </label>
-
-            <p id="completeMessage" class="complete-message"></p>
+            <div class="learning-status-panel reveal" data-tilt-card>
+                <div class="learning-ring">
+                    <span th:text="${#lists.size(category.lessons)}">4</span>
+                </div>
+                <p class="learning-ring-label"
+                   th:text="${lang == 'ko' ? '준비된 레슨' : (lang == 'en' ? 'available lessons' : (lang == 'hira' ? 'れっすん' : '用意されたレッスン'))}">用意されたレッスン</p>
+                <div class="learning-mini-list">
+                    <span th:text="${lang == 'ko' ? '보기 쉬운 단계' : (lang == 'en' ? 'clear steps' : (lang == 'hira' ? 'わかりやすいてじゅん' : 'わかりやすい手順'))}">わかりやすい手順</span>
+                    <span th:text="${lang == 'ko' ? '음성 지원' : (lang == 'en' ? 'voice support' : (lang == 'hira' ? 'おんせいさぽーと' : '音声サポート'))}">音声サポート</span>
+                    <span th:text="${lang == 'ko' ? '진행 확인' : (lang == 'en' ? 'progress check' : (lang == 'hira' ? 'すすみぐあいかくにん' : '進捗確認'))}">進捗確認</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? '学習レッスン' : '학습 레슨'"></h2>
+    <section class="design-section learning-feature-section">
+        <div class="design-section-inner">
+            <div class="section-heading reveal">
+                <p class="section-label" th:text="${lang == 'ko' ? 'CAN LEARN' : (lang == 'en' ? 'CAN LEARN' : (lang == 'hira' ? 'まなべること' : 'CAN LEARN'))}">CAN LEARN</p>
+                <h2 th:text="${lang == 'ko' ? '이 카테고리에서 배울 수 있는 것' : (lang == 'en' ? 'What you can learn' : (lang == 'hira' ? 'このかてごりでまなべること' : 'このカテゴリで学べること'))}">このカテゴリで学べること</h2>
+            </div>
 
-        <div th:if="${#lists.isEmpty(category.lessons)}">
-            <p th:text="${lang == 'ja'} ? 'このカテゴリのレッスンは準備中です。' : '이 카테고리의 레슨은 준비 중입니다.'"></p>
-        </div>
+            <div class="learning-step-grid">
+                <article class="learning-step-card reveal" th:each="step, stat : ${category.getStepsByLang(lang)}" data-tilt-card>
+                    <span class="learning-step-number" th:text="${stat.count < 10 ? '0' + stat.count : stat.count}">01</span>
+                    <p th:text="${step}">手順</p>
+                </article>
+            </div>
 
-        <div th:each="lesson : ${category.lessons}" class="result-card">
-            <p
-    class="lesson-status"
-    th:attr="data-key=${lesson.url}">
-</p>
-
-    <a th:href="${lesson.url + '?lang=' + lang}">
-
-        <h3 th:if="${lang == 'ja'}" th:text="${lesson.titleJa}"></h3>
-        <h3 th:if="${lang == 'ko'}" th:text="${lesson.titleKo}"></h3>
-
-    </a>
-
-    <p th:if="${lang == 'ja'}" th:text="${lesson.descriptionJa}"></p>
-    <p th:if="${lang == 'ko'}" th:text="${lesson.descriptionKo}"></p>
-    <p>
-    <strong th:text="${lang == 'ja'} ? '難易度：' : '난이도: '"></strong>
-    <span th:text="${lesson.level}"></span>
-</p>
-
-<p>
-    <strong th:text="${lang == 'ja'} ? '目安時間：' : '예상 시간: '"></strong>
-    <span th:text="${lesson.time}"></span>
-</p>
-
-</div>
-    </section>
-
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? 'おすすめカテゴリ' : '추천 카테고리'"></h2>
-
-        <div th:each="recommend : ${recommendations}">
-            <p th:if="${lang == 'ja'}" th:text="${recommend.titleJa}"></p>
-            <p th:if="${lang == 'ko'}" th:text="${recommend.titleKo}"></p>
+            <div class="check-area redesigned-check reveal">
+                <label>
+                    <input type="checkbox" id="completeCheck">
+                    <span th:text="${lang == 'ko' ? '이 카테고리 학습을 완료했습니다' : (lang == 'en' ? 'I have completed this category' : (lang == 'hira' ? 'このかてごりのがくしゅうをかんりょうした' : 'このカテゴリの学習を完了した'))}">このカテゴリの学習を完了した</span>
+                </label>
+                <p id="completeMessage" class="complete-message"></p>
+            </div>
         </div>
     </section>
 
-    <a class="card" th:href="${'/?lang=' + lang}">
-        <h2 th:text="${lang == 'ja'} ? 'トップページへ戻る' : '메인 페이지로 돌아가기'"></h2>
-    </a>
+    <section class="design-section lesson-list-section" id="lessonList">
+        <div class="design-section-inner">
+            <div class="section-heading reveal">
+                <p class="section-label">LESSONS</p>
+                <h2 th:text="${lang == 'ko' ? '학습 레슨' : (lang == 'en' ? 'Learning lessons' : (lang == 'hira' ? 'がくしゅうれっすん' : '学習レッスン'))}">学習レッスン</h2>
+            </div>
+
+            <div th:if="${#lists.isEmpty(category.lessons)}" class="empty-panel reveal">
+                <p th:text="${lang == 'ko' ? '이 카테고리의 레슨은 준비 중입니다.' : (lang == 'en' ? 'Lessons in this category are being prepared.' : (lang == 'hira' ? 'このかてごりのれっすんはじゅんびちゅうです。' : 'このカテゴリのレッスンは準備中です。'))}">準備中</p>
+            </div>
+
+            <div class="lesson-card-grid">
+                <article class="lesson-board-card reveal" th:each="lesson, stat : ${category.lessons}" data-tilt-card>
+                    <p class="lesson-status" th:attr="data-key=${lesson.url}"></p>
+                    <div class="lesson-board-topline">
+                        <span th:text="${stat.count < 10 ? '0' + stat.count : stat.count}">01</span>
+                        <span th:text="${lesson.getLevelByLang(lang)}">初級</span>
+                    </div>
+                    <h3 th:text="${lesson.getTitleByLang(lang)}">レッスン名</h3>
+                    <p th:text="${lesson.getDescriptionByLang(lang)}">説明</p>
+                    <div class="lesson-board-footer">
+                        <span th:text="${lesson.getTimeByLang(lang)}">5分</span>
+                        <a th:href="${lesson.url + '?lang=' + lang}" data-ripple
+                           th:text="${lang == 'ko' ? '시작하기' : (lang == 'en' ? 'Start' : (lang == 'hira' ? 'はじめる' : '始める'))}">始める</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="design-section recommendation-section">
+        <div class="design-section-inner">
+            <div class="recommendation-panel reveal">
+                <div>
+                    <p class="section-label" th:text="${lang == 'ko' ? 'NEXT' : (lang == 'en' ? 'NEXT' : (lang == 'hira' ? 'つぎにおすすめ' : 'NEXT'))}">NEXT</p>
+                    <h2 th:text="${lang == 'ko' ? '추천 카테고리' : (lang == 'en' ? 'Recommended categories' : (lang == 'hira' ? 'おすすめかてごり' : 'おすすめカテゴリ'))}">おすすめカテゴリ</h2>
+                    <div class="recommendation-chips">
+                        <a th:each="recommend : ${recommendations}"
+                           th:href="${recommend.url + '?lang=' + lang}"
+                           th:text="${recommend.getTitleByLang(lang)}">カテゴリ</a>
+                    </div>
+                </div>
+                <a class="design-button design-button-solid" th:href="@{/(lang=${lang})}" data-ripple
+                   th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'ほーむへもどる' : 'トップページへ戻る'))}">トップページへ戻る</a>
+            </div>
+        </div>
+    </section>
 
 </main>
 
-<script src="/script.js"></script>
-
+<script th:src="@{/script.js}"></script>
 </body>
 </html>

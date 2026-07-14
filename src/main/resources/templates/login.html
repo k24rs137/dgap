@@ -1,62 +1,58 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? 'ログイン' : '로그인'">
-        ログイン
-    </title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Login' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body class="designed-page auth-redesign-page login-redesign-page">
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? 'ログイン' : '로그인'"></h1>
-    <p th:text="${lang == 'ja'} ? 'アカウントにログインしてサービスを利用しましょう' : '계정에 로그인하여 서비스를 이용하세요'"></p>
-</header>
+<main class="auth-split-shell">
 
-<main>
-
-    <section class="card">
-
-        <label th:text="${lang == 'ja'} ? 'ユーザーID' : '아이디'"></label>
-        <input
-            type="text"
-            id="loginId"
-            th:placeholder="${lang == 'ja'} ? 'ユーザーIDを入力' : '아이디를 입력하세요'">
-
-        <br><br>
-
-        <label th:text="${lang == 'ja'} ? 'パスワード' : '비밀번호'"></label>
-        <input
-            type="password"
-            id="loginPassword"
-            th:placeholder="${lang == 'ja'} ? 'パスワードを入力' : '비밀번호를 입력하세요'">
-
-        <br><br>
-
-        <button
-            type="button"
-            id="loginButton"
-            th:text="${lang == 'ja'} ? 'ログイン' : '로그인'">
-        </button>
-
-        <p id="loginMessage"></p>
-
-        <p>
-            <a th:href="${'/register?lang=' + lang}"
-               th:text="${lang == 'ja'} ? 'アカウントをお持ちでない方はこちら' : '계정이 없으신가요? 회원가입'">
-            </a>
-        </p>
-
+    <section class="auth-brand-panel reveal">
+        <a class="site-logo auth-logo" th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+        <div class="auth-orbit">
+            <span></span><span></span><span></span>
+            <strong>LOGIN</strong>
+        </div>
+        <h1 th:text="${lang == 'ko' ? '다시 오신 것을 환영합니다' : (lang == 'en' ? 'Welcome back' : (lang == 'hira' ? 'おかえりなさい' : 'おかえりなさい'))}">おかえりなさい</h1>
+        <p th:text="${lang == 'ko' ? '로그인하면 학습 기록과 즐겨찾기를 이어서 사용할 수 있습니다.' : (lang == 'en' ? 'Log in to continue using your progress and favorites.' : (lang == 'hira' ? 'ろぐいんすると、がくしゅうりれきやおきにいりをつづけてつかえます。' : 'ログインすると、学習履歴やお気に入りを続けて使えます。'))}">ログインすると、学習履歴を使えます。</p>
     </section>
 
-    <a class="card" th:href="@{/(lang=${lang})}">
-        <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
-    </a>
+    <section class="auth-form-panel reveal" data-tilt-card>
+        <p class="designed-kicker" th:text="${lang == 'ko' ? 'ACCOUNT' : (lang == 'en' ? 'ACCOUNT' : (lang == 'hira' ? 'あかうんと' : 'ACCOUNT'))}">ACCOUNT</p>
+        <h2 th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</h2>
+
+        <label class="auth-label" for="loginId" th:text="${lang == 'ko' ? '아이디' : (lang == 'en' ? 'User ID' : (lang == 'hira' ? 'ゆーざーID' : 'ユーザーID'))}">ユーザーID</label>
+        <input class="auth-input" type="text" id="loginId"
+               th:placeholder="${lang == 'ko' ? '아이디를 입력하세요' : (lang == 'en' ? 'Enter your user ID' : (lang == 'hira' ? 'ゆーざーIDをにゅうりょくしてください' : 'ユーザーIDを入力してください'))}">
+
+        <label class="auth-label" for="loginPassword" th:text="${lang == 'ko' ? '비밀번호' : (lang == 'en' ? 'Password' : (lang == 'hira' ? 'ぱすわーど' : 'パスワード'))}">パスワード</label>
+        <input class="auth-input" type="password" id="loginPassword"
+               th:placeholder="${lang == 'ko' ? '비밀번호를 입력하세요' : (lang == 'en' ? 'Enter your password' : (lang == 'hira' ? 'ぱすわーどをにゅうりょくしてください' : 'パスワードを入力してください'))}">
+
+        <button type="button" id="loginButton" class="auth-main-button" data-ripple
+                th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</button>
+
+        <p id="loginMessage" class="auth-message"></p>
+
+        <div class="auth-link-row">
+            <a th:href="@{/register(lang=${lang})}"
+               th:text="${lang == 'ko' ? '계정이 없으신가요? 회원가입' : (lang == 'en' ? 'Do not have an account? Sign up' : (lang == 'hira' ? 'あかうんとをおもちでないかたはこちら' : 'アカウントをお持ちでない方はこちら'))}">アカウントをお持ちでない方はこちら</a>
+            <a th:href="@{/(lang=${lang})}"
+               th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'ほーむへもどる' : 'トップへ戻る'))}">トップへ戻る</a>
+        </div>
+    </section>
 
 </main>
 
-<script src="/auth.js"></script>
-
+<script th:src="@{/auth.js}"></script>
+<script th:src="@{/script.js}"></script>
 </body>
 </html>

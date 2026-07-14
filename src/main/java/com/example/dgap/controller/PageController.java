@@ -613,7 +613,7 @@ public class PageController {
 
     @GetMapping("/search")
     public String search(
-            @RequestParam String keyword,
+            @RequestParam(required = false, defaultValue = "") String keyword,
             @RequestParam(defaultValue = "ja") String lang,
             Model model) {
 

@@ -1,50 +1,183 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? '詐欺メール診断' : '사기 메일 진단'"></h1>
-    <p th:text="${lang == 'ja'}
-        ? 'メール本文を入力して、詐欺の可能性を確認できます。'
-        : '메일 내용을 입력하여 사기 가능성을 확인할 수 있습니다.'">
-    </p>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam Email Check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">
+        詐欺メール診断
+    </title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body class="fraud-page">
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <a class="site-logo"
+           th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}"
+               th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'とっぷ' : 'トップ'))}">
+                トップ
+            </a>
+
+            <a th:href="@{/search(lang=${lang})}"
+               th:text="${lang == 'ko' ? '검색' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさく' : '検索'))}">
+                検索
+            </a>
+
+            <a th:href="@{/diagnosis(lang=${lang})}"
+               th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble Check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">
+                困りごと診断
+            </a>
+
+            <a th:href="@{/ai(lang=${lang})}"
+               th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI Support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">
+                AI相談
+            </a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="button button-small button-primary"
+               th:href="@{/login(lang=${lang})}">
+                <span th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">
+                    ログイン
+                </span>
+            </a>
+        </div>
+
+    </div>
 </header>
 
 <main>
 
-<section class="card">
-    <textarea
-        id="mailText"
-        rows="10"
-        th:placeholder="${lang == 'ja'} ? 'メール本文を貼り付けてください' : '메일 내용을 붙여넣어 주세요'">
-    </textarea>
+    <section class="search-hero-section">
+        <div class="search-hero-inner reveal">
 
-    <br><br>
+            <p class="section-label"
+               th:text="${lang == 'ko' ? 'SCAM CHECK' : (lang == 'en' ? 'SCAM CHECK' : (lang == 'hira' ? 'あぶないめーる' : 'SCAM CHECK'))}">
+                SCAM CHECK
+            </p>
 
-    <button
-        id="fraudButton"
-        type="button"
-        th:text="${lang == 'ja'} ? '診断する' : '진단하기'">
-    </button>
-</section>
+            <h1 th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam Email Check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">
+                詐欺メール診断
+            </h1>
 
-<section class="card">
-    <h2 th:text="${lang == 'ja'} ? '診断結果' : '진단 결과'"></h2>
-    <div id="fraudResult"></div>
-</section>
+            <p class="search-hero-text"
+               th:text="${lang == 'ko' ? '메일 내용을 입력하여 사기 가능성을 확인할 수 있습니다. 의심되는 링크나 긴급한 표현이 있는지 확인합니다.' : (lang == 'en' ? 'Paste an email message and check whether it may be suspicious. D-Gap checks for risky links, urgent wording, and requests for personal information.' : (lang == 'hira' ? 'めーるのぶんをいれて、あぶないめーるかどうかをかくにんできます。' : 'メール本文を入力して、詐欺の可能性を確認できます。URL、緊急性をあおる表現、個人情報を求める表現などを確認します。'))}">
+                メール本文を入力して、詐欺の可能性を確認できます。
+            </p>
 
-<a class="card" th:href="@{/(lang=${lang})}">
-    <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
-</a>
+        </div>
+    </section>
+
+    <section class="section search-result-section">
+        <div class="section-inner">
+
+            <section class="search-support-box reveal">
+                <div>
+                    <h2 th:text="${lang == 'ko' ? '메일 내용을 붙여넣어 주세요' : (lang == 'en' ? 'Paste the email text' : (lang == 'hira' ? 'めーるのぶんをはりつけてください' : 'メール本文を貼り付けてください'))}">
+                        メール本文を貼り付けてください
+                    </h2>
+
+                    <p th:text="${lang == 'ko' ? '개인정보나 비밀번호는 입력하지 않는 것을 추천합니다.' : (lang == 'en' ? 'For safety, do not enter passwords or private personal information.' : (lang == 'hira' ? 'ぱすわーどやたいせつなじょうほうは、いれないでください。' : '安全のため、パスワードや個人情報そのものは入力しないでください。'))}">
+                        安全のため、パスワードや個人情報そのものは入力しないでください。
+                    </p>
+                </div>
+            </section>
+
+            <section class="search-result-card reveal" style="display: block;">
+                <label class="search-input-label"
+                       for="mailText"
+                       th:text="${lang == 'ko' ? '메일 내용' : (lang == 'en' ? 'Email text' : (lang == 'hira' ? 'めーるのないよう' : 'メール本文'))}">
+                    メール本文
+                </label>
+
+                <textarea id="mailText"
+                          class="search-input"
+                          rows="10"
+                          style="width: 100%; min-height: 260px; padding: 18px; resize: vertical;"
+                          th:placeholder="${lang == 'ko' ? '메일 내용을 붙여넣어 주세요' : (lang == 'en' ? 'Paste the email text here' : (lang == 'hira' ? 'めーるのぶんをはりつけてください' : 'メール本文を貼り付けてください'))}"></textarea>
+
+                <div style="margin-top: 18px;">
+                    <button id="fraudButton"
+                            class="button button-primary"
+                            type="button"
+                            th:text="${lang == 'ko' ? '진단하기' : (lang == 'en' ? 'Check now' : (lang == 'hira' ? 'しんだんする' : '診断する'))}">
+                        診断する
+                    </button>
+                </div>
+            </section>
+
+            <section class="search-result-card reveal" style="display: block; margin-top: 22px;">
+                <p class="search-result-type">
+                    RESULT
+                </p>
+
+                <h2 th:text="${lang == 'ko' ? '진단 결과' : (lang == 'en' ? 'Result' : (lang == 'hira' ? 'しんだんけっか' : '診断結果'))}">
+                    診断結果
+                </h2>
+
+                <div id="fraudResult">
+                    <p th:text="${lang == 'ko' ? '메일 내용을 입력하고 진단 버튼을 눌러 주세요.' : (lang == 'en' ? 'Enter email text and press the check button.' : (lang == 'hira' ? 'めーるのぶんをいれて、しんだんぼたんをおしてください。' : 'メール本文を入力して、診断ボタンを押してください。'))}">
+                        メール本文を入力して、診断ボタンを押してください。
+                    </p>
+                </div>
+            </section>
+
+            <div class="search-back-area">
+                <a class="button button-secondary"
+                   th:href="@{/search(lang=${lang})}"
+                   th:text="${lang == 'ko' ? '검색으로 돌아가기' : (lang == 'en' ? 'Back to search' : (lang == 'hira' ? 'けんさくにもどる' : '検索へ戻る'))}">
+                    検索へ戻る
+                </a>
+
+                <a class="button button-primary"
+                   th:href="@{/(lang=${lang})}"
+                   th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'とっぷへもどる' : 'トップへ戻る'))}">
+                    トップへ戻る
+                </a>
+            </div>
+
+        </div>
+    </section>
 
 </main>
 
-<script src="/fraud.js"></script>
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>
+            <a class="site-logo footer-logo"
+               th:href="@{/(lang=${lang})}">
+                <span class="site-logo-mark">D</span>
+                <span>D-Gap</span>
+            </a>
+
+            <p th:text="${lang == 'ko' ? '디지털의 불안을 배움과 안심으로 바꾸는 서비스.' : (lang == 'en' ? 'A service that turns digital anxiety into learning and confidence.' : (lang == 'hira' ? 'でじたるのふあんを、まなびとあんしんにかえるさーびす。' : 'デジタルの不安を、学びと安心に変えるサービス。'))}">
+                デジタルの不安を、学びと安心に変えるサービス。
+            </p>
+        </div>
+
+        <p class="copyright">
+            © 2026 D-Gap
+        </p>
+    </div>
+</footer>
+
+<script th:src="@{/fraud.js}"></script>
+<script th:src="@{/script.js}"></script>
 
 </body>
 </html>

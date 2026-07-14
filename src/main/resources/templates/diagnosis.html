@@ -1,59 +1,102 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'">
-        困りごと診断
-    </title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lang == 'ko' ? '문제 해결 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body class="designed-page diagnosis-redesign-page">
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? '困りごと診断' : '문제 해결 진단'"></h1>
-    <p th:text="${lang == 'ja'}
-        ? '検索ワードが分からなくても、目的に合うレッスンを探せます。'
-        : '검색어를 몰라도 목적에 맞는 레슨을 찾을 수 있습니다.'">
-    </p>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="site-logo" th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</a>
+            <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+        </nav>
+        <div class="header-actions">
+            <a class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
+        </div>
+    </div>
 </header>
 
-<main>
+<main class="designed-main diagnosis-main">
 
-    <section class="card">
+    <section class="diagnosis-hero designed-hero">
+        <div class="diagnosis-hero-shape"></div>
+        <div class="designed-hero-grid">
+            <div class="designed-hero-copy reveal">
+                <p class="designed-kicker">TROUBLE CHECK</p>
+                <h1 th:text="${lang == 'ko' ? '무엇을 하고 싶으신가요?' : (lang == 'en' ? 'What do you want to do?' : (lang == 'hira' ? 'なにをしたいですか？' : '何をしたいですか？'))}">何をしたいですか？</h1>
+                <p th:text="${lang == 'ko' ? '검색어를 몰라도 목적에 맞는 레슨을 바로 찾을 수 있습니다.' : (lang == 'en' ? 'Even if you do not know the right search word, you can find the lesson that matches your goal.' : (lang == 'hira' ? 'けんさくわーどがわからなくても、もくてきにあうれっすんをさがせます。' : '検索ワードが分からなくても、目的に合うレッスンを探せます。'))}">検索ワードが分からなくても、目的に合うレッスンを探せます。</p>
+            </div>
 
-        <h2 th:text="${lang == 'ja'} ? '何に困っていますか？' : '무엇이 어려우신가요?'"></h2>
-
-        <a class="card" th:href="@{/lesson/gmail(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? 'メールを送りたい' : '메일을 보내고 싶어요'"></h3>
-        </a>
-
-        <a class="card" th:href="@{/lesson/google-map(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? '道順を調べたい' : '길찾기를 하고 싶어요'"></h3>
-        </a>
-
-        <a class="card" th:href="@{/lesson/camera-photo(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? '写真を撮りたい' : '사진을 찍고 싶어요'"></h3>
-        </a>
-
-        <a class="card" th:href="@{/lesson/phone-call(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? '電話をかけたい' : '전화를 걸고 싶어요'"></h3>
-        </a>
-
-        <a class="card" th:href="@{/lesson/money-safety(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? '銀行アプリや詐欺が不安' : '은행 앱이나 사기가 걱정돼요'"></h3>
-        </a>
-
-        <a class="card" th:href="@{/lesson/line-message(lang=${lang})}">
-            <h3 th:text="${lang == 'ja'} ? 'LINEで連絡したい' : 'LINE으로 연락하고 싶어요'"></h3>
-        </a>
-
+            <div class="diagnosis-mini-panel reveal" data-tilt-card>
+                <span>?</span>
+                <p th:text="${lang == 'ko' ? '아래 카드에서 지금 하고 싶은 일을 선택하세요.' : (lang == 'en' ? 'Choose what you want to do from the cards below.' : (lang == 'hira' ? 'したのかーどから、いまやりたいことをえらびます。' : '下のカードから、今やりたいことを選びます。'))}">下のカードから選びます。</p>
+            </div>
+        </div>
     </section>
 
-    <a class="card" th:href="@{/(lang=${lang})}">
-        <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
-    </a>
+    <section class="design-section diagnosis-choice-section">
+        <div class="design-section-inner">
+            <div class="diagnosis-choice-grid">
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/gmail(lang=${lang})}">
+                    <span class="choice-icon">✉</span>
+                    <strong th:text="${lang == 'ko' ? '메일을 보내고 싶어요' : (lang == 'en' ? 'Send an email' : (lang == 'hira' ? 'めーるをおくりたい' : 'メールを送りたい'))}">メールを送りたい</strong>
+                    <p th:text="${lang == 'ko' ? 'Gmail 작성과 전송을 배웁니다.' : (lang == 'en' ? 'Learn how to write and send Gmail.' : (lang == 'hira' ? 'Gmailのかきかたとおくりかたをまなびます。' : 'Gmailの作成と送信を学びます。'))}">Gmailを学びます。</p>
+                </a>
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/google-map(lang=${lang})}">
+                    <span class="choice-icon">⌖</span>
+                    <strong th:text="${lang == 'ko' ? '길찾기를 하고 싶어요' : (lang == 'en' ? 'Check directions' : (lang == 'hira' ? 'みちじゅんをしらべたい' : '道順を調べたい'))}">道順を調べたい</strong>
+                    <p th:text="${lang == 'ko' ? 'Google 지도에서 경로를 찾습니다.' : (lang == 'en' ? 'Find routes with Google Maps.' : (lang == 'hira' ? 'Googleまっぷでけいろをしらべます。' : 'Googleマップで経路を調べます。'))}">Googleマップで調べます。</p>
+                </a>
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/camera-photo(lang=${lang})}">
+                    <span class="choice-icon">◉</span>
+                    <strong th:text="${lang == 'ko' ? '사진을 찍고 싶어요' : (lang == 'en' ? 'Take a photo' : (lang == 'hira' ? 'しゃしんをとりたい' : '写真を撮りたい'))}">写真を撮りたい</strong>
+                    <p th:text="${lang == 'ko' ? '카메라 앱 사용법을 배웁니다.' : (lang == 'en' ? 'Learn how to use the camera app.' : (lang == 'hira' ? 'かめらあぷりのつかいかたをまなびます。' : 'カメラアプリの使い方を学びます。'))}">カメラを学びます。</p>
+                </a>
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/phone-call(lang=${lang})}">
+                    <span class="choice-icon">☎</span>
+                    <strong th:text="${lang == 'ko' ? '전화를 걸고 싶어요' : (lang == 'en' ? 'Make a phone call' : (lang == 'hira' ? 'でんわをかけたい' : '電話をかけたい'))}">電話をかけたい</strong>
+                    <p th:text="${lang == 'ko' ? '전화 앱으로 통화하는 방법을 배웁니다.' : (lang == 'en' ? 'Learn how to call from the phone app.' : (lang == 'hira' ? 'でんわあぷりでつうわするほうほうをまなびます。' : '電話アプリで通話する方法を学びます。'))}">電話を学びます。</p>
+                </a>
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/money-safety(lang=${lang})}">
+                    <span class="choice-icon">⚠</span>
+                    <strong th:text="${lang == 'ko' ? '은행 앱이나 사기가 걱정돼요' : (lang == 'en' ? 'Bank apps or scams worry me' : (lang == 'hira' ? 'ぎんこうあぷりやさぎがふあん' : '銀行アプリや詐欺が不安'))}">銀行アプリや詐欺が不安</strong>
+                    <p th:text="${lang == 'ko' ? '수상한 알림과 안전 확인을 배웁니다.' : (lang == 'en' ? 'Learn how to check suspicious notices safely.' : (lang == 'hira' ? 'あやしいつうちやあんぜんかくにんをまなびます。' : '怪しい通知や安全確認を学びます。'))}">安全確認を学びます。</p>
+                </a>
+
+                <a class="diagnosis-choice-card reveal" data-tilt-card th:href="@{/lesson/line-message(lang=${lang})}">
+                    <span class="choice-icon">💬</span>
+                    <strong th:text="${lang == 'ko' ? 'LINE으로 연락하고 싶어요' : (lang == 'en' ? 'Contact someone with LINE' : (lang == 'hira' ? 'LINEでれんらくしたい' : 'LINEで連絡したい'))}">LINEで連絡したい</strong>
+                    <p th:text="${lang == 'ko' ? '메시지를 보내는 방법을 배웁니다.' : (lang == 'en' ? 'Learn how to send messages.' : (lang == 'hira' ? 'めっせーじのおくりかたをまなびます。' : 'メッセージの送り方を学びます。'))}">メッセージを学びます。</p>
+                </a>
+
+            </div>
+
+            <div class="designed-back-area">
+                <a class="design-button design-button-solid" th:href="@{/(lang=${lang})}" data-ripple
+                   th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'ほーむへもどる' : 'トップへ戻る'))}">トップへ戻る</a>
+            </div>
+        </div>
+    </section>
 
 </main>
 
+<script th:src="@{/script.js}"></script>
 </body>
 </html>

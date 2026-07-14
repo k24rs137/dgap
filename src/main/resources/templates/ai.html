@@ -1,60 +1,82 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? 'AI相談' : 'AI 상담'">AI相談</title>
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI Support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<body>
+<body class="designed-page ai-redesign-page">
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? 'AI相談' : 'AI 상담'"></h1>
-    <p th:text="${lang == 'ja'}
-        ? '困っていることを書くと、おすすめのレッスンを案内します。'
-        : '어려운 점을 입력하면 추천 레슨을 안내합니다.'">
-    </p>
+<header class="site-header">
+    <div class="header-inner">
+        <a class="site-logo" th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
+            <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+        </nav>
+        <div class="header-actions">
+            <a class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
+        </div>
+    </div>
 </header>
 
-<main>
+<main class="designed-main ai-main">
+    <section class="ai-lab-shell">
+        <div class="ai-lab-hero reveal">
+            <p class="designed-kicker">AI SUPPORT</p>
+            <h1 th:text="${lang == 'ko' ? '고민을 쓰면 레슨을 추천합니다' : (lang == 'en' ? 'Tell us your issue and find a lesson' : (lang == 'hira' ? 'こまりごとをかくと、れっすんをあんないします' : '困りごとを書くと、レッスンを案内します'))}">困りごとを書くと、レッスンを案内します</h1>
+            <p th:text="${lang == 'ko' ? '짧은 문장으로 입력해도 괜찮습니다. D-Gap이 관련 학습을 찾아줍니다.' : (lang == 'en' ? 'A short sentence is enough. D-Gap will guide you to related learning content.' : (lang == 'hira' ? 'みじかいぶんでもだいじょうぶです。D-Gapがあうがくしゅうをさがします。' : '短い文章でも大丈夫です。D-Gapが関連する学習を探します。'))}">短い文章でも大丈夫です。</p>
+        </div>
 
-<section class="card">
-    <textarea
-        id="aiInput"
-        rows="4"
-        th:placeholder="${lang == 'ja'} ? '例：メールを送りたい、道順を調べたい' : '예: 메일을 보내고 싶어요, 길을 찾고 싶어요'">
-    </textarea>
+        <div class="ai-lab-grid">
+            <section class="ai-chat-panel reveal" data-tilt-card>
+                <div class="ai-orb-wrap">
+                    <div class="ai-orb"></div>
+                    <span th:text="${lang == 'ko' ? 'AI 상담실' : (lang == 'en' ? 'AI room' : (lang == 'hira' ? 'AIそうだんしつ' : 'AI相談室'))}">AI相談室</span>
+                </div>
 
-    <br><br>
+                <textarea id="aiInput" rows="6"
+                          th:placeholder="${lang == 'ko' ? '예: 메일을 보내고 싶어요, 길을 찾고 싶어요' : (lang == 'en' ? 'Example: I want to send an email, I want to check directions' : (lang == 'hira' ? 'れい：めーるをおくりたい、みちじゅんをしらべたい' : '例：メールを送りたい、道順を調べたい'))}"></textarea>
 
-<button
-    type="button"
-    id="voiceButton"
-    th:text="${lang == 'ja'} ? '🎤 音声入力' : '🎤 음성 입력'">
-</button>
+                <div class="ai-action-row">
+                    <button type="button" id="voiceButton" class="design-button design-button-soft" data-ripple
+                            th:text="${lang == 'ko' ? '🎤 음성 입력' : (lang == 'en' ? '🎤 Voice input' : (lang == 'hira' ? '🎤 おんせいにゅうりょく' : '🎤 音声入力'))}">🎤 音声入力</button>
+                    <button type="button" id="aiButton" class="design-button design-button-solid" data-ripple
+                            th:text="${lang == 'ko' ? '상담하기' : (lang == 'en' ? 'Ask AI' : (lang == 'hira' ? 'そうだんする' : '相談する'))}">相談する</button>
+                </div>
+            </section>
 
-    <button
-        type="button"
-        id="aiButton"
-        th:text="${lang == 'ja'} ? '相談する' : '상담하기'">
-    </button>
-</section>
+            <section class="ai-result-stack">
+                <article class="ai-result-card reveal">
+                    <p class="section-label" th:text="${lang == 'ko' ? 'RESULT' : (lang == 'en' ? 'RESULT' : (lang == 'hira' ? 'けっか' : 'RESULT'))}">RESULT</p>
+                    <h2 th:text="${lang == 'ko' ? '추천 결과' : (lang == 'en' ? 'Recommended results' : (lang == 'hira' ? 'おすすめけっか' : 'おすすめ結果'))}">おすすめ結果</h2>
+                    <div id="aiResult"></div>
+                </article>
 
-<section class="card">
-    <h2 th:text="${lang == 'ja'} ? 'おすすめ結果' : '추천 결과'"></h2>
-    <div id="aiResult"></div>
-</section>
-<section class="card">
-    <h2 th:text="${lang == 'ja'} ? '相談履歴' : '상담 기록'"></h2>
-    <div id="aiHistory"></div>
-</section>
+                <article class="ai-history-card reveal">
+                    <p class="section-label" th:text="${lang == 'ko' ? 'HISTORY' : (lang == 'en' ? 'HISTORY' : (lang == 'hira' ? 'りれき' : 'HISTORY'))}">HISTORY</p>
+                    <h2 th:text="${lang == 'ko' ? '상담 기록' : (lang == 'en' ? 'Consultation history' : (lang == 'hira' ? 'そうだんりれき' : '相談履歴'))}">相談履歴</h2>
+                    <div id="aiHistory"></div>
+                </article>
+            </section>
+        </div>
 
-<a class="card" th:href="@{/(lang=${lang})}">
-    <h2 th:text="${lang == 'ja'} ? 'メインへ戻る' : '메인으로 돌아가기'"></h2>
-</a>
-
+        <div class="designed-back-area">
+            <a class="design-button design-button-solid" th:href="@{/(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'ほーむへもどる' : 'トップへ戻る'))}">トップへ戻る</a>
+        </div>
+    </section>
 </main>
 
-<script src="/ai.js"></script>
-
+<script th:src="@{/ai.js}"></script>
+<script th:src="@{/script.js}"></script>
 </body>
 </html>

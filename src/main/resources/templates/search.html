@@ -1,50 +1,454 @@
 <!DOCTYPE html>
-<html th:lang="${lang}" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="${lang == 'ja'} ? '検索結果' : '검색 결과'">検索結果</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
 
-<header>
-    <h1 th:text="${lang == 'ja'} ? '検索結果' : '검색 결과'"></h1>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${lang == 'ko' ? '검색 | D-Gap' : (lang == 'en' ? 'Search | D-Gap' : (lang == 'hira' ? 'けんさく | D-Gap' : '検索 | D-Gap'))}">
+        検索 | D-Gap
+    </title>
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body class="search-page">
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <a class="site-logo"
+           th:href="@{/(lang=${lang})}">
+            <span class="site-logo-mark">D</span>
+            <span>D-Gap</span>
+        </a>
+
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}">トップ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
+            <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+            <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        </nav>
+
+        <div class="header-actions">
+            <a class="button button-small button-primary"
+               th:href="@{/login(lang=${lang})}"
+               data-ripple>
+                ログイン
+            </a>
+        </div>
+
+    </div>
 </header>
 
 <main>
 
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? '検索ワード' : '검색어'"></h2>
-        <p th:text="${keyword}"></p>
-    </section>
+    <section class="search-hero-section">
 
-    <section class="card">
-        <h2 th:text="${lang == 'ja'} ? '該当するカテゴリ' : '해당 카테고리'"></h2>
+        <div class="search-hero-inner reveal">
 
-        <div th:if="${#lists.isEmpty(results)}">
-            <p th:text="${lang == 'ja'} ? '該当するカテゴリはありません。' : '해당하는 카테고리가 없습니다.'"></p>
+            <p class="section-label">
+                SEARCH
+            </p>
+
+            <h1>
+                学びたい内容を検索する
+            </h1>
+
+            <p class="search-hero-text">
+                スマートフォン、SNS、Googleサービス、金融アプリ、詐欺メール対策など、
+                困っていることや学びたい内容を入力してください。
+            </p>
+
+            <form class="search-form"
+                  th:action="@{/search}"
+                  method="get">
+
+                <input type="hidden"
+                       name="lang"
+                       th:value="${lang}">
+
+                <label class="search-input-label"
+                       for="keyword">
+                    検索ワード
+                </label>
+
+                <div class="search-input-area">
+                    <input id="keyword"
+                           class="search-input"
+                           type="text"
+                           name="keyword"
+                           th:value="${keyword}"
+                           placeholder="例：スマホ、LINE、地図、メール、決済、詐欺">
+
+                    <button class="button button-primary search-submit-button"
+                            type="submit"
+                            data-ripple>
+                        検索する
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="search-keywords"
+                 aria-label="おすすめ検索ワード">
+
+                <span>おすすめ：</span>
+
+                <a th:href="@{/search(keyword='スマホ', lang=${lang})}">
+                    スマホ
+                </a>
+
+                <a th:href="@{/search(keyword='LINE', lang=${lang})}">
+                    LINE
+                </a>
+
+                <a th:href="@{/search(keyword='地図', lang=${lang})}">
+                    地図
+                </a>
+
+                <a th:href="@{/search(keyword='メール', lang=${lang})}">
+                    メール
+                </a>
+
+                <a th:href="@{/search(keyword='決済', lang=${lang})}">
+                    決済
+                </a>
+
+                <a th:href="@{/search(keyword='詐欺', lang=${lang})}">
+                    詐欺
+                </a>
+
+            </div>
+
         </div>
 
-        <div th:each="result : ${results}" class="result-card">
-            <h3 th:if="${lang == 'ja'}" th:text="${result.titleJa}"></h3>
-<h3 th:if="${lang == 'ko'}" th:text="${result.titleKo}"></h3>
-
-<p th:if="${lang == 'ja'}" th:text="${result.descriptionJa}"></p>
-<p th:if="${lang == 'ko'}" th:text="${result.descriptionKo}"></p>
-
-<a th:href="${result.url + '?lang=' + lang}"
-   th:text="${lang == 'ja'} ? '詳細を見る' : '자세히 보기'">
-</a>
-        </div>
     </section>
 
-    <a class="card" href="/">
-        <a class="card" th:href="${'/?lang=' + lang}">
-    <h2 th:text="${lang == 'ja'} ? 'トップへ戻る' : '메인으로 돌아가기'"></h2>
+    <section class="section search-result-section">
+
+        <div class="section-inner">
+
+            <div class="search-result-heading reveal">
+
+                <div>
+                    <p class="section-label">
+                        RESULT
+                    </p>
+
+                    <h2>
+                        検索結果
+                    </h2>
+                </div>
+
+                <p class="search-word"
+                   id="searchWordText">
+                    キーワードを入力すると、関連するカテゴリを探せます。
+                </p>
+
+            </div>
+
+            <div class="search-result-grid">
+
+                <a class="search-result-card reveal"
+                   data-search-card
+                   data-keywords="スマホ スマートフォン 携帯 電話 カメラ 文字入力 入力 画面 操作 基本 smartphone phone camera typing"
+                   th:href="@{/category/smartphone(lang=${lang})}">
+
+                    <div class="search-result-icon">
+                        01
+                    </div>
+
+                    <div class="search-result-content">
+                        <p class="search-result-type">
+                            CATEGORY
+                        </p>
+
+                        <h3>
+                            スマートフォン操作
+                        </h3>
+
+                        <p>
+                            電話、カメラ、文字入力、画面操作など、スマートフォンの基本操作を学べます。
+                        </p>
+
+                        <span class="search-result-tags">
+                            スマホ / 電話 / カメラ / 文字入力
+                        </span>
+                    </div>
+
+                    <span class="search-result-arrow">→</span>
+                </a>
+
+                <a class="search-result-card reveal"
+                   data-search-card
+                   data-keywords="sns SNS line LINE ライン kakao カカオトーク メッセージ チャット 友達 家族 連絡 message chat"
+                   th:href="@{/category/sns(lang=${lang})}">
+
+                    <div class="search-result-icon">
+                        02
+                    </div>
+
+                    <div class="search-result-content">
+                        <p class="search-result-type">
+                            CATEGORY
+                        </p>
+
+                        <h3>
+                            SNS・メッセージ
+                        </h3>
+
+                        <p>
+                            LINEやカカオトークなど、家族や友人と連絡を取るための使い方を学べます。
+                        </p>
+
+                        <span class="search-result-tags">
+                            LINE / カカオトーク / SNS / メッセージ
+                        </span>
+                    </div>
+
+                    <span class="search-result-arrow">→</span>
+                </a>
+
+                <a class="search-result-card reveal"
+                   data-search-card
+                   data-keywords="google Google gmail Gmail メール 地図 マップ map maps 検索 翻訳 translate route 経路 youtube 動画"
+                   th:href="@{/category/google(lang=${lang})}">
+
+                    <div class="search-result-icon">
+                        03
+                    </div>
+
+                    <div class="search-result-content">
+                        <p class="search-result-type">
+                            CATEGORY
+                        </p>
+
+                        <h3>
+                            Googleサービス
+                        </h3>
+
+                        <p>
+                            Google検索、Gmail、Googleマップ、翻訳、YouTubeなど、日常で役立つサービスを学べます。
+                        </p>
+
+                        <span class="search-result-tags">
+                            Google / Gmail / 地図 / 検索 / 翻訳
+                        </span>
+                    </div>
+
+                    <span class="search-result-arrow">→</span>
+                </a>
+
+                <a class="search-result-card reveal"
+                   data-search-card
+                   data-keywords="金融 お金 決済 支払い 銀行 PayPay paypay クレジットカード 送金 finance money payment bank"
+                   th:href="@{/category/money(lang=${lang})}">
+
+                    <div class="search-result-icon">
+                        04
+                    </div>
+
+                    <div class="search-result-content">
+                        <p class="search-result-type">
+                            CATEGORY
+                        </p>
+
+                        <h3>
+                            金融・決済アプリ
+                        </h3>
+
+                        <p>
+                            決済アプリや銀行アプリを安全に使うための基本を学べます。
+                        </p>
+
+                        <span class="search-result-tags">
+                            決済 / 銀行 / 金融 / 安全
+                        </span>
+                    </div>
+
+                    <span class="search-result-arrow">→</span>
+                </a>
+
+                <a class="search-result-card reveal"
+   data-search-card
+   data-keywords="詐欺 サギ さぎ メール めーる 請求書 セキュリティ 危険 不審 fraud scam phishing mail email invoice security danger suspicious 사기 메일 청구서 보안 위험 의심"
+   th:href="@{/fraud(lang=${lang})}">
+
+    <div class="search-result-icon">
+        05
+    </div>
+
+    <div class="search-result-content">
+        <p class="search-result-type"
+           th:text="${lang == 'ko' ? '카테고리' : (lang == 'en' ? 'CATEGORY' : (lang == 'hira' ? 'かてごりー' : 'カテゴリー'))}">
+            カテゴリー
+        </p>
+
+        <h3 th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam Email Check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">
+            詐欺メール診断
+        </h3>
+
+        <p th:text="${lang == 'ko' ? '수상한 메일이나 청구서 메일의 내용을 확인하고, 위험한 특징이 있는지 진단할 수 있습니다。' : (lang == 'en' ? 'Check suspicious emails or invoice messages and identify possible warning signs.' : (lang == 'hira' ? 'あやしいめーるやせいきゅうしょめーるをかくにんして、あぶないとくちょうがないかしらべられます。' : '不審なメールや請求書メールの内容を確認し、危険な特徴がないか診断できます。'))}">
+            不審なメールや請求書メールの内容を確認し、危険な特徴がないか診断できます。
+        </p>
+
+        <span class="search-result-tags"
+              th:text="${lang == 'ko' ? '사기 / 메일 / 청구서 / 보안' : (lang == 'en' ? 'Scam / Email / Invoice / Security' : (lang == 'hira' ? 'さぎ / めーる / せいきゅうしょ / せきゅりてぃ' : '詐欺 / メール / 請求書 / セキュリティ'))}">
+            詐欺 / メール / 請求書 / セキュリティ
+        </span>
+    </div>
+
+    <span class="search-result-arrow">→</span>
 </a>
-    </a>
+            </div>
+
+            <div class="search-no-result"
+                 id="searchNoResult">
+
+                <h3>
+                    該当するカテゴリが見つかりませんでした
+                </h3>
+
+                <p>
+                    別の言葉で検索してみてください。
+                    例：スマホ、LINE、地図、メール、決済、詐欺
+                </p>
+
+            </div>
+
+            <div class="search-support-box reveal">
+
+                <div>
+                    <h2>
+                        何を検索すればよいか分からない場合
+                    </h2>
+
+                    <p>
+                        困りごと診断を使うと、今の状況に合った学習内容を探しやすくなります。
+                    </p>
+                </div>
+
+                <a class="button button-secondary"
+                   th:href="@{/diagnosis(lang=${lang})}"
+                   data-ripple>
+                    困りごと診断を使う
+                </a>
+
+            </div>
+
+            <div class="search-back-area">
+                <a class="button button-primary"
+                   th:href="@{/(lang=${lang})}"
+                   data-ripple>
+                    トップへ戻る
+                </a>
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div>
+            <a class="site-logo footer-logo"
+               th:href="@{/(lang=${lang})}">
+                <span class="site-logo-mark">D</span>
+                <span>D-Gap</span>
+            </a>
+
+            <p>
+                デジタルの不安を、学びと安心に変えるサービス。
+            </p>
+        </div>
+
+        <p class="copyright">
+            © 2026 D-Gap
+        </p>
+
+    </div>
+
+</footer>
+
+<script th:src="@{/script.js}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("keyword");
+    const searchCards = document.querySelectorAll("[data-search-card]");
+    const noResultBox = document.getElementById("searchNoResult");
+    const searchWordText = document.getElementById("searchWordText");
+
+    if (!searchInput || searchCards.length === 0) {
+        return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const keywordFromUrl = urlParams.get("keyword") || "";
+
+    searchInput.value = keywordFromUrl;
+    filterCards(keywordFromUrl);
+
+    searchInput.addEventListener("input", function () {
+        filterCards(searchInput.value);
+    });
+
+    function filterCards(keyword) {
+        const normalizedKeyword = normalizeText(keyword);
+        let visibleCount = 0;
+
+        searchCards.forEach(function (card) {
+            const targetText = normalizeText(card.textContent + " " + (card.dataset.keywords || ""));
+            const isMatch = normalizedKeyword === "" || targetText.includes(normalizedKeyword);
+
+            card.style.display = isMatch ? "grid" : "none";
+
+            if (isMatch) {
+                visibleCount++;
+            }
+        });
+
+        if (noResultBox) {
+            noResultBox.classList.toggle("is-visible", visibleCount === 0);
+        }
+
+        if (searchWordText) {
+            if (normalizedKeyword === "") {
+                searchWordText.textContent = "キーワードを入力すると、関連するカテゴリを探せます。";
+            } else {
+                searchWordText.innerHTML =
+                    "検索ワード：<strong>" + escapeHtml(keyword) + "</strong>　" + visibleCount + "件";
+            }
+        }
+    }
+
+    function normalizeText(text) {
+        return String(text)
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .replace(/　+/g, "")
+            .trim();
+    }
+
+    function escapeHtml(text) {
+        return String(text)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+    }
+});
+</script>
 
 </body>
 </html>
