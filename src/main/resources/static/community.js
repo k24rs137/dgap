@@ -1,176 +1,117 @@
 const communityLang = document.documentElement.lang;
-
 const notLoggedInArea = document.getElementById("notLoggedInArea");
 const loggedInArea = document.getElementById("loggedInArea");
 const userWelcome = document.getElementById("userWelcome");
-
 const postInput = document.getElementById("postInput");
 const postButton = document.getElementById("postButton");
 const postList = document.getElementById("postList");
-
 const logoutButton = document.getElementById("logoutButton");
 
-const isLoggedIn = localStorage.getItem("loggedIn");
-const userId = localStorage.getItem("userId");
-
-if (isLoggedIn === "true") {
-    notLoggedInArea.style.display = "none";
-    loggedInArea.style.display = "block";
-
-    userWelcome.textContent =
-        communityLang === "ko"
-            ? userId + "님, 환영합니다."
-            : userId + "さん、ようこそ。";
-} else {
-    notLoggedInArea.style.display = "block";
-    loggedInArea.style.display = "none";
+async function communityRequest(url, options) {
+    const response = await fetch(url, Object.assign({ credentials: "same-origin" }, options));
+    if (!response.ok) {
+        let message = "操作に失敗しました。";
+        try { message = (await response.json()).message || message; } catch (error) { /* noop */ }
+        throw new Error(message);
+    }
+    if (response.status === 204) return null;
+    return response.json();
 }
 
-function showPosts() {
-    postList.innerHTML = "";
+function createPostCard(post) {
+    const card = document.createElement("article");
+    card.className = "post-card";
 
-    const posts =
-        JSON.parse(localStorage.getItem("communityPosts")) || [];
-
-    posts.forEach(function (post, index) {
-        const div = document.createElement("div");
-        div.className = "post-card";
-
-        let deleteButtonHtml = "";
-
-        if (post.user === userId) {
-            deleteButtonHtml =
-                "<button class='delete-post-button' data-index='" + index + "'>" +
-                (communityLang === "ko" ? "삭제" : "削除") +
-                "</button>";
+    const author = document.createElement("strong");
+    author.textContent = post.user;
+    const date = document.createElement("small");
+    date.textContent = new Date(post.createdAt).toLocaleString();
+    const content = document.createElement("p");
+    content.textContent = post.text;
+    const likeButton = document.createElement("button");
+    likeButton.type = "button";
+    likeButton.className = "like-button";
+    likeButton.textContent = (post.liked ? "♥ " : "♡ ") + post.likes;
+    likeButton.addEventListener("click", async function () {
+        try {
+            await communityRequest("/api/community/posts/" + post.id + "/like", { method: "POST" });
+            await showPosts();
+        } catch (error) {
+            alert(error.message);
         }
-
-        if (!post.likedUsers) {
-            post.likedUsers = [];
-        }
-
-        const liked =
-            post.likedUsers.includes(userId);
-
-        const heart =
-            liked ? "❤️" : "♡";
-
-        div.innerHTML =
-            "<strong>" + post.user + "</strong><br>" +
-            "<small>" + (post.date || "") + "</small>" +
-            "<p>" + post.text + "</p>" +
-            "<button class='like-button' data-index='" + index + "'>" +
-            heart + " " +
-            (post.likes || 0) +
-            "</button>" +
-            deleteButtonHtml;
-
-        postList.appendChild(div);
     });
 
-    const deleteButtons =
-        document.querySelectorAll(".delete-post-button");
-
-    deleteButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const index = button.dataset.index;
-
-            const posts =
-                JSON.parse(localStorage.getItem("communityPosts")) || [];
-
-            posts.splice(index, 1);
-
-            localStorage.setItem(
-                "communityPosts",
-                JSON.stringify(posts)
-            );
-
-            showPosts();
+    card.append(author, document.createElement("br"), date, content, likeButton);
+    if (post.owned) {
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.className = "delete-post-button";
+        deleteButton.textContent = communityLang === "en" ? "Delete" : "削除";
+        deleteButton.addEventListener("click", async function () {
+            try {
+                await communityRequest("/api/community/posts/" + post.id, { method: "DELETE" });
+                await showPosts();
+            } catch (error) {
+                alert(error.message);
+            }
         });
-    });
+        card.append(deleteButton);
+    }
+    return card;
+}
 
-    const likeButtons =
-        document.querySelectorAll(".like-button");
+async function showPosts() {
+    const posts = await communityRequest("/api/community/posts");
+    postList.replaceChildren();
+    if (posts.length === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = communityLang === "en" ? "No posts yet." : "まだ投稿はありません。";
+        postList.appendChild(empty);
+        return;
+    }
+    posts.forEach(post => postList.appendChild(createPostCard(post)));
+}
 
-    likeButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const index = button.dataset.index;
-
-            const posts =
-                JSON.parse(localStorage.getItem("communityPosts")) || [];
-
-            if (!posts[index].likedUsers) {
-                posts[index].likedUsers = [];
-            }
-
-            if (!posts[index].likes) {
-                posts[index].likes = 0;
-            }
-
-            const alreadyLiked =
-                posts[index].likedUsers.includes(userId);
-
-            if (alreadyLiked) {
-                posts[index].likes--;
-
-                posts[index].likedUsers =
-                    posts[index].likedUsers.filter(
-                        function (user) {
-                            return user !== userId;
-                        }
-                    );
-            } else {
-                posts[index].likes++;
-                posts[index].likedUsers.push(userId);
-            }
-
-            localStorage.setItem(
-                "communityPosts",
-                JSON.stringify(posts)
-            );
-
-            showPosts();
-        });
-    });
+async function initializeCommunity() {
+    try {
+        const session = await communityRequest("/api/session");
+        notLoggedInArea.style.display = "none";
+        loggedInArea.style.display = "block";
+        userWelcome.textContent = communityLang === "en"
+            ? "Welcome, " + session.userId + "."
+            : session.userId + "さん、ようこそ。";
+        await showPosts();
+    } catch (error) {
+        notLoggedInArea.style.display = "block";
+        loggedInArea.style.display = "none";
+    }
 }
 
 if (postButton) {
-    postButton.addEventListener("click", function () {
-        const text = postInput.value;
-
-        if (!text) {
-            return;
+    postButton.addEventListener("click", async function () {
+        const text = postInput.value.trim();
+        if (!text) return;
+        postButton.disabled = true;
+        try {
+            await communityRequest("/api/community/posts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text })
+            });
+            postInput.value = "";
+            await showPosts();
+        } catch (error) {
+            alert(error.message);
+        } finally {
+            postButton.disabled = false;
         }
-
-        const posts =
-            JSON.parse(localStorage.getItem("communityPosts")) || [];
-
-        posts.unshift({
-            user: userId,
-            text: text,
-            date: new Date().toLocaleString(),
-            likes: 0,
-            likedUsers: []
-        });
-
-        localStorage.setItem(
-            "communityPosts",
-            JSON.stringify(posts)
-        );
-
-        postInput.value = "";
-
-        showPosts();
     });
-}
-
-if (postList) {
-    showPosts();
 }
 
 if (logoutButton) {
     logoutButton.addEventListener("click", function () {
-        localStorage.removeItem("loggedIn");
-        location.reload();
+        if (window.dgapLogout) window.dgapLogout();
     });
 }
+
+initializeCommunity();

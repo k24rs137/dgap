@@ -11,7 +11,7 @@
 
     <title>D-Gap</title>
 
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
 </head>
 
 <body class="home-page">
@@ -28,7 +28,7 @@
         <nav class="desktop-nav" aria-label="メインメニュー">
             <a href="#learning">学習カテゴリ</a>
             <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
-            <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+            <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
         </nav>
 
@@ -111,7 +111,7 @@
          aria-label="スマートフォン用メニュー">
         <a href="#learning">学習カテゴリ</a>
         <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
-        <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+        <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
         <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
         <a th:href="@{/search(lang=${lang})}">検索</a>
         <a th:href="@{/login(lang=${lang})}">ログイン</a>
@@ -408,7 +408,7 @@
                     </h2>
 
                     <p>
-                        何から学べばよいか分からない場合は、困りごと診断やAI相談から始められます。
+                        何から学べばよいか分からない場合は、困りごと診断や相談ナビから始められます。
                         入力した内容に合わせて、必要な学習につながるように設計しています。
                     </p>
 
@@ -423,7 +423,7 @@
                         <a class="button button-secondary"
                            th:href="@{/ai(lang=${lang})}"
                            data-ripple>
-                            AI相談を使う
+                            相談ナビを使う
                         </a>
 
                         <a class="button button-secondary"
@@ -519,7 +519,8 @@
 
 </footer>
 
-<script th:src="@{/script.js}"></script>
+<script th:src="@{/account-sync.js(v='20260930')}"></script>
+<script th:src="@{/script.js(v='20261001-2')}"></script>
 
 </body>
 </html>

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lesson.getTitleByLang(lang)}">レッスン詳細</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
 </head>
 <body class="designed-page lesson-redesign-page">
 
@@ -19,7 +19,7 @@
         <nav class="desktop-nav" aria-label="メインメニュー">
             <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
             <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
-            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</a>
+            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
         </nav>
         <div class="header-actions">
@@ -73,6 +73,29 @@
                     </li>
                 </ol>
 
+                <section class="lesson-outcome-panel">
+                    <p class="section-label" th:text="${lang == 'ko' ? 'GOAL' : (lang == 'en' ? 'GOAL' : (lang == 'hira' ? 'できること' : 'できるようになること'))}">できるようになること</p>
+                    <p th:text="${lesson.getOutcomeByLang(lang)}">このレッスンの目標</p>
+                </section>
+
+                <section class="lesson-practice-panel">
+                    <div class="section-heading compact-heading">
+                        <p class="section-label" th:text="${lang == 'ko' ? 'PRACTICE' : (lang == 'en' ? 'PRACTICE' : (lang == 'hira' ? 'じっせん' : 'PRACTICE'))}">PRACTICE</p>
+                        <h2 th:text="${lang == 'ko' ? '직접 해보기' : (lang == 'en' ? 'Try it yourself' : (lang == 'hira' ? 'じぶんでやってみる' : '実践ミッション'))}">実践ミッション</h2>
+                    </div>
+                    <ul class="lesson-practice-list">
+                        <li th:each="task : ${lesson.getPracticeTasksByLang(lang)}">
+                            <span aria-hidden="true">✓</span>
+                            <p th:text="${task}">実践項目</p>
+                        </li>
+                    </ul>
+                </section>
+
+                <aside class="lesson-safety-note">
+                    <strong th:text="${lang == 'ko' ? '안전 확인' : (lang == 'en' ? 'Safety check' : (lang == 'hira' ? 'あんぜんかくにん' : '安全・注意ポイント'))}">安全・注意ポイント</strong>
+                    <p th:text="${lesson.getSafetyTipByLang(lang)}">安全上の注意</p>
+                </aside>
+
                 <div class="check-area redesigned-check">
                     <label>
                         <input type="checkbox" id="completeCheck" th:attr="data-key=${lesson.url}">
@@ -110,6 +133,7 @@
 
 </main>
 
-<script th:src="@{/script.js}"></script>
+<script th:src="@{/account-sync.js(v='20260930')}"></script>
+<script th:src="@{/script.js(v='20261001-2')}"></script>
 </body>
 </html>

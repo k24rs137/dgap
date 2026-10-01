@@ -3,6 +3,8 @@ package com.example.dgap.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.text.Normalizer;
 
 import com.example.dgap.model.Category;
 import com.example.dgap.model.Lesson;
@@ -618,13 +620,21 @@ public class PageController {
             Model model) {
 
         List<Category> results = new ArrayList<>();
+        String normalizedKeyword = normalizeSearchText(keyword);
 
-        for (Category category : getCategories()) {
-            if (category.getTitleJa().contains(keyword)
-                    || category.getTitleKo().contains(keyword)
-                    || category.getDescriptionJa().contains(keyword)
-                    || category.getDescriptionKo().contains(keyword)) {
-                results.add(category);
+        if (!normalizedKeyword.isBlank()) {
+            for (Category category : getCategories()) {
+                boolean categoryMatch = Arrays.asList("ja", "ko", "en", "hira").stream()
+                        .anyMatch(candidateLang ->
+                                normalizeSearchText(category.getTitleByLang(candidateLang)).contains(normalizedKeyword)
+                                || normalizeSearchText(category.getDescriptionByLang(candidateLang)).contains(normalizedKeyword));
+                boolean lessonMatch = category.getLessons().stream().anyMatch(lesson ->
+                        Arrays.asList("ja", "ko", "en", "hira").stream().anyMatch(candidateLang ->
+                                normalizeSearchText(lesson.getTitleByLang(candidateLang)).contains(normalizedKeyword)
+                                || normalizeSearchText(lesson.getDescriptionByLang(candidateLang)).contains(normalizedKeyword)));
+                if (categoryMatch || lessonMatch) {
+                    results.add(category);
+                }
             }
         }
 
@@ -633,6 +643,14 @@ public class PageController {
         model.addAttribute("lang", lang);
 
         return "search";
+    }
+
+    private String normalizeSearchText(String value) {
+        if (value == null) return "";
+        return Normalizer.normalize(value, Normalizer.Form.NFKC)
+                .toLowerCase(Locale.ROOT)
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 
     @GetMapping("/lesson/{id}")

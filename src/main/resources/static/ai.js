@@ -1,197 +1,104 @@
-const aiLang = document.documentElement.lang;
+const navigatorLang = document.documentElement.lang;
+const navigatorInput = document.getElementById("aiInput");
+const navigatorButton = document.getElementById("aiButton");
+const navigatorResult = document.getElementById("aiResult");
+const navigatorHistory = document.getElementById("aiHistory");
+const voiceButton = document.getElementById("voiceButton");
 
-const aiInput = document.getElementById("aiInput");
-const aiButton = document.getElementById("aiButton");
-const aiResult = document.getElementById("aiResult");
-const aiHistory = document.getElementById("aiHistory");
-const voiceButton =
-    document.getElementById("voiceButton");
-const lessons = [
-    {
-        keywords: ["メール", "mail", "gmail", "メッセージ", "메일"],
-        titleJa: "Gmailでメールを送る",
-        titleKo: "Gmail로 메일 보내기",
-        url: "/lesson/gmail"
-    },
-    {
-        keywords: ["道", "地図", "場所", "マップ", "길", "지도", "장소"],
-        titleJa: "Googleマップで目的地を調べる",
-        titleKo: "Google 지도로 목적지 찾기",
-        url: "/lesson/google-map"
-    },
-    {
-        keywords: ["写真", "カメラ", "撮る", "사진", "카메라"],
-        titleJa: "カメラで写真を撮る",
-        titleKo: "카메라로 사진 찍기",
-        url: "/lesson/camera-photo"
-    },
-    {
-        keywords: ["電話", "通話", "전화", "통화"],
-        titleJa: "電話をかける",
-        titleKo: "전화 걸기",
-        url: "/lesson/phone-call"
-    },
-    {
-        keywords: ["line", "ライン", "LINE"],
-        titleJa: "LINEでメッセージを送る",
-        titleKo: "LINE으로 메시지 보내기",
-        url: "/lesson/line-message"
-    },
-    {
-        keywords: ["詐欺", "危険", "通知", "銀行", "사기", "위험", "알림", "은행"],
-        titleJa: "不審な通知を見分ける",
-        titleKo: "수상한 알림 구별하기",
-        url: "/lesson/money-safety"
-    },
-    {
-        keywords: ["翻訳", "translate", "번역"],
-        titleJa: "Google翻訳を使う",
-        titleKo: "Google 번역 사용하기",
-        url: "/lesson/google-translate"
-    },
-    {
-        keywords: ["動画", "youtube", "ユーチューブ", "동영상"],
-        titleJa: "YouTubeで動画を見る",
-        titleKo: "YouTube에서 동영상 보기",
-        url: "/lesson/youtube-watch"
+const lessonCatalog = [
+    ["/lesson/smartphone-power", "スマートフォンの電源を入れる", "Turn on a smartphone", ["電源", "起動", "スマホ", "power", "turn on"]],
+    ["/lesson/smartphone-input", "文字を入力する", "Type text", ["文字", "入力", "キーボード", "type", "keyboard"]],
+    ["/lesson/phone-call", "電話をかける", "Make a phone call", ["電話", "通話", "call", "phone"]],
+    ["/lesson/camera-photo", "カメラで写真を撮る", "Take a photo", ["写真", "カメラ", "撮影", "photo", "camera"]],
+    ["/lesson/gallery-view", "ギャラリーで写真を見る", "View photos", ["ギャラリー", "写真を見る", "gallery", "view photo"]],
+    ["/lesson/line-message", "LINEでメッセージを送る", "Send a LINE message", ["line", "ライン", "メッセージ"]],
+    ["/lesson/kakao-message", "KakaoTalkでメッセージを送る", "Send a KakaoTalk message", ["kakao", "カカオ", "카카오"]],
+    ["/lesson/sns-privacy", "SNSの公開範囲を確認する", "Check SNS privacy", ["sns", "公開", "個人情報", "privacy"]],
+    ["/lesson/google-search", "Google検索を使う", "Use Google Search", ["検索", "google", "調べる", "search"]],
+    ["/lesson/gmail", "Gmailでメールを送る", "Send an email", ["メール", "mail", "gmail", "email"]],
+    ["/lesson/google-map", "Googleマップで目的地を調べる", "Use Google Maps", ["道", "地図", "場所", "マップ", "map", "route"]],
+    ["/lesson/youtube-watch", "YouTubeで動画を見る", "Watch YouTube", ["動画", "youtube", "ユーチューブ", "video"]],
+    ["/lesson/google-translate", "Google翻訳を使う", "Use Google Translate", ["翻訳", "translate", "translation"]],
+    ["/lesson/payment-app", "決済アプリで支払う", "Use a payment app", ["決済", "支払い", "payment", "pay"]],
+    ["/lesson/smbc-app", "SMBCアプリの基本操作", "Use the SMBC app", ["smbc", "三井住友", "残高"]],
+    ["/lesson/yucho-app", "ゆうちょ通帳アプリの基本操作", "Use the Japan Post Bank app", ["ゆうちょ", "通帳", "郵便局"]],
+    ["/lesson/money-safety", "不審な通知を見分ける", "Identify suspicious messages", ["詐欺", "危険", "通知", "銀行", "怪しい", "scam", "fraud"]]
+].map(item => ({ url: item[0], ja: item[1], en: item[2], keywords: item[3] }));
+
+function normalizeNavigatorText(value) {
+    return value.normalize("NFKC").toLocaleLowerCase().trim();
+}
+
+function saveNavigatorHistory(text) {
+    let histories = [];
+    try { histories = JSON.parse(localStorage.getItem("navigatorHistories")) || []; } catch (error) { histories = []; }
+    histories.unshift({ text, date: new Date().toISOString() });
+    localStorage.setItem("navigatorHistories", JSON.stringify(histories.slice(0, 30)));
+}
+
+function showNavigatorHistory() {
+    if (!navigatorHistory) return;
+    navigatorHistory.replaceChildren();
+    let histories = [];
+    try { histories = JSON.parse(localStorage.getItem("navigatorHistories")) || []; } catch (error) { histories = []; }
+    if (histories.length === 0) {
+        navigatorHistory.textContent = navigatorLang === "en" ? "No consultation history yet." : "相談履歴はまだありません。";
+        return;
     }
-];
+    histories.forEach(function (history) {
+        const item = document.createElement("div");
+        item.className = "post-card";
+        const strong = document.createElement("strong");
+        strong.textContent = history.text;
+        const date = document.createElement("small");
+        date.textContent = new Date(history.date).toLocaleString();
+        item.append(strong, document.createElement("br"), date);
+        navigatorHistory.appendChild(item);
+    });
+}
 
-if (aiButton) {
-    aiButton.addEventListener("click", function () {
-        const text = aiInput.value.toLowerCase();
-        const histories =
-    JSON.parse(localStorage.getItem("aiHistories")) || [];
+function runNavigator() {
+    const originalText = navigatorInput.value.trim();
+    const text = normalizeNavigatorText(originalText);
+    navigatorResult.replaceChildren();
+    if (!text) {
+        navigatorResult.textContent = navigatorLang === "en" ? "Describe what you want to do." : "困っていることを入力してください。";
+        return;
+    }
+    saveNavigatorHistory(originalText);
+    const matches = lessonCatalog.filter(lesson =>
+        lesson.keywords.some(keyword => text.includes(normalizeNavigatorText(keyword))));
+    if (matches.length === 0) {
+        navigatorResult.textContent = navigatorLang === "en"
+            ? "No matching lesson was found. Try a shorter phrase such as email, map, photo, or payment."
+            : "一致するレッスンがありません。メール、地図、写真、支払いなど短い言葉でお試しください。";
+    } else {
+        matches.forEach(function (lesson) {
+            const link = document.createElement("a");
+            link.className = "card";
+            link.href = lesson.url + "?lang=" + encodeURIComponent(navigatorLang);
+            link.textContent = navigatorLang === "en" ? lesson.en : lesson.ja;
+            navigatorResult.appendChild(link);
+        });
+    }
+    showNavigatorHistory();
+}
 
-histories.unshift({
-    text: aiInput.value,
-    date: new Date().toLocaleString()
+if (navigatorButton) navigatorButton.addEventListener("click", runNavigator);
+if (voiceButton) voiceButton.addEventListener("click", function () {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+        alert(navigatorLang === "en" ? "Voice input is not supported by this browser." : "このブラウザは音声入力に対応していません。");
+        return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.lang = navigatorLang === "en" ? "en-US" : navigatorLang === "ko" ? "ko-KR" : "ja-JP";
+    recognition.onresult = event => {
+        navigatorInput.value = event.results[0][0].transcript;
+        runNavigator();
+    };
+    recognition.onerror = () => alert(navigatorLang === "en" ? "Voice recognition failed." : "音声認識に失敗しました。");
+    recognition.start();
 });
 
-localStorage.setItem(
-    "aiHistories",
-    JSON.stringify(histories)
-);
-
-        aiResult.innerHTML = "";
-
-        if (!text) {
-            aiResult.textContent =
-                aiLang === "ko"
-                    ? "상담 내용을 입력해주세요."
-                    : "相談内容を入力してください。";
-            return;
-        }
-
-        const matches = lessons.filter(function (lesson) {
-            return lesson.keywords.some(function (keyword) {
-                return text.includes(keyword.toLowerCase());
-            });
-        });
-
-        if (matches.length === 0) {
-            aiResult.textContent =
-                aiLang === "ko"
-                    ? "관련 레슨을 찾지 못했습니다. 다른 말로 입력해보세요."
-                    : "関連するレッスンが見つかりませんでした。別の言葉で入力してみてください。";
-            return;
-        }
-
-        matches.forEach(function (lesson) {
-            const a = document.createElement("a");
-            a.className = "card";
-            a.href = lesson.url + "?lang=" + aiLang;
-            a.textContent =
-                aiLang === "ko"
-                    ? lesson.titleKo
-                    : lesson.titleJa;
-
-            aiResult.appendChild(a);
-        });
-    });
-    function showAiHistory() {
-    if (!aiHistory) {
-        return;
-    }
-
-    const histories =
-        JSON.parse(localStorage.getItem("aiHistories")) || [];
-
-    aiHistory.innerHTML = "";
-
-    if (histories.length === 0) {
-        aiHistory.textContent =
-            aiLang === "ko"
-                ? "아직 상담 기록이 없습니다."
-                : "まだ相談履歴はありません。";
-        return;
-    }
-
-    histories.forEach(function (history) {
-        const div = document.createElement("div");
-        div.className = "post-card";
-
-        div.innerHTML =
-            "<strong>" + history.text + "</strong><br>" +
-            "<small>" + history.date + "</small>";
-
-        aiHistory.appendChild(div);
-    });
-}
-
-showAiHistory();
-if (voiceButton) {
-
-    voiceButton.addEventListener(
-        "click",
-        function () {
-
-            const SpeechRecognition =
-                window.SpeechRecognition
-                || window.webkitSpeechRecognition;
-
-            if (!SpeechRecognition) {
-
-                alert(
-                    aiLang === "ko"
-                        ? "음성 입력을 지원하지 않는 브라우저입니다."
-                        : "このブラウザは音声入力に対応していません。"
-                );
-
-                return;
-            }
-
-            const recognition =
-                new SpeechRecognition();
-
-            recognition.lang =
-                aiLang === "ko"
-                    ? "ko-KR"
-                    : "ja-JP";
-
-            recognition.start();
-
-            recognition.onresult =
-    function(event) {
-
-        const text =
-            event.results[0][0].transcript;
-
-        aiInput.value = text;
-
-        aiButton.click();
-    };
-
-            recognition.onerror =
-                function() {
-
-                    alert(
-                        aiLang === "ko"
-                            ? "음성 인식에 실패했습니다."
-                            : "音声認識に失敗しました。"
-                    );
-                };
-        }
-    );
-}
-}
+showNavigatorHistory();

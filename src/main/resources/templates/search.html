@@ -13,7 +13,7 @@
         検索 | D-Gap
     </title>
 
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
 </head>
 
 <body class="search-page">
@@ -30,7 +30,7 @@
         <nav class="desktop-nav" aria-label="メインメニュー">
             <a th:href="@{/(lang=${lang})}">トップ</a>
             <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
-            <a th:href="@{/ai(lang=${lang})}">AI相談</a>
+            <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
         </nav>
 
@@ -379,7 +379,7 @@
 
 </footer>
 
-<script th:src="@{/script.js}"></script>
+<script th:src="@{/script.js(v='20261001-2')}"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

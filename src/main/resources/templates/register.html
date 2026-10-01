@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lang == 'ko' ? '회원가입' : (lang == 'en' ? 'Sign up' : (lang == 'hira' ? 'かいいんとうろく' : '会員登録'))}">会員登録</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
 </head>
 <body class="designed-page auth-redesign-page register-redesign-page">
 
@@ -56,7 +56,8 @@
 
 </main>
 
-<script th:src="@{/auth.js}"></script>
-<script th:src="@{/script.js}"></script>
+<script th:src="@{/account-sync.js(v='20260930')}"></script>
+<script th:src="@{/auth.js(v='20260930')}"></script>
+<script th:src="@{/script.js(v='20261001-2')}"></script>
 </body>
 </html>

@@ -437,7 +437,8 @@ public class Lesson {
     }
 
     public String getTimeByLang(String lang) {
-        String minutes = time.replace("分", "");
+        int baseMinutes = Integer.parseInt(time.replace("分", ""));
+        String minutes = String.valueOf(baseMinutes + 7);
 
         if ("ko".equals(lang)) {
             return minutes + "분";
@@ -448,7 +449,84 @@ public class Lesson {
         if ("hira".equals(lang)) {
             return minutes + "ふん";
         }
-        return time;
+        return minutes + "分";
+    }
+
+    public String getOutcomeByLang(String lang) {
+        if ("ko".equals(lang)) {
+            return "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다.";
+        }
+        if ("en".equals(lang)) {
+            return "You will be able to complete the task with safe practice data and verify the result yourself.";
+        }
+        if ("hira".equals(lang)) {
+            return "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。";
+        }
+        return switch (url) {
+            case "/lesson/smartphone-power" -> "電源オン・ロック解除・再起動を自分で行い、反応しないときの確認もできます。";
+            case "/lesson/smartphone-input" -> "文字種を切り替え、入力ミスを直しながら短い文章を完成できます。";
+            case "/lesson/phone-call" -> "連絡先を選んで発信し、スピーカーやミュートを使って安全に通話できます。";
+            case "/lesson/camera-photo" -> "ピントと明るさを確認して撮影し、写真が保存されたことまで確認できます。";
+            case "/lesson/gallery-view" -> "目的の写真を探し、拡大・整理・共有前の確認ができます。";
+            case "/lesson/line-message" -> "相手を間違えずに文章や写真を送り、既読や送信結果を確認できます。";
+            case "/lesson/kakao-message" -> "チャット相手を確認してメッセージを送り、送信結果を確認できます。";
+            case "/lesson/sns-privacy" -> "投稿・プロフィール・位置情報の公開範囲を自分で点検できます。";
+            case "/lesson/google-search" -> "具体的な検索語で調べ、複数の情報源を比べて信頼性を判断できます。";
+            case "/lesson/gmail" -> "宛先・件名・本文・添付を確認してメールを送り、返信もできます。";
+            case "/lesson/google-map" -> "目的地までの経路を交通手段別に調べ、出発前に所要時間を確認できます。";
+            case "/lesson/youtube-watch" -> "必要な動画を探し、字幕・速度・音量を調整して視聴できます。";
+            case "/lesson/google-translate" -> "言語を正しく選び、文字・音声・カメラ翻訳を場面に応じて使えます。";
+            case "/lesson/payment-app" -> "店名と金額を確認し、支払い結果と利用履歴まで安全に確認できます。";
+            case "/lesson/smbc-app" -> "公式アプリで残高と明細を確認し、安全にログアウトできます。";
+            case "/lesson/yucho-app" -> "公式アプリで残高と入出金明細を確認し、安全に終了できます。";
+            case "/lesson/money-safety" -> "不審な通知を開かず、公式窓口で確認して報告・削除できます。";
+            default -> "手順を自分で実行し、結果を確認できるようになります。";
+        };
+    }
+
+    public List<String> getPracticeTasksByLang(String lang) {
+        if ("ko".equals(lang)) {
+            return Arrays.asList("연습용 정보로 처음부터 끝까지 조작한다", "표시된 결과가 맞는지 확인한다", "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다");
+        }
+        if ("en".equals(lang)) {
+            return Arrays.asList("Complete the steps using safe practice information", "Check that the expected result appears", "If your screen differs, go back and look for a similarly named menu");
+        }
+        if ("hira".equals(lang)) {
+            return Arrays.asList("れんしゅうようのないようで、さいしょからさいごまでそうさする", "おもったとおりのけっかになったか、かくにんする", "がめんがちがうときは、ひとつもどって、にたなまえをさがす");
+        }
+        return switch (url) {
+            case "/lesson/smartphone-power" -> Arrays.asList("充電が20％以上あることを確認し、電源を入れてロックを解除する", "電源ボタンと音量ボタンの違いを指で確認する", "動作が重い想定で、電源メニューから再起動する場所を確認する");
+            case "/lesson/smartphone-input" -> Arrays.asList("メモアプリに『明日10時に駅で会います』と入力する", "かな・英字・数字を切り替えて『KSU 2026』と入力する", "わざと1文字間違え、カーソル移動と削除で修正する");
+            case "/lesson/phone-call" -> Arrays.asList("家族など了承を得た相手を連絡先から選び、発信前に名前を再確認する", "通話中にスピーカーとミュートを一度ずつ切り替える", "通話履歴から相手を確認し、誤発信せず折り返す手順を確認する");
+            case "/lesson/camera-photo" -> Arrays.asList("明るい場所で書類を1枚、全体が入るように撮影する", "画面の被写体をタップしてピントを合わせ、撮り直して比べる", "撮影直後の小さい写真を開き、文字が読めるか拡大して確認する");
+            case "/lesson/gallery-view" -> Arrays.asList("今日撮影した写真を日付から探す", "2本指で拡大し、必要な部分が鮮明か確認する", "共有ボタンを開くところまで進み、送信先を選ばず閉じる");
+            case "/lesson/line-message" -> Arrays.asList("自分用メモまたは了承を得た相手を開き、短い予定を送る", "送信前に相手の名前と文章を声に出して確認する", "写真選択画面を開き、個人情報が写っていない写真だけを選ぶ");
+            case "/lesson/kakao-message" -> Arrays.asList("自分用チャットまたは了承を得た相手に短い予定を送る", "送信前にプロフィール名とチャット履歴を確認する", "通知・写真・連絡先の権限設定を開き、許可範囲を確認する");
+            case "/lesson/sns-privacy" -> Arrays.asList("現在のアカウントが公開か非公開か確認する", "過去の投稿を1件開き、公開相手と位置情報の有無を確認する", "タグ付けの承認と、連絡先から検索される設定を確認する");
+            case "/lesson/google-search" -> Arrays.asList("『福岡市 粗大ごみ 申込 公式』のように地域・目的・公式を入れて検索する", "広告表示と通常の検索結果を見分ける", "自治体など公式サイトと別のサイトを開き、日付と内容を比較する");
+            case "/lesson/gmail" -> Arrays.asList("自分宛てに件名『送信練習』、本文2行のメールを作る", "送信前に宛先・件名・添付ファイルを指差し確認する", "受信したメールに返信し、引用部分と自分の文章を見分ける");
+            case "/lesson/google-map" -> Arrays.asList("近くの市役所や駅を検索し、住所が正しいか確認する", "徒歩と公共交通の経路を切り替え、時間と乗換回数を比べる", "出発時刻を変更し、一本後の経路も確認する");
+            case "/lesson/youtube-watch" -> Arrays.asList("公式チャンネルの操作説明動画を検索する", "字幕をオンにし、再生速度を0.75倍へ変更する", "自動再生をオフにし、視聴履歴から同じ動画を開く");
+            case "/lesson/google-translate" -> Arrays.asList("短い案内文を入力し、翻訳元と翻訳先の言語を入れ替える", "スピーカーボタンで発音を聞き、音量を調整する", "カメラ翻訳を試し、重要な文章は原文と結果を両方保存する");
+            case "/lesson/payment-app" -> Arrays.asList("支払い前画面で残高・店名・金額を確認する順番を練習する", "店員に提示するコードと、自分が読み取るコードの違いを確認する", "支払い後に完了画面と利用履歴を開き、同じ金額か確認する");
+            case "/lesson/smbc-app" -> Arrays.asList("公式ストアから入れたアプリか、提供元名を確認する", "ログイン後に残高と直近の入出金明細を確認する", "振込は実行せず、振込前に必要な確認項目を読み、ログアウトする");
+            case "/lesson/yucho-app" -> Arrays.asList("公式ストアから入れたアプリか、提供元名を確認する", "ログイン後に残高と直近の入出金明細を確認する", "端末認証と通知設定を確認し、アプリを安全に終了する");
+            case "/lesson/money-safety" -> Arrays.asList("不審な通知の送信元・URL・期限を紙に書き出して怪しい点を探す", "通知内のリンクを使わず、公式アプリのお知らせ欄から同じ情報を探す", "詐欺メール診断を使い、家族や公式窓口へ相談する手順を確認する");
+            default -> Arrays.asList("手順を最初から最後まで実行する", "結果を確認する", "失敗した場合は一つ前の画面へ戻る");
+        };
+    }
+
+    public String getSafetyTipByLang(String lang) {
+        if ("ko".equals(lang)) return "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다.";
+        if ("en".equals(lang)) return "Never share passwords, verification codes, or payment details. Screen names may vary by device and app version.";
+        if ("hira".equals(lang)) return "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがあります。";
+        if (url.contains("payment") || url.contains("smbc") || url.contains("yucho") || url.contains("money")) {
+            return "暗証番号・パスワード・SMS認証コードは誰にも伝えません。送金や支払いは、店名・相手・金額を確認できた場合だけ確定してください。";
+        }
+        if (url.contains("line") || url.contains("kakao") || url.contains("sns")) {
+            return "送信・投稿の前に相手と公開範囲を再確認します。住所、電話番号、身分証、現在地が写る画像は送らないでください。";
+        }
+        return "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。";
     }
 
     public String getQuizQuestionByLang(String lang) {

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lang == 'ko' ? '문제 해결 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
 </head>
 <body class="designed-page diagnosis-redesign-page">
 
@@ -18,7 +18,7 @@
         </a>
         <nav class="desktop-nav" aria-label="メインメニュー">
             <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
-            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? 'AI 상담' : (lang == 'en' ? 'AI support' : (lang == 'hira' ? 'AIそうだん' : 'AI相談'))}">AI相談</a>
+            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
         </nav>
         <div class="header-actions">
@@ -97,6 +97,6 @@
 
 </main>
 
-<script th:src="@{/script.js}"></script>
+<script th:src="@{/script.js(v='20261001-2')}"></script>
 </body>
 </html>

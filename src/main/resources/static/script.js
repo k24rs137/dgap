@@ -125,12 +125,18 @@ localStorage.setItem(
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             localStorage.setItem(key, "done");
+            if (window.dgapSaveProgress) {
+                window.dgapSaveProgress(key, true, document.querySelector("h1").textContent);
+            }
 
             if (message) {
                 message.textContent = getDgapCompleteMessage();
             }
         } else {
             localStorage.removeItem(key);
+            if (window.dgapSaveProgress) {
+                window.dgapSaveProgress(key, false, document.querySelector("h1").textContent);
+            }
 
             if (message) {
                 message.textContent = "";
@@ -218,6 +224,9 @@ if (quizArea) {
 
         const key = completeCheck.dataset.key;
         localStorage.setItem(key, "done");
+        if (window.dgapSaveProgress) {
+            window.dgapSaveProgress(key, true, document.querySelector("h1").textContent);
+        }
     }
 } else {
                 quizMessage.textContent =
@@ -258,6 +267,9 @@ if (favoriteButton) {
                 "favoriteLessons",
                 JSON.stringify(newFavorites)
             );
+            if (window.dgapSaveFavorite) {
+                window.dgapSaveFavorite(favoriteKey, false);
+            }
 
             favoriteButton.textContent = getDgapFavoriteAddText();
 
@@ -268,6 +280,9 @@ if (favoriteButton) {
                 "favoriteLessons",
                 JSON.stringify(favorites)
             );
+            if (window.dgapSaveFavorite) {
+                window.dgapSaveFavorite(favoriteKey, true);
+            }
 
             favoriteButton.textContent = getDgapFavoriteRemoveText();
         }
@@ -390,11 +405,11 @@ if (historyList) {
 
             div.className = "card";
 
-            div.innerHTML =
-                "<strong>" +
-                item.title +
-                "</strong><br>" +
-                item.date;
+            const strong = document.createElement("strong");
+            strong.textContent = item.title;
+            const lineBreak = document.createElement("br");
+            const date = document.createTextNode(item.date);
+            div.append(strong, lineBreak, date);
 
             historyList.appendChild(div);
 
@@ -648,7 +663,7 @@ const dgapHomeTranslations = {
         login: "ログイン",
         navLearning: "学習カテゴリ",
         navDiagnosis: "困りごと診断",
-        navAi: "AI相談",
+        navAi: "相談ナビ",
         navCommunity: "コミュニティ",
         search: "検索",
         desktopNavAriaLabel: "メインメニュー",
@@ -752,9 +767,9 @@ const dgapHomeTranslations = {
         supportLabel: "SUPPORT",
         supportTitle: "困ったときも、すぐに次の行動が分かる",
         supportText:
-            "何から学べばよいか分からない場合は、困りごと診断やAI相談から始められます。入力した内容に合わせて、必要な学習につながるように設計しています。",
+            "何から学べばよいか分からない場合は、困りごと診断や相談ナビから始められます。入力した内容に合わせて、必要な学習につながるように設計しています。",
         useDiagnosis: "困りごと診断を使う",
-        useAi: "AI相談を使う",
+        useAi: "相談ナビを使う",
         useFraud: "詐欺メール診断",
 
         step1Title: "困っていることを選ぶ",

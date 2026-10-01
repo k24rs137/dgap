@@ -1,154 +1,86 @@
-const authLang = document.documentElement.lang;
+const authLang = new URLSearchParams(location.search).get("lang") || "ja";
 
-// =====================
-// 会員登録
-// =====================
+async function sendAuthRequest(url, payload) {
+    const response = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+    let result = {};
+    try {
+        result = await response.json();
+    } catch (error) {
+        result = { message: "サーバーから正しい応答を受け取れませんでした。" };
+    }
+    if (!response.ok) {
+        throw new Error(result.message || "処理に失敗しました。");
+    }
+    return result;
+}
+
+function showAuthMessage(element, text, isError) {
+    if (!element) return;
+    element.textContent = text;
+    element.dataset.state = isError ? "error" : "success";
+}
 
 const registerButton = document.getElementById("registerButton");
-
 if (registerButton) {
     registerButton.addEventListener("click", async function () {
-        const id = document.getElementById("registerId").value;
+        const id = document.getElementById("registerId").value.trim();
         const password = document.getElementById("registerPassword").value;
         const confirm = document.getElementById("registerPasswordConfirm").value;
         const message = document.getElementById("registerMessage");
 
-        if (!id || !password || !confirm) {
-            message.textContent =
-                authLang === "ko"
-                    ? "모든 항목을 입력해주세요."
-                    : "すべての項目を入力してください。";
-            return;
-        }
-
         if (password !== confirm) {
-            message.textContent =
-                authLang === "ko"
-                    ? "비밀번호가 일치하지 않습니다."
-                    : "パスワードが一致しません。";
+            showAuthMessage(message, "パスワードが一致しません。", true);
             return;
         }
-
-        const response = await fetch("/api/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                userId: id,
-                password: password
-            })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            localStorage.setItem("userId", id);
-            localStorage.setItem("loggedIn", "true");
-
-            message.textContent =
-                authLang === "ko"
-                    ? "회원가입이 완료되었습니다."
-                    : "会員登録が完了しました。";
-
-            setTimeout(function () {
-                location.href = "/?lang=" + authLang;
-            }, 500);
-        } else {
-            message.textContent = result.message;
+        registerButton.disabled = true;
+        try {
+            const result = await sendAuthRequest("/api/register", { userId: id, password });
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("userId");
+            sessionStorage.removeItem("dgapAccountHydrated");
+            showAuthMessage(message, result.message, false);
+            setTimeout(() => { location.href = "/?lang=" + encodeURIComponent(authLang); }, 400);
+        } catch (error) {
+            showAuthMessage(message, error.message, true);
+        } finally {
+            registerButton.disabled = false;
         }
     });
 }
-
-// =====================
-// ログイン
-// =====================
 
 const loginButton = document.getElementById("loginButton");
-
 if (loginButton) {
     loginButton.addEventListener("click", async function () {
-        const id = document.getElementById("loginId").value;
+        const id = document.getElementById("loginId").value.trim();
         const password = document.getElementById("loginPassword").value;
         const message = document.getElementById("loginMessage");
-
-        const response = await fetch("/api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                userId: id,
-                password: password
-            })
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            localStorage.setItem("userId", id);
-            localStorage.setItem("loggedIn", "true");
-
-            message.textContent =
-                authLang === "ko"
-                    ? "로그인되었습니다."
-                    : "ログインしました。";
-
-            setTimeout(function () {
-                location.href = "/?lang=" + authLang;
-            }, 500);
-        } else {
-            message.textContent = result.message;
+        loginButton.disabled = true;
+        try {
+            const result = await sendAuthRequest("/api/login", { userId: id, password });
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("userId");
+            sessionStorage.removeItem("dgapAccountHydrated");
+            showAuthMessage(message, result.message, false);
+            setTimeout(() => { location.href = "/?lang=" + encodeURIComponent(authLang); }, 400);
+        } catch (error) {
+            showAuthMessage(message, error.message, true);
+        } finally {
+            loginButton.disabled = false;
         }
     });
 }
 
-// =====================
-// トップページ表示
-// =====================
-
-const loginStatus = document.getElementById("loginStatus");
-const topLogoutButton = document.getElementById("topLogoutButton");
-const loginLink = document.getElementById("loginLink");
-const registerLink = document.getElementById("registerLink");
-
-if (loginStatus) {
-    const loggedIn = localStorage.getItem("loggedIn");
-    const userId = localStorage.getItem("userId");
-
-    if (loggedIn === "true") {
-        loginStatus.textContent =
-            authLang === "ko"
-                ? userId + "님 로그인 중"
-                : userId + "さんでログイン中";
-
-        if (topLogoutButton) {
-            topLogoutButton.style.display = "inline-block";
+["loginPassword", "registerPasswordConfirm"].forEach(function (id) {
+    const input = document.getElementById(id);
+    if (input) input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            const button = id === "loginPassword" ? loginButton : registerButton;
+            if (button) button.click();
         }
-
-        if (loginLink) {
-            loginLink.style.display = "none";
-        }
-
-        if (registerLink) {
-            registerLink.style.display = "none";
-        }
-    } else {
-        loginStatus.textContent =
-            authLang === "ko"
-                ? "로그인하지 않았습니다"
-                : "ログインしていません";
-    }
-}
-
-// =====================
-// ログアウト
-// =====================
-
-if (topLogoutButton) {
-    topLogoutButton.addEventListener("click", function () {
-        localStorage.removeItem("loggedIn");
-        localStorage.removeItem("userId");
-        location.reload();
     });
-}
+});
