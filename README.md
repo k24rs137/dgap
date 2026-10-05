@@ -48,7 +48,7 @@ https://dgap-14r4.onrender.com
 
 ### データベース
 - PostgreSQL
-- Supabase
+- Neon
 
 ### 認証・セキュリティ
 - BCryptによるパスワード暗号化
@@ -57,7 +57,7 @@ https://dgap-14r4.onrender.com
 - GitHub
 - Render
 - Docker
-- Supabase
+- Neon
 
 ## 工夫した点
 
@@ -68,12 +68,24 @@ https://dgap-14r4.onrender.com
 高齢者やデジタル機器に不慣れな人を想定し、文字サイズ変更や音声読み上げにも対応しています。
 
 会員登録・ログイン機能では、PostgreSQLにユーザー情報を保存し、パスワードはBCryptで暗号化しています。  
-さらに、RenderとSupabaseを連携させることで、ローカル環境だけでなくインターネット上に公開できるようにしました。
+さらに、RenderとNeonを連携させることで、ローカル環境だけでなくインターネット上に公開できるようにしました。
 
 ## 苦労した点
 
 ローカル環境では動作していても、Render上では環境変数やデータベース接続、キャッシュの影響で表示が異なることがありました。  
-そのため、GitHubのブランチ管理、Renderのデプロイログ確認、Supabaseとの接続確認を行いながら、原因を一つずつ切り分けて修正しました。
+そのため、GitHubのブランチ管理、Renderのデプロイログ確認、Neonとの接続確認を行いながら、原因を一つずつ切り分けて修正しました。
+
+## RenderとNeonの接続
+
+Neonの `Connect` 画面で接続情報を表示し、RenderのEnvironmentへ分けて登録します。このSpring Bootアプリは接続数を最大5に制限しているため、まずは通常の `Direct connection` を使用します。
+
+```text
+DATABASE_URL=jdbc:postgresql://Neonのホスト/データベース名?sslmode=require
+DB_USER=Neonのユーザー名
+DB_PASSWORD=Neonのデータベースパスワード
+```
+
+`DATABASE_URL` は `postgresql://` ではなく `jdbc:postgresql://` で始めます。パスワードや完全な接続文字列はGitへ保存しません。初回接続時にHibernateが必要なテーブルを作成します。
 
 また、多言語対応ではHTMLだけでなくJavaScriptで表示されるメッセージも言語ごとに切り替える必要があり、画面全体で表示が統一されるように修正しました。
 

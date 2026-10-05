@@ -1,0 +1,7 @@
+.git
+.idea
+.vscode
+target
+*.log
+*.mv.db
+*.trace.db
