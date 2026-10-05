@@ -109,7 +109,7 @@
         }
 
         if (language !== "ja") {
-            const localizedTasks = [...document.querySelectorAll(".lesson-practice-list p")]
+            const localizedTasks = [...document.querySelectorAll(".lesson-practice-data p")]
                 .map(element => element.textContent.trim())
                 .filter(Boolean);
             const localizedOptions = {

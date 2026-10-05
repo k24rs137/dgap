@@ -89,12 +89,12 @@ class ApplicationFlowTests {
     void lessonIncludesPracticalMissionOutcomeAndSafetyGuidance() throws Exception {
         mvc.perform(get("/lesson/gmail").param("lang", "ja"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("実践ミッション")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("今回のゴール")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("自分宛てに件名『送信練習』")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("安全・注意ポイント")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("操作練習モード")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("data-lesson-key=\"/lesson/gmail\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("practice.js?v=20261001-2")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("practice.js?v=20261005-1")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("トップページへ戻る")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("href=\"/?lang=ja\"")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("12分")));
