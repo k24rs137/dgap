@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lesson.getTitleByLang(lang)}">レッスン詳細</title>
-    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261005-2')}">
 </head>
 <body class="designed-page lesson-redesign-page">
 
@@ -21,6 +21,7 @@
             <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
             <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+            <a th:href="@{/fraud(lang=${lang})}" th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
         </nav>
         <div class="header-actions">
             <a class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
@@ -72,6 +73,42 @@
                         <p th:text="${step}">手順</p>
                     </li>
                 </ol>
+
+                <section class="lesson-simulator-card"
+                         id="practiceSimulator"
+                         th:attr="data-lesson-key=${lesson.url},data-lang=${lang}">
+                    <div class="lesson-simulator-heading">
+                        <div>
+                            <p class="section-label">SIMULATION</p>
+                            <h2 th:text="${lang == 'ko' ? '조작 연습 모드' : (lang == 'en' ? 'Practice mode' : (lang == 'hira' ? 'そうされんしゅうもーど' : '操作練習モード'))}">操作練習モード</h2>
+                        </div>
+                        <span class="lesson-simulator-safe"
+                              th:text="${lang == 'ko' ? '실제 전송·결제 없음' : (lang == 'en' ? 'No real calls, messages, or payments' : (lang == 'hira' ? 'ほんとうのそうしん・しはらいはありません' : '実際の送信・通話・決済はありません'))}">実際の送信・通話・決済はありません</span>
+                    </div>
+
+                    <div class="practice-phone" aria-live="polite">
+                        <div class="practice-phone-status" aria-hidden="true">
+                            <span>9:41</span><span>● Wi-Fi ▰</span>
+                        </div>
+                        <div class="practice-app-bar">
+                            <strong id="practiceAppName">練習アプリ</strong>
+                            <span id="practiceStepCount">1 / 3</span>
+                        </div>
+                        <div class="practice-screen">
+                            <p class="practice-screen-label" id="practiceScreenLabel">練習を開始</p>
+                            <h3 id="practiceInstruction">下のボタンから正しい操作を選びます。</h3>
+                            <div class="practice-action-grid" id="practiceActions"></div>
+                            <p class="practice-feedback" id="practiceFeedback"></p>
+                        </div>
+                    </div>
+
+                    <div class="practice-controls">
+                        <button type="button" class="design-button design-button-solid" id="practiceStartButton"
+                                th:text="${lang == 'ko' ? '연습 시작' : (lang == 'en' ? 'Start practice' : (lang == 'hira' ? 'れんしゅうをはじめる' : '練習を始める'))}">練習を始める</button>
+                        <button type="button" class="design-button design-button-soft" id="practiceResetButton" hidden
+                                th:text="${lang == 'ko' ? '처음부터' : (lang == 'en' ? 'Start over' : (lang == 'hira' ? 'さいしょから' : '最初からやり直す'))}">最初からやり直す</button>
+                    </div>
+                </section>
 
                 <section class="lesson-outcome-panel">
                     <p class="section-label" th:text="${lang == 'ko' ? 'GOAL' : (lang == 'en' ? 'GOAL' : (lang == 'hira' ? 'できること' : 'できるようになること'))}">できるようになること</p>
@@ -129,11 +166,14 @@
     <div class="designed-back-area">
         <a class="design-button design-button-solid" th:href="${category.url + '?lang=' + lang}" data-ripple
            th:text="${lang == 'ko' ? '카테고리 페이지로 돌아가기' : (lang == 'en' ? 'Back to category' : (lang == 'hira' ? 'かてごりぺーじへもどる' : 'カテゴリページへ戻る'))}">カテゴリページへ戻る</a>
+        <a class="design-button design-button-soft" th:href="@{/(lang=${lang})}" data-ripple
+           th:text="${lang == 'ko' ? '홈으로 돌아가기' : (lang == 'en' ? 'Back to home' : (lang == 'hira' ? 'とっぷぺーじへもどる' : 'トップページへ戻る'))}">トップページへ戻る</a>
     </div>
 
 </main>
 
 <script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261001-2')}"></script>
+<script th:src="@{/script.js(v='20261005-1')}"></script>
+<script th:src="@{/practice.js(v='20261001-2')}"></script>
 </body>
 </html>

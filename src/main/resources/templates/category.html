@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${category.getTitleByLang(lang)}">カテゴリ詳細</title>
-    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
 </head>
 <body class="designed-page category-redesign-page">
 
@@ -26,6 +26,8 @@
                th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}"
                th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+            <a th:href="@{/fraud(lang=${lang})}"
+               th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
         </nav>
 
         <div class="header-actions">
@@ -142,6 +144,6 @@
 </main>
 
 <script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261001-2')}"></script>
+<script th:src="@{/script.js(v='20261005-1')}"></script>
 </body>
 </html>

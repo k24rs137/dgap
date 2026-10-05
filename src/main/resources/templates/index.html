@@ -11,7 +11,7 @@
 
     <title>D-Gap</title>
 
-    <link rel="stylesheet" th:href="@{/style.css(v='20261001-3')}">
+    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
 </head>
 
 <body class="home-page">
@@ -30,6 +30,7 @@
             <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
             <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+            <a th:href="@{/fraud(lang=${lang})}">詐欺メール診断</a>
         </nav>
 
         <div class="header-actions">
@@ -113,6 +114,7 @@
         <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
         <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
         <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        <a th:href="@{/fraud(lang=${lang})}">詐欺メール診断</a>
         <a th:href="@{/search(lang=${lang})}">検索</a>
         <a th:href="@{/login(lang=${lang})}">ログイン</a>
     </nav>
@@ -520,7 +522,7 @@
 </footer>
 
 <script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261001-2')}"></script>
+<script th:src="@{/script.js(v='20261005-1')}"></script>
 
 </body>
 </html>
