@@ -13,59 +13,12 @@
         詐欺メール診断
     </title>
 
-    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
+    <th:block th:replace="~{fragments/layout :: assets}"></th:block>
 </head>
 
 <body class="fraud-page">
 
-<header class="site-header">
-    <div class="header-inner">
-
-        <a class="site-logo"
-           th:href="@{/(lang=${lang})}">
-            <span class="site-logo-mark">D</span>
-            <span>D-Gap</span>
-        </a>
-
-        <nav class="desktop-nav" aria-label="メインメニュー">
-            <a th:href="@{/(lang=${lang})}"
-               th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'とっぷ' : 'トップ'))}">
-                トップ
-            </a>
-
-            <a th:href="@{/search(lang=${lang})}"
-               th:text="${lang == 'ko' ? '검색' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさく' : '検索'))}">
-                検索
-            </a>
-
-            <a th:href="@{/diagnosis(lang=${lang})}"
-               th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble Check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">
-                困りごと診断
-            </a>
-
-            <a th:href="@{/ai(lang=${lang})}"
-               th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson Navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">
-                相談ナビ
-            </a>
-
-            <a th:href="@{/fraud(lang=${lang})}"
-               aria-current="page"
-               th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam Email Check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">
-                詐欺メール診断
-            </a>
-        </nav>
-
-        <div class="header-actions">
-            <a class="button button-small button-primary"
-               th:href="@{/login(lang=${lang})}">
-                <span th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">
-                    ログイン
-                </span>
-            </a>
-        </div>
-
-    </div>
-</header>
+<header th:replace="~{fragments/layout :: header}"></header>
 
 <main>
 
@@ -162,29 +115,9 @@
 
 </main>
 
-<footer class="site-footer">
-    <div class="footer-inner">
-        <div>
-            <a class="site-logo footer-logo"
-               th:href="@{/(lang=${lang})}">
-                <span class="site-logo-mark">D</span>
-                <span>D-Gap</span>
-            </a>
-
-            <p th:text="${lang == 'ko' ? '디지털의 불안을 배움과 안심으로 바꾸는 서비스.' : (lang == 'en' ? 'A service that turns digital anxiety into learning and confidence.' : (lang == 'hira' ? 'でじたるのふあんを、まなびとあんしんにかえるさーびす。' : 'デジタルの不安を、学びと安心に変えるサービス。'))}">
-                デジタルの不安を、学びと安心に変えるサービス。
-            </p>
-        </div>
-
-        <p class="copyright">
-            © 2026 D-Gap
-        </p>
-    </div>
-</footer>
-
-<script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/fraud.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261005-1')}"></script>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/js/features/fraud.js(v='20261114')}"></script>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
 
 </body>
 </html>

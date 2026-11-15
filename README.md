@@ -1,103 +1,162 @@
 # D-Gap
 
-D-Gapは、スマートフォンやSNS、Googleサービス、金融アプリなどの使い方を、やさしい手順で学べるデジタル学習Webアプリです。  
-高齢者や留学生、デジタル機器に不慣れな人でも安心して学習できるように、多言語対応、音声読み上げ、学習進捗、困りごと診断などを実装しました。
+D-Gapは、スマートフォン、SNS、Googleサービス、金融アプリなどの使い方を、やさしい手順で学べるデジタル学習Webアプリです。
+
+高齢者、留学生、デジタル機器に不慣れな利用者を想定し、多言語表示、音声読み上げ、学習進捗、困りごと診断などを提供します。
 
 ## 公開URL
 
 https://dgap-14r4.onrender.com
 
-※Renderの無料プランを利用しているため、一定時間アクセスがない場合は初回表示に時間がかかることがあります。
-
-## 開発した目的
-
-身近なデジタル機器の操作に不安を感じる人が、自分のペースで学習できるサービスを作ることを目的に開発しました。  
-特に、スマートフォン操作、SNS、メール、地図、金融アプリなど、日常生活で必要になる操作を分かりやすく学べるように意識しました。
+Renderの無料プランでは、一定時間アクセスがない場合、初回表示に時間がかかることがあります。
 
 ## 主な機能
 
-- 学習カテゴリ機能
-- レッスン詳細表示
-- 学習完了チェック
-- 学習進捗表示
-- お気に入り機能
-- 学習履歴機能
-- 検索機能
-- 困りごと診断
-- AI相談機能
-- 詐欺メール診断
-- コミュニティ投稿
-- 会員登録・ログイン
-- パスワード暗号化
-- 音声読み上げ
+- 4カテゴリ・17レッスン
 - 日本語・韓国語・英語・ひらがな表示
-- 文字サイズ変更
+- レッスン検索、クイズ、操作練習
+- 音声読み上げ・音声入力
+- 学習進捗・履歴・お気に入り
+- キーワード式レッスン案内
+- 困りごと診断、詐欺メール診断
+- 会員登録・ログイン（変更不可のユーザーIDと変更可能なユーザー名を分離）
+- 学習進捗・最近の学習・お気に入りを確認できるマイページ
+- コミュニティ投稿、いいね、削除
 
-## 使用技術
+## 技術構成
 
-### フロントエンド
-- HTML
-- CSS
-- JavaScript
-- Thymeleaf
-
-### バックエンド
-- Java
-- Spring Boot
+- Java 17
+- Spring Boot 3.5
+- Spring MVC / Thymeleaf
 - Spring Data JPA
-
-### データベース
-- PostgreSQL
-- Neon
-
-### 認証・セキュリティ
-- BCryptによるパスワード暗号化
-
-### インフラ・デプロイ
-- GitHub
-- Render
+- Spring Security
+- Flyway
+- PostgreSQL（本番）
+- H2（ローカル・テスト）
+- Maven Wrapper
 - Docker
-- Neon
+- Render / Neon
 
-## 工夫した点
-
-利用者が迷わず操作できるよう、画面ごとに役割が分かるデザインを意識しました。  
-トップページ、学習カテゴリ、AI相談、困りごと診断、コミュニティ、ログイン画面などでデザインに変化をつけ、単調にならないようにしています。
-
-また、日本語だけでなく、韓国語、英語、ひらがな表示にも対応し、利用者の理解度に合わせて表示を切り替えられるようにしました。  
-高齢者やデジタル機器に不慣れな人を想定し、文字サイズ変更や音声読み上げにも対応しています。
-
-会員登録・ログイン機能では、PostgreSQLにユーザー情報を保存し、パスワードはBCryptで暗号化しています。  
-さらに、RenderとNeonを連携させることで、ローカル環境だけでなくインターネット上に公開できるようにしました。
-
-## 苦労した点
-
-ローカル環境では動作していても、Render上では環境変数やデータベース接続、キャッシュの影響で表示が異なることがありました。  
-そのため、GitHubのブランチ管理、Renderのデプロイログ確認、Neonとの接続確認を行いながら、原因を一つずつ切り分けて修正しました。
-
-## RenderとNeonの接続
-
-Neonの `Connect` 画面で接続情報を表示し、RenderのEnvironmentへ分けて登録します。このSpring Bootアプリは接続数を最大5に制限しているため、まずは通常の `Direct connection` を使用します。
+## ディレクトリ構成
 
 ```text
-DATABASE_URL=jdbc:postgresql://Neonのホスト/データベース名?sslmode=require
-DB_USER=Neonのユーザー名
-DB_PASSWORD=Neonのデータベースパスワード
+src/main/
+├── java/com/example/dgap/
+│   ├── config/          Spring Security設定
+│   ├── controller/      画面・APIコントローラー
+│   ├── dto/             APIのリクエスト・レスポンス
+│   ├── model/           ドメインモデル・JPAエンティティ
+│   ├── repository/      JPAリポジトリ
+│   └── service/         ユーザー処理・レッスンカタログ
+└── resources/
+    ├── content/         レッスン・翻訳データ
+    ├── db/migration/    Flywayマイグレーション
+    ├── static/
+    │   ├── css/
+    │   └── js/
+    │       ├── common/
+    │       └── features/
+    └── templates/
+        └── fragments/
 ```
 
-`DATABASE_URL` は `postgresql://` ではなく `jdbc:postgresql://` で始めます。パスワードや完全な接続文字列はGitへ保存しません。初回接続時にHibernateが必要なテーブルを作成します。
+レッスン内容と4言語の翻訳は、`src/main/resources/content/lesson-catalog.yaml`で管理します。
 
-また、多言語対応ではHTMLだけでなくJavaScriptで表示されるメッセージも言語ごとに切り替える必要があり、画面全体で表示が統一されるように修正しました。
+## 必要環境
 
-## 今後の改善点
+- Java 17
+- Git
 
-- 実際の利用者に使ってもらい、分かりにくい部分を改善する
-- AI相談機能をより高度な自然言語対応にする
-- 管理者機能を追加し、投稿やユーザー管理を行えるようにする
-- 学習データをデータベースで管理し、より個人に合わせた学習支援を行う
-- スマートフォン表示の操作性をさらに向上させる
+Mavenの個別インストールは不要です。リポジトリに含まれるMaven Wrapperを使用します。
 
-## 学んだこと
+## ローカル起動
 
-Spring Bootを用いたWebアプリ開発だけでなく、データベース接続、認証機能、クラウド環境へのデプロイ、GitHubによるバージョン管理まで一連の流れを経験しました。  
-特に、ローカルで動くだけでなく、実際にインターネット上に公開し、スマートフォンからも確認できる状態にしたことで、Webアプリ開発の流れを実践的に学ぶことができました。
+Windows PowerShell:
+
+```powershell
+.\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=local"
+```
+
+macOS / Linux:
+
+```bash
+bash ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+起動後、次のURLへアクセスします。
+
+```text
+http://localhost:8081
+```
+
+ローカル環境では、`target/dgap-local.mv.db`にH2データベースが作成されます。
+
+## テスト
+
+Windows:
+
+```powershell
+.\mvnw.cmd test
+```
+
+macOS / Linux:
+
+```bash
+bash ./mvnw test
+```
+
+テストではH2のインメモリDBを使用し、Flywayマイグレーション、画面描画、認証、学習データ、コミュニティ、CSRF保護を確認します。
+
+## 本番環境変数
+
+```text
+DATABASE_URL=jdbc:postgresql://HOST/DATABASE?sslmode=require
+DB_USER=データベースユーザー
+DB_PASSWORD=データベースパスワード
+PORT=10000
+SESSION_COOKIE_SECURE=true
+```
+
+接続情報やパスワードはGitへ保存しないでください。
+
+## データベースマイグレーション
+
+スキーマはFlywayで管理します。
+
+```text
+src/main/resources/db/migration/
+└── V1__initial_schema.sql
+```
+
+Hibernateは`ddl-auto: validate`でスキーマを検証し、テーブルを自動変更しません。既存の本番DBへ初めて適用する前には、必ずバックアップを取得してください。
+
+## セキュリティ
+
+- BCryptによるパスワードハッシュ化
+- HTTPセッション認証
+- Spring SecurityによるAPI認可
+- CSRFトークン検証
+- Content Security Policyなどのレスポンスヘッダー
+- 本番Cookieの`HttpOnly`、`Secure`、`SameSite=Lax`
+- ログイン時のセッションID更新
+
+## Docker
+
+```bash
+docker build -t dgap .
+docker run --rm -p 8081:8081 \
+  -e DATABASE_URL="jdbc:postgresql://HOST/DATABASE?sslmode=require" \
+  -e DB_USER="USER" \
+  -e DB_PASSWORD="PASSWORD" \
+  -e PORT=8081 \
+  dgap
+```
+
+Dockerfileはマルチステージ構成で、JDKイメージでビルドし、JREイメージで実行します。
+
+## CI
+
+GitHub Actionsで以下を自動確認します。
+
+- Mavenテスト
+- Dockerイメージのビルド

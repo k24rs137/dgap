@@ -6,24 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Login' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</title>
-    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
+    <th:block th:replace="~{fragments/layout :: assets}"></th:block>
 </head>
 <body class="designed-page auth-redesign-page login-redesign-page">
 
 <main class="auth-split-shell">
-
-    <section class="auth-brand-panel reveal">
-        <a class="site-logo auth-logo" th:href="@{/(lang=${lang})}">
-            <span class="site-logo-mark">D</span>
-            <span>D-Gap</span>
-        </a>
-        <div class="auth-orbit">
-            <span></span><span></span><span></span>
-            <strong>LOGIN</strong>
-        </div>
-        <h1 th:text="${lang == 'ko' ? '다시 오신 것을 환영합니다' : (lang == 'en' ? 'Welcome back' : (lang == 'hira' ? 'おかえりなさい' : 'おかえりなさい'))}">おかえりなさい</h1>
-        <p th:text="${lang == 'ko' ? '로그인하면 학습 기록과 즐겨찾기를 이어서 사용할 수 있습니다.' : (lang == 'en' ? 'Log in to continue using your progress and favorites.' : (lang == 'hira' ? 'ろぐいんすると、がくしゅうりれきやおきにいりをつづけてつかえます。' : 'ログインすると、学習履歴やお気に入りを続けて使えます。'))}">ログインすると、学習履歴を使えます。</p>
-    </section>
 
     <section class="auth-form-panel reveal" data-tilt-card>
         <p class="designed-kicker" th:text="${lang == 'ko' ? 'ACCOUNT' : (lang == 'en' ? 'ACCOUNT' : (lang == 'hira' ? 'あかうんと' : 'ACCOUNT'))}">ACCOUNT</p>
@@ -51,9 +38,7 @@
     </section>
 
 </main>
-
-<script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/auth.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261005-1')}"></script>
+<script th:src="@{/js/features/auth.js(v='20261114')}"></script>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
 </body>
 </html>

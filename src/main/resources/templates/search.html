@@ -13,38 +13,12 @@
         検索 | D-Gap
     </title>
 
-    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
+    <th:block th:replace="~{fragments/layout :: assets}"></th:block>
 </head>
 
 <body class="search-page">
 
-<header class="site-header">
-    <div class="header-inner">
-
-        <a class="site-logo"
-           th:href="@{/(lang=${lang})}">
-            <span class="site-logo-mark">D</span>
-            <span>D-Gap</span>
-        </a>
-
-        <nav class="desktop-nav" aria-label="メインメニュー">
-            <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
-            <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
-            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
-            <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
-            <a th:href="@{/fraud(lang=${lang})}" th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
-        </nav>
-
-        <div class="header-actions">
-            <a class="button button-small button-primary"
-               th:href="@{/login(lang=${lang})}"
-               data-ripple>
-                <span th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</span>
-            </a>
-        </div>
-
-    </div>
-</header>
+<header th:replace="~{fragments/layout :: header}"></header>
 
 <main>
 
@@ -86,12 +60,28 @@
                            th:value="${keyword}"
                            placeholder="例：スマホ、LINE、地図、メール、決済、詐欺">
 
+                    <button class="voice-search-button"
+                            id="voiceSearchButton"
+                            type="button"
+                            hidden
+                            aria-pressed="false"
+                            aria-describedby="voiceSearchStatus voiceSearchNote">
+                        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+                            <path d="M12 15a3.5 3.5 0 0 0 3.5-3.5v-5a3.5 3.5 0 1 0-7 0v5A3.5 3.5 0 0 0 12 15Zm-6-3.5a1 1 0 0 1 2 0 4 4 0 0 0 8 0 1 1 0 1 1 2 0 6 6 0 0 1-5 5.92V20h2.5a1 1 0 1 1 0 2h-7a1 1 0 1 1 0-2H11v-2.58A6 6 0 0 1 6 11.5Z"/>
+                        </svg>
+                        <span th:text="${lang == 'ko' ? '음성 검색' : (lang == 'en' ? 'Voice search' : (lang == 'hira' ? 'こえで けんさく' : '音声検索'))}">音声検索</span>
+                    </button>
+
                     <button class="button button-primary search-submit-button"
                             type="submit"
                             data-ripple>
                         検索する
                     </button>
                 </div>
+
+                <p id="voiceSearchStatus" class="voice-search-status" role="status" aria-live="polite" hidden></p>
+                <p id="voiceSearchNote" class="voice-search-note" hidden
+                   th:text="${lang == 'ko' ? '음성은 브라우저의 음성 인식 서비스에서 처리될 수 있습니다.' : (lang == 'en' ? 'Your voice may be processed by your browser’s speech recognition service.' : (lang == 'hira' ? 'こえは ぶらうざの おんせいにんしき さーびすで しょりされる ことが あります。' : '音声はブラウザの音声認識サービスで処理される場合があります。'))}">音声はブラウザの音声認識サービスで処理される場合があります。</p>
 
             </form>
 
@@ -356,100 +346,9 @@
 
 </main>
 
-<footer class="site-footer">
+<footer th:replace="~{fragments/layout :: footer}"></footer>
 
-    <div class="footer-inner">
-
-        <div>
-            <a class="site-logo footer-logo"
-               th:href="@{/(lang=${lang})}">
-                <span class="site-logo-mark">D</span>
-                <span>D-Gap</span>
-            </a>
-
-            <p>
-                デジタルの不安を、学びと安心に変えるサービス。
-            </p>
-        </div>
-
-        <p class="copyright">
-            © 2026 D-Gap
-        </p>
-
-    </div>
-
-</footer>
-
-<script th:src="@{/script.js(v='20261005-1')}"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("keyword");
-    const searchCards = document.querySelectorAll("[data-search-card]");
-    const noResultBox = document.getElementById("searchNoResult");
-    const searchWordText = document.getElementById("searchWordText");
-
-    if (!searchInput || searchCards.length === 0) {
-        return;
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const keywordFromUrl = urlParams.get("keyword") || "";
-
-    searchInput.value = keywordFromUrl;
-    filterCards(keywordFromUrl);
-
-    searchInput.addEventListener("input", function () {
-        filterCards(searchInput.value);
-    });
-
-    function filterCards(keyword) {
-        const normalizedKeyword = normalizeText(keyword);
-        let visibleCount = 0;
-
-        searchCards.forEach(function (card) {
-            const targetText = normalizeText(card.textContent + " " + (card.dataset.keywords || ""));
-            const isMatch = normalizedKeyword === "" || targetText.includes(normalizedKeyword);
-
-            card.style.display = isMatch ? "grid" : "none";
-
-            if (isMatch) {
-                visibleCount++;
-            }
-        });
-
-        if (noResultBox) {
-            noResultBox.classList.toggle("is-visible", visibleCount === 0);
-        }
-
-        if (searchWordText) {
-            if (normalizedKeyword === "") {
-                searchWordText.textContent = "キーワードを入力すると、関連するカテゴリを探せます。";
-            } else {
-                searchWordText.innerHTML =
-                    "検索ワード：<strong>" + escapeHtml(keyword) + "</strong>　" + visibleCount + "件";
-            }
-        }
-    }
-
-    function normalizeText(text) {
-        return String(text)
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .replace(/　+/g, "")
-            .trim();
-    }
-
-    function escapeHtml(text) {
-        return String(text)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-    }
-});
-</script>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
 
 </body>
 </html>

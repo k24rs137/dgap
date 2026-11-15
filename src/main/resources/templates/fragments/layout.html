@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:fragment="assets">
+        <meta name="_csrf" th:content="${_csrf.token}">
+        <link rel="stylesheet" th:href="@{/css/base.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/components.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/home.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/accessibility.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/search.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/pages.css(v='20261114')}">
+        <script th:src="@{/js/common/security.js(v='20261114')}"></script>
+    </th:block>
+</head>
+<body>
+<header class="site-header" th:fragment="header">
+    <div class="header-inner">
+        <a class="site-logo" th:href="@{/(lang=${lang})}">
+            <img class="site-logo-image" th:src="@{/images/dgap-logo.png(v='20261114')}"
+                 src="/images/dgap-logo.png" alt="D-Gap">
+        </a>
+        <nav class="desktop-nav" aria-label="メインメニュー">
+            <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
+            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
+            <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
+            <a th:href="@{/fraud(lang=${lang})}" th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
+        </nav>
+        <div class="header-actions">
+            <a class="header-search" th:href="@{/search(lang=${lang})}" th:text="${lang == 'ko' ? '검색' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさく' : '検索'))}">検索</a>
+            <span id="loginStatus"></span>
+            <a id="myPageLink" class="button button-small" style="display:none"
+               th:href="@{/mypage(lang=${lang})}"
+               th:text="${lang == 'ko' ? '마이페이지' : (lang == 'en' ? 'My page' : (lang == 'hira' ? 'まいぺーじ' : 'マイページ'))}">マイページ</a>
+            <a id="loginLink" class="button button-small button-primary" th:href="@{/login(lang=${lang})}" data-ripple
+               th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
+            <button id="topLogoutButton" type="button" class="button button-small" style="display:none"
+                    th:text="${lang == 'ko' ? '로그아웃' : (lang == 'en' ? 'Log out' : (lang == 'hira' ? 'ろぐあうと' : 'ログアウト'))}">ログアウト</button>
+            <button type="button" class="mobile-menu-button" id="dgapMenuButton"
+                    aria-controls="dgapMobileMenu" aria-expanded="false">メニュー</button>
+        </div>
+    </div>
+    <div class="accessibility-toolbar">
+        <div class="accessibility-group">
+            <span class="accessibility-label">表示言語</span>
+            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ja">日本語</button>
+            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ko">한국어</button>
+            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="en">English</button>
+            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="hira">ひらがな</button>
+        </div>
+        <div class="accessibility-group">
+            <span class="accessibility-label">文字サイズ</span>
+            <button type="button" class="accessibility-button font-size-button" data-font-size="normal">標準</button>
+            <button type="button" class="accessibility-button font-size-button" data-font-size="large">大</button>
+            <button type="button" class="accessibility-button font-size-button" data-font-size="xlarge">特大</button>
+        </div>
+    </div>
+    <nav class="mobile-nav" id="dgapMobileMenu" aria-label="スマートフォン用メニュー">
+        <a th:href="@{/(lang=${lang})}">トップ</a>
+        <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
+        <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
+        <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        <a th:href="@{/fraud(lang=${lang})}">詐欺メール診断</a>
+        <a th:href="@{/search(lang=${lang})}">検索</a>
+        <a id="mobileMyPageLink" style="display:none" th:href="@{/mypage(lang=${lang})}"
+           th:text="${lang == 'ko' ? '마이페이지' : (lang == 'en' ? 'My page' : (lang == 'hira' ? 'まいぺーじ' : 'マイページ'))}">マイページ</a>
+    </nav>
+</header>
+
+<footer class="site-footer" th:fragment="footer">
+    <div class="footer-inner">
+        <div><a class="site-logo footer-logo" th:href="@{/(lang=${lang})}"><img class="site-logo-image" th:src="@{/images/dgap-logo.png(v='20261114')}" src="/images/dgap-logo.png" alt="D-Gap"></a>
+            <p th:text="${lang == 'en' ? 'Digital learning, one step at a time.' : 'デジタル学習を、ひとつずつ。'}">デジタル学習を、ひとつずつ。</p></div>
+        <p class="copyright">© D-Gap</p>
+    </div>
+</footer>
+
+<th:block th:fragment="scripts">
+    <script th:src="@{/js/common/account-sync.js(v='20261114')}"></script>
+    <script th:src="@{/js/features/learning.js(v='20261114')}"></script>
+    <script th:src="@{/js/common/ui.js(v='20261114')}"></script>
+    <script th:src="@{/js/features/translations.js(v='20261114')}"></script>
+    <script th:src="@{/js/features/accessibility.js(v='20261114')}"></script>
+    <script th:src="@{/js/features/search.js(v='20261114')}"></script>
+    <script th:src="@{/js/common/effects.js(v='20261114')}"></script>
+</th:block>
+</body>
+</html>

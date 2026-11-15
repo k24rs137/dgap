@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja"
+      th:lang="${lang == 'ko' ? 'ko' : (lang == 'en' ? 'en' : 'ja')}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${lang == 'ko' ? '마이페이지 | D-Gap' : (lang == 'en' ? 'My page | D-Gap' : (lang == 'hira' ? 'まいぺーじ | D-Gap' : 'マイページ | D-Gap'))}">マイページ | D-Gap</title>
+    <th:block th:replace="~{fragments/layout :: assets}"></th:block>
+    <link rel="stylesheet" th:href="@{/css/features/mypage.css(v='20261114')}">
+</head>
+<body class="designed-page mypage-page">
+
+<header th:replace="~{fragments/layout :: header}"></header>
+
+<main class="mypage-main">
+    <section class="mypage-hero">
+        <div class="mypage-hero-inner">
+            <div class="mypage-welcome reveal">
+                <p class="designed-kicker">MY LEARNING</p>
+                <h1 th:text="${lang == 'ko' ? myPage.displayName + '님의 학습 페이지' : (lang == 'en' ? 'Learning page for ' + myPage.displayName : (lang == 'hira' ? myPage.displayName + 'さんの まいぺーじ' : myPage.displayName + 'さんのマイページ'))}">ユーザーさんのマイページ</h1>
+                <p th:text="${lang == 'ko' ? '학습 진행 상황을 확인하고 다음 레슨을 시작하세요.' : (lang == 'en' ? 'Review your progress and continue with your next lesson.' : (lang == 'hira' ? 'がくしゅうの すすみぐあいを みて、つぎの れっすんを はじめましょう。' : '学習の進み具合を確認して、次のレッスンを始めましょう。'))}">学習の進み具合を確認して、次のレッスンを始めましょう。</p>
+            </div>
+
+            <div class="mypage-progress-card reveal">
+                <div class="mypage-progress-ring" th:style="'--progress: ' + ${myPage.progressPercent} + '%'">
+                    <strong th:text="${myPage.progressPercent + '%'}">0%</strong>
+                    <span th:text="${lang == 'ko' ? '완료' : (lang == 'en' ? 'complete' : (lang == 'hira' ? 'かんりょう' : '完了'))}">完了</span>
+                </div>
+                <div>
+                    <p class="mypage-stat-label" th:text="${lang == 'ko' ? '전체 진행률' : (lang == 'en' ? 'Overall progress' : (lang == 'hira' ? 'ぜんたいの すすみぐあい' : '全体の進捗'))}">全体の進捗</p>
+                    <p class="mypage-stat-value">
+                        <strong th:text="${myPage.completedCount}">0</strong>
+                        <span th:text="${' / ' + myPage.totalCount}"> / 17</span>
+                    </p>
+                    <p class="mypage-stat-caption" th:text="${lang == 'ko' ? '레슨을 완료했습니다' : (lang == 'en' ? 'lessons completed' : (lang == 'hira' ? 'れっすん かんりょう' : 'レッスン完了'))}">レッスン完了</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="mypage-content">
+        <section class="mypage-section mypage-next-section reveal" aria-labelledby="mypageNextTitle">
+            <div class="mypage-section-heading">
+                <div>
+                    <p class="section-label">NEXT LESSON</p>
+                    <h2 id="mypageNextTitle" th:text="${lang == 'ko' ? '다음 추천 레슨' : (lang == 'en' ? 'Your next lesson' : (lang == 'hira' ? 'つぎの おすすめ れっすん' : '次のおすすめレッスン'))}">次のおすすめレッスン</h2>
+                </div>
+            </div>
+
+            <article class="mypage-next-card" th:if="${myPage.nextLesson != null}">
+                <div>
+                    <div class="mypage-lesson-meta">
+                        <span th:text="${myPage.nextLesson.level}">初級</span>
+                        <span th:text="${myPage.nextLesson.time}">5分</span>
+                    </div>
+                    <h3 th:text="${myPage.nextLesson.title}">レッスン名</h3>
+                    <p th:text="${myPage.nextLesson.description}">レッスンの説明</p>
+                </div>
+                <a class="design-button design-button-solid"
+                   th:href="${myPage.nextLesson.url + '?lang=' + lang}"
+                   data-ripple
+                   th:text="${lang == 'ko' ? '학습 계속하기' : (lang == 'en' ? 'Continue learning' : (lang == 'hira' ? 'がくしゅうを つづける' : '学習を続ける'))}">学習を続ける</a>
+            </article>
+
+            <div class="mypage-empty mypage-complete" th:if="${myPage.nextLesson == null}">
+                <span aria-hidden="true">✓</span>
+                <div>
+                    <h3 th:text="${lang == 'ko' ? '모든 레슨을 완료했습니다' : (lang == 'en' ? 'All lessons completed' : (lang == 'hira' ? 'すべての れっすんが かんりょうしました' : 'すべてのレッスンを完了しました'))}">すべてのレッスンを完了しました</h3>
+                    <p th:text="${lang == 'ko' ? '배운 내용을 복습해 보세요.' : (lang == 'en' ? 'Review your completed lessons to keep your skills fresh.' : (lang == 'hira' ? 'まなんだ ないようを ふくしゅうしましょう。' : '学んだ内容を復習して、知識を定着させましょう。'))}">学んだ内容を復習しましょう。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="mypage-two-column">
+            <section class="mypage-section reveal" aria-labelledby="mypageHistoryTitle">
+                <div class="mypage-section-heading">
+                    <div>
+                        <p class="section-label">RECENT</p>
+                        <h2 id="mypageHistoryTitle" th:text="${lang == 'ko' ? '최근 학습' : (lang == 'en' ? 'Recent learning' : (lang == 'hira' ? 'さいきんの がくしゅう' : '最近の学習'))}">最近の学習</h2>
+                    </div>
+                </div>
+                <div class="mypage-history-list" th:if="${!#lists.isEmpty(myPage.recentHistory)}">
+                    <a th:each="item : ${myPage.recentHistory}"
+                       th:href="${item.url + '?lang=' + lang}"
+                       class="mypage-history-item">
+                        <span class="mypage-history-check" aria-hidden="true">✓</span>
+                        <span>
+                            <strong th:text="${item.title}">レッスン名</strong>
+                            <small th:text="${item.completedDate}">2026/11/14</small>
+                        </span>
+                        <span class="mypage-item-arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+                <div class="mypage-empty" th:if="${#lists.isEmpty(myPage.recentHistory)}">
+                    <p th:text="${lang == 'ko' ? '아직 완료한 레슨이 없습니다.' : (lang == 'en' ? 'No completed lessons yet.' : (lang == 'hira' ? 'まだ かんりょうした れっすんは ありません。' : '完了したレッスンはまだありません。'))}">完了したレッスンはまだありません。</p>
+                    <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '레슨 찾기' : (lang == 'en' ? 'Find a lesson' : (lang == 'hira' ? 'れっすんを さがす' : 'レッスンを探す'))}">レッスンを探す</a>
+                </div>
+            </section>
+
+            <section class="mypage-section reveal" aria-labelledby="mypageFavoriteTitle">
+                <div class="mypage-section-heading">
+                    <div>
+                        <p class="section-label">FAVORITES</p>
+                        <h2 id="mypageFavoriteTitle" th:text="${lang == 'ko' ? '즐겨찾기' : (lang == 'en' ? 'Favorites' : (lang == 'hira' ? 'おきにいり' : 'お気に入り'))}">お気に入り</h2>
+                    </div>
+                    <span class="mypage-count-badge" th:text="${#lists.size(myPage.favorites)}">0</span>
+                </div>
+                <div class="mypage-favorite-list" th:if="${!#lists.isEmpty(myPage.favorites)}">
+                    <a th:each="lesson : ${myPage.favorites}"
+                       th:href="${lesson.url + '?lang=' + lang}"
+                       class="mypage-favorite-item">
+                        <span aria-hidden="true">★</span>
+                        <span>
+                            <strong th:text="${lesson.title}">レッスン名</strong>
+                            <small th:text="${lesson.level + ' · ' + lesson.time}">初級 · 5分</small>
+                        </span>
+                        <span class="mypage-item-arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+                <div class="mypage-empty" th:if="${#lists.isEmpty(myPage.favorites)}">
+                    <p th:text="${lang == 'ko' ? '즐겨찾기한 레슨이 없습니다.' : (lang == 'en' ? 'No favorite lessons yet.' : (lang == 'hira' ? 'おきにいりの れっすんは まだ ありません。' : 'お気に入りのレッスンはまだありません。'))}">お気に入りのレッスンはまだありません。</p>
+                    <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '레슨 찾기' : (lang == 'en' ? 'Browse lessons' : (lang == 'hira' ? 'れっすんを みる' : 'レッスンを見る'))}">レッスンを見る</a>
+                </div>
+            </section>
+        </div>
+
+        <section class="mypage-account-section reveal" aria-labelledby="mypageAccountTitle">
+            <div class="mypage-account-heading">
+                <div>
+                    <p class="section-label">ACCOUNT</p>
+                    <h2 id="mypageAccountTitle" th:text="${lang == 'ko' ? '계정 설정' : (lang == 'en' ? 'Account settings' : (lang == 'hira' ? 'あかうんとの せってい' : 'アカウント設定'))}">アカウント設定</h2>
+                    <p>
+                        <span th:text="${lang == 'ko' ? '현재 사용자 ID' : (lang == 'en' ? 'Current user ID' : (lang == 'hira' ? 'いま つかっている ID' : '現在のユーザーID'))}">現在のユーザーID</span>：
+                        <strong id="currentUserId" th:text="${myPage.userId}">user</strong>
+                    </p>
+                </div>
+                <button type="button" id="mypageLogoutButton" class="mypage-logout-button"
+                        th:text="${lang == 'ko' ? '로그아웃' : (lang == 'en' ? 'Log out' : (lang == 'hira' ? 'ろぐあうと' : 'ログアウト'))}">ログアウト</button>
+            </div>
+
+            <form id="changeDisplayNameForm" class="mypage-profile-form" novalidate>
+                <div class="mypage-form-copy">
+                    <h3 th:text="${lang == 'ko' ? '사용자 이름 변경' : (lang == 'en' ? 'Change display name' : (lang == 'hira' ? 'ひょうじする なまえを かえる' : 'ユーザー名を変更'))}">ユーザー名を変更</h3>
+                    <p th:text="${lang == 'ko' ? '마이페이지와 커뮤니티에 표시되는 이름입니다. 사용자 ID는 변경되지 않습니다.' : (lang == 'en' ? 'This name appears on your page and community posts. Your user ID does not change.' : (lang == 'hira' ? 'まいぺーじと こみゅにてぃに でる なまえです。IDは かわりません。' : 'マイページやコミュニティに表示される名前です。ユーザーIDは変更されません。'))}">マイページやコミュニティに表示される名前です。</p>
+                </div>
+                <div class="mypage-form-fields">
+                    <label for="newDisplayName" th:text="${lang == 'ko' ? '새 사용자 이름' : (lang == 'en' ? 'New display name' : (lang == 'hira' ? 'あたらしい なまえ' : '新しいユーザー名'))}">新しいユーザー名</label>
+                    <input id="newDisplayName" name="displayName" type="text"
+                           maxlength="40" autocomplete="name" required th:value="${myPage.displayName}">
+                    <small th:text="${lang == 'ko' ? '40자 이내로 입력하세요. 다른 사용자와 같은 이름도 사용할 수 있습니다.' : (lang == 'en' ? 'Use up to 40 characters. Display names do not need to be unique.' : (lang == 'hira' ? '40もじ いないです。ほかの ひとと おなじ なまえも つかえます。' : '40文字以内で入力してください。他のユーザーと同じ名前も使用できます。'))}">40文字以内で入力してください。</small>
+
+                    <button id="changeDisplayNameButton" type="submit" class="design-button design-button-solid" data-ripple
+                            th:text="${lang == 'ko' ? '사용자 이름 변경' : (lang == 'en' ? 'Change display name' : (lang == 'hira' ? 'なまえを かえる' : 'ユーザー名を変更する'))}">ユーザー名を変更する</button>
+                    <p id="profileMessage" class="mypage-profile-message" role="status" aria-live="polite"></p>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
+<script th:src="@{/js/features/mypage.js(v='20261114')}"></script>
+</body>
+</html>

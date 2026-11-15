@@ -1,0 +1,1750 @@
+---
+categories:
+- id: "smartphone"
+  title:
+    ja: "スマートフォン操作"
+    ko: "스마트폰 조작"
+    en: "Smartphone Use"
+    hira: "すまーとふぉんそうさ"
+  description:
+    ja: "スマートフォンの基本操作を学べます。"
+    ko: "스마트폰의 기본 조작을 배울 수 있습니다."
+    en: "Learn basic smartphone operations."
+    hira: "すまーとふぉんのきほんそうさをまなべます。"
+  steps:
+    ja:
+    - "電源の入れ方・切り方を確認する"
+    - "文字入力や音量調整を練習する"
+    - "カメラや電話など基本アプリを使う"
+    ko:
+    - "전원을 켜고 끄는 방법을 확인한다"
+    - "문자 입력과 음량 조절을 연습한다"
+    - "카메라와 전화 같은 기본 앱을 사용한다"
+    en:
+    - "Check how to turn the phone on and off"
+    - "Practice typing and adjusting the volume"
+    - "Use basic apps such as camera and phone"
+    hira:
+    - "でんげんのいれかた・きりかたをかくにんする"
+    - "もじにゅうりょくやおんりょうちょうせいをれんしゅうする"
+    - "かめらやでんわなどのきほんあぷりをつかう"
+  lessons:
+  - id: "smartphone-power"
+    title:
+      ja: "スマートフォンの電源を入れる"
+      ko: "스마트폰 전원 켜기"
+      en: "Turn on a smartphone"
+      hira: "すまーとふぉんのでんげんをいれる"
+    description:
+      ja: "スマートフォンの電源を入れ、ロックを解除する方法を学びます。"
+      ko: "스마트폰의 전원을 켜고 잠금을 해제하는 방법을 배웁니다."
+      en: "Learn how to turn on a smartphone and unlock the screen."
+      hira: "すまーとふぉんのでんげんをいれて、ろっくをかいじょするほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "10分"
+      ko: "10분"
+      en: "10 min"
+      hira: "10ふん"
+    steps:
+      ja:
+      - "電源ボタンの位置を確認する"
+      - "電源ボタンを長押しする"
+      - "画面が表示されたらロックを解除する"
+      ko:
+      - "전원 버튼의 위치를 확인한다"
+      - "전원 버튼을 길게 누른다"
+      - "화면이 표시되면 잠금을 해제한다"
+      en:
+      - "Check where the power button is"
+      - "Press and hold the power button"
+      - "Unlock the screen when it appears"
+      hira:
+      - "でんげんぼたんのばしょをかくにんする"
+      - "でんげんぼたんをながくおす"
+      - "がめんがひょうじされたら、ろっくをかいじょする"
+    outcome:
+      ja: "電源オン・ロック解除・再起動を自分で行い、反応しないときの確認もできます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "充電が20％以上あることを確認し、電源を入れてロックを解除する"
+      - "電源ボタンと音量ボタンの違いを指で確認する"
+      - "動作が重い想定で、電源メニューから再起動する場所を確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "スマートフォンの電源を入れるときに押すものはどれですか？"
+        ko: "스마트폰 전원을 켤 때 누르는 것은 무엇인가요?"
+        en: "What do you press to turn on a smartphone?"
+        hira: "すまーとふぉんのでんげんをいれるときにおすものはどれですか？"
+      choices:
+        ja:
+        - "電源ボタン"
+        - "音量ボタン"
+        - "戻るボタン"
+        ko:
+        - "전원 버튼"
+        - "음량 버튼"
+        - "뒤로 가기 버튼"
+        en:
+        - "Power button"
+        - "Volume button"
+        - "Back button"
+        hira:
+        - "でんげんぼたん"
+        - "おんりょうぼたん"
+        - "もどるぼたん"
+      answerIndex: 0
+  - id: "smartphone-input"
+    title:
+      ja: "文字を入力する"
+      ko: "문자 입력하기"
+      en: "Type text"
+      hira: "もじをにゅうりょくする"
+    description:
+      ja: "スマートフォンで文字を入力し、文章を作成する方法を学びます。"
+      ko: "스마트폰에서 문자를 입력하고 문장을 작성하는 방법을 배웁니다."
+      en: "Learn how to type text and create a sentence on a smartphone."
+      hira: "すまーとふぉんでもじをにゅうりょくして、ぶんしょうをつくるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "入力欄をタップする"
+      - "キーボードが表示されることを確認する"
+      - "文字を入力する"
+      - "入力した内容を確認する"
+      ko:
+      - "입력 칸을 누른다"
+      - "키보드가 표시되는지 확인한다"
+      - "문자를 입력한다"
+      - "입력한 내용을 확인한다"
+      en:
+      - "Tap the input field"
+      - "Check that the keyboard appears"
+      - "Type the text"
+      - "Check what you typed"
+      hira:
+      - "にゅうりょくらんをたっぷする"
+      - "きーぼーどがひょうじされることをかくにんする"
+      - "もじをにゅうりょくする"
+      - "にゅうりょくしたないようをかくにんする"
+    outcome:
+      ja: "文字種を切り替え、入力ミスを直しながら短い文章を完成できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "メモアプリに『明日10時に駅で会います』と入力する"
+      - "かな・英字・数字を切り替えて『KSU 2026』と入力する"
+      - "わざと1文字間違え、カーソル移動と削除で修正する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "文字を入力する前に最初にすることはどれですか？"
+        ko: "문자를 입력하기 전에 먼저 해야 하는 것은 무엇인가요?"
+        en: "What should you do first before typing text?"
+        hira: "もじをにゅうりょくするまえに、さいしょにすることはどれですか？"
+      choices:
+        ja:
+        - "入力欄をタップする"
+        - "電源を切る"
+        - "写真を削除する"
+        ko:
+        - "입력 칸을 누른다"
+        - "전원을 끈다"
+        - "사진을 삭제한다"
+        en:
+        - "Tap the input field"
+        - "Turn off the power"
+        - "Delete a photo"
+        hira:
+        - "にゅうりょくらんをたっぷする"
+        - "でんげんをきる"
+        - "しゃしんをけす"
+      answerIndex: 0
+  - id: "phone-call"
+    title:
+      ja: "電話をかける"
+      ko: "전화 걸기"
+      en: "Make a phone call"
+      hira: "でんわをかける"
+    description:
+      ja: "電話アプリを使って連絡先に電話をかける方法を学びます。"
+      ko: "전화 앱을 사용해 연락처에 전화하는 방법을 배웁니다."
+      en: "Learn how to use the phone app to call a contact."
+      hira: "でんわあぷりをつかって、れんらくさきにでんわをかけるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "11分"
+      ko: "11분"
+      en: "11 min"
+      hira: "11ふん"
+    steps:
+      ja:
+      - "電話アプリを開く"
+      - "連絡先または番号を選ぶ"
+      - "発信ボタンを押す"
+      - "通話が終わったら終了ボタンを押す"
+      ko:
+      - "전화 앱을 연다"
+      - "연락처 또는 번호를 선택한다"
+      - "통화 버튼을 누른다"
+      - "통화가 끝나면 종료 버튼을 누른다"
+      en:
+      - "Open the phone app"
+      - "Choose a contact or enter a number"
+      - "Tap the call button"
+      - "Tap the end button when the call is finished"
+      hira:
+      - "でんわあぷりをひらく"
+      - "れんらくさき、またはばんごうをえらぶ"
+      - "はっしんぼたんをおす"
+      - "つうわがおわったら、しゅうりょうぼたんをおす"
+    outcome:
+      ja: "連絡先を選んで発信し、スピーカーやミュートを使って安全に通話できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "家族など了承を得た相手を連絡先から選び、発信前に名前を再確認する"
+      - "通話中にスピーカーとミュートを一度ずつ切り替える"
+      - "通話履歴から相手を確認し、誤発信せず折り返す手順を確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "電話をかけるときに押すボタンはどれですか？"
+        ko: "전화를 걸 때 누르는 버튼은 무엇인가요?"
+        en: "Which button do you press to make a call?"
+        hira: "でんわをかけるときにおすぼたんはどれですか？"
+      choices:
+        ja:
+        - "発信ボタン"
+        - "削除ボタン"
+        - "翻訳ボタン"
+        ko:
+        - "통화 버튼"
+        - "삭제 버튼"
+        - "번역 버튼"
+        en:
+        - "Call button"
+        - "Delete button"
+        - "Translate button"
+        hira:
+        - "はっしんぼたん"
+        - "さくじょぼたん"
+        - "ほんやくぼたん"
+      answerIndex: 0
+  - id: "camera-photo"
+    title:
+      ja: "カメラで写真を撮る"
+      ko: "카메라로 사진 찍기"
+      en: "Take a photo with the camera"
+      hira: "かめらでしゃしんをとる"
+    description:
+      ja: "カメラアプリを使って写真を撮影する方法を学びます。"
+      ko: "카메라 앱을 사용해 사진을 찍는 방법을 배웁니다."
+      en: "Learn how to use the camera app to take photos."
+      hira: "かめらあぷりをつかって、しゃしんをとるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "11分"
+      ko: "11분"
+      en: "11 min"
+      hira: "11ふん"
+    steps:
+      ja:
+      - "カメラアプリを開く"
+      - "撮りたいものにカメラを向ける"
+      - "撮影ボタンを押す"
+      - "撮った写真を確認する"
+      ko:
+      - "카메라 앱을 연다"
+      - "찍고 싶은 대상을 향해 카메라를 맞춘다"
+      - "촬영 버튼을 누른다"
+      - "찍은 사진을 확인한다"
+      en:
+      - "Open the camera app"
+      - "Point the camera at what you want to take"
+      - "Tap the shutter button"
+      - "Check the photo you took"
+      hira:
+      - "かめらあぷりをひらく"
+      - "とりたいものにかめらをむける"
+      - "さつえいぼたんをおす"
+      - "とったしゃしんをかくにんする"
+    outcome:
+      ja: "ピントと明るさを確認して撮影し、写真が保存されたことまで確認できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "明るい場所で書類を1枚、全体が入るように撮影する"
+      - "画面の被写体をタップしてピントを合わせ、撮り直して比べる"
+      - "撮影直後の小さい写真を開き、文字が読めるか拡大して確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "写真を撮るときに使うアプリはどれですか？"
+        ko: "사진을 찍을 때 사용하는 앱은 무엇인가요?"
+        en: "Which app do you use to take photos?"
+        hira: "しゃしんをとるときにつかうあぷりはどれですか？"
+      choices:
+        ja:
+        - "カメラアプリ"
+        - "電話アプリ"
+        - "銀行アプリ"
+        ko:
+        - "카메라 앱"
+        - "전화 앱"
+        - "은행 앱"
+        en:
+        - "Camera app"
+        - "Phone app"
+        - "Banking app"
+        hira:
+        - "かめらあぷり"
+        - "でんわあぷり"
+        - "ぎんこうあぷり"
+      answerIndex: 0
+  - id: "gallery-view"
+    title:
+      ja: "ギャラリーで写真を見る"
+      ko: "갤러리에서 사진 보기"
+      en: "View photos in the gallery"
+      hira: "ぎゃらりーでしゃしんをみる"
+    description:
+      ja: "保存された写真をギャラリーで確認する方法を学びます。"
+      ko: "저장된 사진을 갤러리에서 확인하는 방법을 배웁니다."
+      en: "Learn how to check saved photos in the gallery."
+      hira: "ほぞんされたしゃしんを、ぎゃらりーでかくにんするほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "10分"
+      ko: "10분"
+      en: "10 min"
+      hira: "10ふん"
+    steps:
+      ja:
+      - "ギャラリーアプリを開く"
+      - "見たい写真を選ぶ"
+      - "写真を拡大・縮小して確認する"
+      - "必要に応じて戻るボタンを押す"
+      ko:
+      - "갤러리 앱을 연다"
+      - "보고 싶은 사진을 선택한다"
+      - "사진을 확대하거나 축소해 확인한다"
+      - "필요하면 뒤로 가기 버튼을 누른다"
+      en:
+      - "Open the gallery app"
+      - "Choose the photo you want to see"
+      - "Zoom in or out to check the photo"
+      - "Tap the back button if needed"
+      hira:
+      - "ぎゃらりーあぷりをひらく"
+      - "みたいしゃしんをえらぶ"
+      - "しゃしんをおおきくしたり、ちいさくしたりしてかくにんする"
+      - "ひつようなら、もどるぼたんをおす"
+    outcome:
+      ja: "目的の写真を探し、拡大・整理・共有前の確認ができます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "今日撮影した写真を日付から探す"
+      - "2本指で拡大し、必要な部分が鮮明か確認する"
+      - "共有ボタンを開くところまで進み、送信先を選ばず閉じる"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "保存された写真を見るときに使うアプリはどれですか？"
+        ko: "저장된 사진을 볼 때 사용하는 앱은 무엇인가요?"
+        en: "Which app do you use to view saved photos?"
+        hira: "ほぞんされたしゃしんをみるときにつかうあぷりはどれですか？"
+      choices:
+        ja:
+        - "ギャラリーアプリ"
+        - "翻訳アプリ"
+        - "設定アプリ"
+        ko:
+        - "갤러리 앱"
+        - "번역 앱"
+        - "설정 앱"
+        en:
+        - "Gallery app"
+        - "Translate app"
+        - "Settings app"
+        hira:
+        - "ぎゃらりーあぷり"
+        - "ほんやくあぷり"
+        - "せっていあぷり"
+      answerIndex: 0
+- id: "sns"
+  title:
+    ja: "SNS"
+    ko: "SNS"
+    en: "SNS and Messages"
+    hira: "SNS・めっせーじ"
+  description:
+    ja: "LINEやカカオトークなどの使い方を学べます。"
+    ko: "LINE이나 카카오톡 사용법을 배울 수 있습니다."
+    en: "Learn how to use LINE, KakaoTalk, and other messaging tools."
+    hira: "LINEやかかおとーくなどのつかいかたをまなべます。"
+  steps:
+    ja:
+    - "アカウントの基本設定を確認する"
+    - "メッセージや投稿の使い方を学ぶ"
+    - "個人情報を守る設定を理解する"
+    ko:
+    - "계정의 기본 설정을 확인한다"
+    - "메시지와 게시물 사용법을 배운다"
+    - "개인정보를 보호하는 설정을 이해한다"
+    en:
+    - "Check basic account settings"
+    - "Learn how to use messages and posts"
+    - "Understand settings that protect personal information"
+    hira:
+    - "あかうんとのきほんせっていをかくにんする"
+    - "めっせーじやとうこうのつかいかたをまなぶ"
+    - "こじんじょうほうをまもるせっていをりかいする"
+  lessons:
+  - id: "line-message"
+    title:
+      ja: "LINEでメッセージを送る"
+      ko: "LINE으로 메시지 보내기"
+      en: "Send a message on LINE"
+      hira: "LINEでめっせーじをおくる"
+    description:
+      ja: "LINEを使って友だちにメッセージを送る方法を学びます。"
+      ko: "LINE을 사용해 친구에게 메시지를 보내는 방법을 배웁니다."
+      en: "Learn how to send a message to a friend using LINE."
+      hira: "LINEをつかって、ともだちにめっせーじをおくるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "LINEアプリを開く"
+      - "トークしたい相手を選ぶ"
+      - "メッセージを入力する"
+      - "送信ボタンを押す"
+      ko:
+      - "LINE 앱을 연다"
+      - "대화하고 싶은 상대를 선택한다"
+      - "메시지를 입력한다"
+      - "보내기 버튼을 누른다"
+      en:
+      - "Open the LINE app"
+      - "Choose the person you want to chat with"
+      - "Type your message"
+      - "Tap the send button"
+      hira:
+      - "LINEあぷりをひらく"
+      - "とーくしたいあいてをえらぶ"
+      - "めっせーじをにゅうりょくする"
+      - "そうしんぼたんをおす"
+    outcome:
+      ja: "相手を間違えずに文章や写真を送り、既読や送信結果を確認できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "自分用メモまたは了承を得た相手を開き、短い予定を送る"
+      - "送信前に相手の名前と文章を声に出して確認する"
+      - "写真選択画面を開き、個人情報が写っていない写真だけを選ぶ"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "送信・投稿の前に相手と公開範囲を再確認します。住所、電話番号、身分証、現在地が写る画像は送らないでください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "LINEでメッセージを送る前に選ぶものはどれですか？"
+        ko: "LINE에서 메시지를 보내기 전에 선택하는 것은 무엇인가요?"
+        en: "What do you choose before sending a message on LINE?"
+        hira: "LINEでめっせーじをおくるまえにえらぶものはどれですか？"
+      choices:
+        ja:
+        - "トークしたい相手"
+        - "画面の明るさ"
+        - "カメラの画質"
+        ko:
+        - "대화하고 싶은 상대"
+        - "화면 밝기"
+        - "카메라 화질"
+        en:
+        - "The person you want to chat with"
+        - "Screen brightness"
+        - "Camera quality"
+        hira:
+        - "とーくしたいあいて"
+        - "がめんのあかるさ"
+        - "かめらのがしつ"
+      answerIndex: 0
+  - id: "kakao-message"
+    title:
+      ja: "カカオトークでメッセージを送る"
+      ko: "카카오톡으로 메시지 보내기"
+      en: "Send a message on KakaoTalk"
+      hira: "かかおとーくでめっせーじをおくる"
+    description:
+      ja: "カカオトークを使ってメッセージを送る方法を学びます。"
+      ko: "카카오톡을 사용해 메시지를 보내는 방법을 배웁니다."
+      en: "Learn how to send a message using KakaoTalk."
+      hira: "かかおとーくをつかって、めっせーじをおくるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "カカオトークを開く"
+      - "チャットしたい相手を選ぶ"
+      - "メッセージを入力する"
+      - "送信ボタンを押す"
+      ko:
+      - "카카오톡을 연다"
+      - "채팅하고 싶은 상대를 선택한다"
+      - "메시지를 입력한다"
+      - "보내기 버튼을 누른다"
+      en:
+      - "Open KakaoTalk"
+      - "Choose the person you want to chat with"
+      - "Type your message"
+      - "Tap the send button"
+      hira:
+      - "かかおとーくをひらく"
+      - "ちゃっとしたいあいてをえらぶ"
+      - "めっせーじをにゅうりょくする"
+      - "そうしんぼたんをおす"
+    outcome:
+      ja: "チャット相手を確認してメッセージを送り、送信結果を確認できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "自分用チャットまたは了承を得た相手に短い予定を送る"
+      - "送信前にプロフィール名とチャット履歴を確認する"
+      - "通知・写真・連絡先の権限設定を開き、許可範囲を確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "送信・投稿の前に相手と公開範囲を再確認します。住所、電話番号、身分証、現在地が写る画像は送らないでください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "カカオトークでメッセージを送るときに使う画面はどれですか？"
+        ko: "카카오톡에서 메시지를 보낼 때 사용하는 화면은 무엇인가요?"
+        en: "Which screen do you use to send a message on KakaoTalk?"
+        hira: "かかおとーくでめっせーじをおくるときにつかうがめんはどれですか？"
+      choices:
+        ja:
+        - "チャット画面"
+        - "地図画面"
+        - "支払い画面"
+        ko:
+        - "채팅 화면"
+        - "지도 화면"
+        - "결제 화면"
+        en:
+        - "Chat screen"
+        - "Map screen"
+        - "Payment screen"
+        hira:
+        - "ちゃっとがめん"
+        - "ちずがめん"
+        - "しはらいがめん"
+      answerIndex: 0
+  - id: "sns-privacy"
+    title:
+      ja: "SNSの公開範囲を確認する"
+      ko: "SNS 공개 범위 확인하기"
+      en: "Check SNS privacy settings"
+      hira: "SNSのこうかいはんいをかくにんする"
+    description:
+      ja: "投稿やプロフィールの公開範囲を確認し、個人情報を守る方法を学びます。"
+      ko: "게시물과 프로필의 공개 범위를 확인하고 개인정보를 보호하는 방법을 배웁니다."
+      en: "Learn how to check the visibility of posts and profiles to protect personal\
+        \ information."
+      hira: "とうこうやぷろふぃーるのこうかいはんいをかくにんして、こじんじょうほうをまもるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "14分"
+      ko: "14분"
+      en: "14 min"
+      hira: "14ふん"
+    steps:
+      ja:
+      - "利用しているSNSアプリを開く"
+      - "設定画面を開く"
+      - "プライバシー設定を確認する"
+      - "投稿の公開範囲を必要に応じて変更する"
+      ko:
+      - "사용 중인 SNS 앱을 연다"
+      - "설정 화면을 연다"
+      - "개인정보 보호 설정을 확인한다"
+      - "필요에 따라 게시물 공개 범위를 변경한다"
+      en:
+      - "Open the SNS app you use"
+      - "Open the settings screen"
+      - "Check the privacy settings"
+      - "Change the visibility of posts if needed"
+      hira:
+      - "つかっているSNSあぷりをひらく"
+      - "せっていがめんをひらく"
+      - "ぷらいばしーせっていをかくにんする"
+      - "ひつようにおうじて、とうこうのこうかいはんいをかえる"
+    outcome:
+      ja: "投稿・プロフィール・位置情報の公開範囲を自分で点検できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "現在のアカウントが公開か非公開か確認する"
+      - "過去の投稿を1件開き、公開相手と位置情報の有無を確認する"
+      - "タグ付けの承認と、連絡先から検索される設定を確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "送信・投稿の前に相手と公開範囲を再確認します。住所、電話番号、身分証、現在地が写る画像は送らないでください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "SNSで個人情報を守るために確認する設定はどれですか？"
+        ko: "SNS에서 개인정보를 보호하기 위해 확인해야 하는 설정은 무엇인가요?"
+        en: "Which setting should you check to protect personal information on SNS?"
+        hira: "SNSでこじんじょうほうをまもるためにかくにんするせっていはどれですか？"
+      choices:
+        ja:
+        - "プライバシー設定"
+        - "音量設定"
+        - "充電設定"
+        ko:
+        - "개인정보 보호 설정"
+        - "음량 설정"
+        - "충전 설정"
+        en:
+        - "Privacy settings"
+        - "Volume settings"
+        - "Charging settings"
+        hira:
+        - "ぷらいばしーせってい"
+        - "おんりょうせってい"
+        - "じゅうでんせってい"
+      answerIndex: 0
+- id: "google"
+  title:
+    ja: "Googleサービス"
+    ko: "Google 서비스"
+    en: "Google Services"
+    hira: "Googleさーびす"
+  description:
+    ja: "Google検索、Gmail、Googleマップなどを学べます。"
+    ko: "Google 검색, Gmail, Google 지도 등을 배울 수 있습니다."
+    en: "Learn Google Search, Gmail, Google Maps, and other useful services."
+    hira: "Googleけんさく、Gmail、Googleまっぷなどをまなべます。"
+  steps:
+    ja:
+    - "Google検索の使い方を学ぶ"
+    - "Gmailでメールを送受信する"
+    - "Googleマップや翻訳を使う"
+    ko:
+    - "Google 검색 사용법을 배운다"
+    - "Gmail로 메일을 보내고 받는다"
+    - "Google 지도와 번역을 사용한다"
+    en:
+    - "Learn how to use Google Search"
+    - "Send and receive emails with Gmail"
+    - "Use Google Maps and Google Translate"
+    hira:
+    - "Googleけんさくのつかいかたをまなぶ"
+    - "Gmailでめーるをおくったりうけとったりする"
+    - "Googleまっぷやほんやくをつかう"
+  lessons:
+  - id: "google-search"
+    title:
+      ja: "Google検索を使う"
+      ko: "Google 검색 사용하기"
+      en: "Use Google Search"
+      hira: "Googleけんさくをつかう"
+    description:
+      ja: "Google検索を使って知りたい情報を調べる方法を学びます。"
+      ko: "Google 검색을 사용해 필요한 정보를 찾는 방법을 배웁니다."
+      en: "Learn how to use Google Search to find information."
+      hira: "Googleけんさくをつかって、しりたいじょうほうをしらべるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "Googleを開く"
+      - "検索欄に知りたい言葉を入力する"
+      - "検索結果から見たいページを選ぶ"
+      - "必要な情報を確認する"
+      ko:
+      - "Google을 연다"
+      - "검색창에 알고 싶은 단어를 입력한다"
+      - "검색 결과에서 보고 싶은 페이지를 선택한다"
+      - "필요한 정보를 확인한다"
+      en:
+      - "Open Google"
+      - "Type the words you want to search in the search box"
+      - "Choose the page you want to see from the results"
+      - "Check the information you need"
+      hira:
+      - "Googleをひらく"
+      - "けんさくらんにしりたいことばをにゅうりょくする"
+      - "けんさくけっかから、みたいぺーじをえらぶ"
+      - "ひつようなじょうほうをかくにんする"
+    outcome:
+      ja: "具体的な検索語で調べ、複数の情報源を比べて信頼性を判断できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "『福岡市 粗大ごみ 申込 公式』のように地域・目的・公式を入れて検索する"
+      - "広告表示と通常の検索結果を見分ける"
+      - "自治体など公式サイトと別のサイトを開き、日付と内容を比較する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "Google検索で最初に入力する場所はどこですか？"
+        ko: "Google 검색에서 먼저 입력하는 곳은 어디인가요?"
+        en: "Where do you first type when using Google Search?"
+        hira: "Googleけんさくでさいしょににゅうりょくするばしょはどこですか？"
+      choices:
+        ja:
+        - "検索欄"
+        - "削除ボタン"
+        - "音量ボタン"
+        ko:
+        - "검색창"
+        - "삭제 버튼"
+        - "음량 버튼"
+        en:
+        - "Search box"
+        - "Delete button"
+        - "Volume button"
+        hira:
+        - "けんさくらん"
+        - "さくじょぼたん"
+        - "おんりょうぼたん"
+      answerIndex: 0
+  - id: "gmail"
+    title:
+      ja: "Gmailでメールを送る"
+      ko: "Gmail로 메일 보내기"
+      en: "Send an email with Gmail"
+      hira: "Gmailでめーるをおくる"
+    description:
+      ja: "Gmailを使ってメールを作成し、送信する方法を学びます。"
+      ko: "Gmail을 사용해 메일을 작성하고 보내는 방법을 배웁니다."
+      en: "Learn how to create and send an email using Gmail."
+      hira: "Gmailをつかって、めーるをつくっておくるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "Gmailを開く"
+      - "作成ボタンを押す"
+      - "宛先・件名・本文を入力する"
+      - "送信ボタンを押す"
+      ko:
+      - "Gmail을 연다"
+      - "작성 버튼을 누른다"
+      - "받는 사람, 제목, 내용을 입력한다"
+      - "보내기 버튼을 누른다"
+      en:
+      - "Open Gmail"
+      - "Tap the Compose button"
+      - "Enter the recipient, subject, and message"
+      - "Tap the Send button"
+      hira:
+      - "Gmailをひらく"
+      - "さくせいぼたんをおす"
+      - "あてさき・けんめい・ほんぶんをにゅうりょくする"
+      - "そうしんぼたんをおす"
+    outcome:
+      ja: "宛先・件名・本文・添付を確認してメールを送り、返信もできます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "自分宛てに件名『送信練習』、本文2行のメールを作る"
+      - "送信前に宛先・件名・添付ファイルを指差し確認する"
+      - "受信したメールに返信し、引用部分と自分の文章を見分ける"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "Gmailでメールを書くとき、最初に押すボタンはどれですか？"
+        ko: "Gmail에서 메일을 작성할 때 먼저 누르는 버튼은 무엇인가요?"
+        en: "Which button do you press first when writing an email in Gmail?"
+        hira: "Gmailでめーるをかくとき、さいしょにおすぼたんはどれですか？"
+      choices:
+        ja:
+        - "作成ボタン"
+        - "削除ボタン"
+        - "設定ボタン"
+        ko:
+        - "작성 버튼"
+        - "삭제 버튼"
+        - "설정 버튼"
+        en:
+        - "Compose button"
+        - "Delete button"
+        - "Settings button"
+        hira:
+        - "さくせいぼたん"
+        - "さくじょぼたん"
+        - "せっていぼたん"
+      answerIndex: 0
+  - id: "google-map"
+    title:
+      ja: "Googleマップで目的地を調べる"
+      ko: "Google 지도로 목적지 찾기"
+      en: "Find a destination with Google Maps"
+      hira: "Googleまっぷでもくてきちをしらべる"
+    description:
+      ja: "Googleマップを使って目的地や経路を調べる方法を学びます。"
+      ko: "Google 지도를 사용해 목적지와 경로를 찾는 방법을 배웁니다."
+      en: "Learn how to use Google Maps to search for destinations and routes."
+      hira: "Googleまっぷをつかって、もくてきちやけいろをしらべるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "Googleマップを開く"
+      - "検索欄に目的地を入力する"
+      - "経路ボタンを押す"
+      - "移動手段を選ぶ"
+      ko:
+      - "Google 지도를 연다"
+      - "검색창에 목적지를 입력한다"
+      - "경로 버튼을 누른다"
+      - "이동 수단을 선택한다"
+      en:
+      - "Open Google Maps"
+      - "Enter the destination in the search box"
+      - "Tap the Directions button"
+      - "Choose how you want to travel"
+      hira:
+      - "Googleまっぷをひらく"
+      - "けんさくらんにもくてきちをにゅうりょくする"
+      - "けいろぼたんをおす"
+      - "いどうしゅだんをえらぶ"
+    outcome:
+      ja: "目的地までの経路を交通手段別に調べ、出発前に所要時間を確認できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "近くの市役所や駅を検索し、住所が正しいか確認する"
+      - "徒歩と公共交通の経路を切り替え、時間と乗換回数を比べる"
+      - "出発時刻を変更し、一本後の経路も確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "Googleマップで道順を調べるときに押すボタンはどれですか？"
+        ko: "Google 지도에서 길찾기를 할 때 누르는 버튼은 무엇인가요?"
+        en: "Which button do you press to check directions in Google Maps?"
+        hira: "Googleまっぷでみちじゅんをしらべるときにおすぼたんはどれですか？"
+      choices:
+        ja:
+        - "経路ボタン"
+        - "削除ボタン"
+        - "音量ボタン"
+        ko:
+        - "경로 버튼"
+        - "삭제 버튼"
+        - "음량 버튼"
+        en:
+        - "Directions button"
+        - "Delete button"
+        - "Volume button"
+        hira:
+        - "けいろぼたん"
+        - "さくじょぼたん"
+        - "おんりょうぼたん"
+      answerIndex: 0
+  - id: "youtube-watch"
+    title:
+      ja: "YouTubeで動画を見る"
+      ko: "YouTube에서 동영상 보기"
+      en: "Watch videos on YouTube"
+      hira: "YouTubeでどうがをみる"
+    description:
+      ja: "YouTubeで見たい動画を検索して再生する方法を学びます。"
+      ko: "YouTube에서 보고 싶은 동영상을 검색하고 재생하는 방법을 배웁니다."
+      en: "Learn how to search for and play videos on YouTube."
+      hira: "YouTubeでみたいどうがをけんさくして、さいせいするほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "YouTubeを開く"
+      - "検索欄に見たい動画の言葉を入力する"
+      - "動画を選んで再生する"
+      - "音量や一時停止を操作する"
+      ko:
+      - "YouTube를 연다"
+      - "검색창에 보고 싶은 영상의 단어를 입력한다"
+      - "동영상을 선택해 재생한다"
+      - "음량과 일시정지를 조작한다"
+      en:
+      - "Open YouTube"
+      - "Type words for the video you want to watch in the search box"
+      - "Choose a video and play it"
+      - "Adjust the volume or pause the video"
+      hira:
+      - "YouTubeをひらく"
+      - "けんさくらんにみたいどうがのことばをにゅうりょくする"
+      - "どうがをえらんでさいせいする"
+      - "おんりょうやいちじていしをそうさする"
+    outcome:
+      ja: "必要な動画を探し、字幕・速度・音量を調整して視聴できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "公式チャンネルの操作説明動画を検索する"
+      - "字幕をオンにし、再生速度を0.75倍へ変更する"
+      - "自動再生をオフにし、視聴履歴から同じ動画を開く"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "YouTubeで見たい動画を探すときに使う場所はどこですか？"
+        ko: "YouTube에서 보고 싶은 영상을 찾을 때 사용하는 곳은 어디인가요?"
+        en: "Where do you search for a video you want to watch on YouTube?"
+        hira: "YouTubeでみたいどうがをさがすときにつかうばしょはどこですか？"
+      choices:
+        ja:
+        - "検索欄"
+        - "通話ボタン"
+        - "支払い画面"
+        ko:
+        - "검색창"
+        - "통화 버튼"
+        - "결제 화면"
+        en:
+        - "Search box"
+        - "Call button"
+        - "Payment screen"
+        hira:
+        - "けんさくらん"
+        - "つうわぼたん"
+        - "しはらいがめん"
+      answerIndex: 0
+  - id: "google-translate"
+    title:
+      ja: "Google翻訳を使う"
+      ko: "Google 번역 사용하기"
+      en: "Use Google Translate"
+      hira: "Googleほんやくをつかう"
+    description:
+      ja: "Google翻訳を使って文章を翻訳する方法を学びます。"
+      ko: "Google 번역을 사용해 문장을 번역하는 방법을 배웁니다."
+      en: "Learn how to translate text with Google Translate."
+      hira: "Googleほんやくをつかって、ぶんしょうをほんやくするほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "Google翻訳を開く"
+      - "翻訳したい文章を入力する"
+      - "翻訳する言語を選ぶ"
+      - "翻訳結果を確認する"
+      ko:
+      - "Google 번역을 연다"
+      - "번역하고 싶은 문장을 입력한다"
+      - "번역할 언어를 선택한다"
+      - "번역 결과를 확인한다"
+      en:
+      - "Open Google Translate"
+      - "Enter the text you want to translate"
+      - "Choose the language to translate into"
+      - "Check the translation result"
+      hira:
+      - "Googleほんやくをひらく"
+      - "ほんやくしたいぶんしょうをにゅうりょくする"
+      - "ほんやくするげんごをえらぶ"
+      - "ほんやくけっかをかくにんする"
+    outcome:
+      ja: "言語を正しく選び、文字・音声・カメラ翻訳を場面に応じて使えます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "短い案内文を入力し、翻訳元と翻訳先の言語を入れ替える"
+      - "スピーカーボタンで発音を聞き、音量を調整する"
+      - "カメラ翻訳を試し、重要な文章は原文と結果を両方保存する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "画面名やボタンの位置は機種・OS・アプリの版によって異なります。分からないまま削除・購入・送信を確定せず、一つ前へ戻って確認してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "Google翻訳で翻訳したい文章はどこに入力しますか？"
+        ko: "Google 번역에서 번역하고 싶은 문장은 어디에 입력하나요?"
+        en: "Where do you enter the text you want to translate in Google Translate?"
+        hira: "Googleほんやくでほんやくしたいぶんしょうはどこににゅうりょくしますか？"
+      choices:
+        ja:
+        - "入力欄"
+        - "通話履歴"
+        - "カメラ設定"
+        ko:
+        - "입력 칸"
+        - "통화 기록"
+        - "카메라 설정"
+        en:
+        - "Input field"
+        - "Call history"
+        - "Camera settings"
+        hira:
+        - "にゅうりょくらん"
+        - "つうわりれき"
+        - "かめらせってい"
+      answerIndex: 0
+- id: "money"
+  title:
+    ja: "金融アプリ"
+    ko: "금융 앱"
+    en: "Finance Apps"
+    hira: "おかねのあぷり"
+  description:
+    ja: "決済アプリや銀行アプリを学べます。"
+    ko: "결제 앱이나 은행 앱 사용법을 배울 수 있습니다."
+    en: "Learn how to use payment apps and banking apps safely."
+    hira: "けっさいあぷりやぎんこうあぷりをまなべます。"
+  steps:
+    ja:
+    - "安全なログイン方法を確認する"
+    - "銀行アプリの基本操作を学ぶ"
+    - "不審な通知や詐欺に注意する"
+    ko:
+    - "안전한 로그인 방법을 확인한다"
+    - "은행 앱의 기본 조작을 배운다"
+    - "수상한 알림이나 사기에 주의한다"
+    en:
+    - "Check safe login methods"
+    - "Learn basic banking app operations"
+    - "Be careful of suspicious notifications and scams"
+    hira:
+    - "あんぜんなろぐいんほうほうをかくにんする"
+    - "ぎんこうあぷりのきほんそうさをまなぶ"
+    - "あやしいつうちやさぎにちゅういする"
+  lessons:
+  - id: "payment-app"
+    title:
+      ja: "決済アプリで支払いをする"
+      ko: "결제 앱으로 결제하기"
+      en: "Pay with a payment app"
+      hira: "けっさいあぷりでしはらいをする"
+    description:
+      ja: "決済アプリを使って安全に支払いを行う方法を学びます。"
+      ko: "결제 앱을 사용해 안전하게 결제하는 방법을 배웁니다."
+      en: "Learn how to pay safely using a payment app."
+      hira: "けっさいあぷりをつかって、あんぜんにしはらいをするほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "12分"
+      ko: "12분"
+      en: "12 min"
+      hira: "12ふん"
+    steps:
+      ja:
+      - "決済アプリを開く"
+      - "支払い画面を表示する"
+      - "金額や店舗名を確認する"
+      - "内容を確認して支払いを完了する"
+      ko:
+      - "결제 앱을 연다"
+      - "결제 화면을 표시한다"
+      - "금액과 가게 이름을 확인한다"
+      - "내용을 확인하고 결제를 완료한다"
+      en:
+      - "Open the payment app"
+      - "Show the payment screen"
+      - "Check the amount and store name"
+      - "Confirm the details and complete the payment"
+      hira:
+      - "けっさいあぷりをひらく"
+      - "しはらいがめんをひょうじする"
+      - "きんがくやおみせのなまえをかくにんする"
+      - "ないようをかくにんして、しはらいをかんりょうする"
+    outcome:
+      ja: "店名と金額を確認し、支払い結果と利用履歴まで安全に確認できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "支払い前画面で残高・店名・金額を確認する順番を練習する"
+      - "店員に提示するコードと、自分が読み取るコードの違いを確認する"
+      - "支払い後に完了画面と利用履歴を開き、同じ金額か確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "暗証番号・パスワード・SMS認証コードは誰にも伝えません。送金や支払いは、店名・相手・金額を確認できた場合だけ確定してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "決済前に確認することとして大切なのはどれですか？"
+        ko: "결제 전에 확인해야 할 중요한 것은 무엇인가요?"
+        en: "What is important to check before paying?"
+        hira: "しはらいのまえにかくにんすることでたいせつなのはどれですか？"
+      choices:
+        ja:
+        - "金額や店舗名"
+        - "壁紙の色"
+        - "音量の大きさ"
+        ko:
+        - "금액과 가게 이름"
+        - "배경화면 색"
+        - "음량 크기"
+        en:
+        - "Amount and store name"
+        - "Wallpaper color"
+        - "Volume level"
+        hira:
+        - "きんがくやおみせのなまえ"
+        - "かべがみのいろ"
+        - "おんりょうのおおきさ"
+      answerIndex: 0
+  - id: "smbc-app"
+    title:
+      ja: "SMBCアプリの基本操作"
+      ko: "SMBC 앱 기본 조작"
+      en: "Basic use of the SMBC app"
+      hira: "SMBCあぷりのきほんそうさ"
+    description:
+      ja: "SMBCアプリで残高確認など基本的な操作を学びます。"
+      ko: "SMBC 앱에서 잔액 확인 등 기본 조작을 배웁니다."
+      en: "Learn basic operations such as checking your balance in the SMBC app."
+      hira: "SMBCあぷりで、ざんだかかくにんなどのきほんそうさをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "13分"
+      ko: "13분"
+      en: "13 min"
+      hira: "13ふん"
+    steps:
+      ja:
+      - "SMBCアプリを開く"
+      - "ログイン画面を確認する"
+      - "メニューから利用したい機能を選ぶ"
+      - "表示内容を確認する"
+      ko:
+      - "SMBC 앱을 연다"
+      - "로그인 화면을 확인한다"
+      - "메뉴에서 사용할 기능을 선택한다"
+      - "표시된 내용을 확인한다"
+      en:
+      - "Open the SMBC app"
+      - "Check the login screen"
+      - "Choose the function you want from the menu"
+      - "Check the displayed information"
+      hira:
+      - "SMBCあぷりをひらく"
+      - "ろぐいんがめんをかくにんする"
+      - "めにゅーからつかいたいきのうをえらぶ"
+      - "ひょうじないようをかくにんする"
+    outcome:
+      ja: "公式アプリで残高と明細を確認し、安全にログアウトできます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "公式ストアから入れたアプリか、提供元名を確認する"
+      - "ログイン後に残高と直近の入出金明細を確認する"
+      - "振込は実行せず、振込前に必要な確認項目を読み、ログアウトする"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "暗証番号・パスワード・SMS認証コードは誰にも伝えません。送金や支払いは、店名・相手・金額を確認できた場合だけ確定してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "銀行アプリで機能を選ぶときに使うものはどれですか？"
+        ko: "은행 앱에서 기능을 선택할 때 사용하는 것은 무엇인가요?"
+        en: "What do you use to choose a function in a banking app?"
+        hira: "ぎんこうあぷりできのうをえらぶときにつかうものはどれですか？"
+      choices:
+        ja:
+        - "メニュー"
+        - "カメラズーム"
+        - "着信音"
+        ko:
+        - "메뉴"
+        - "카메라 줌"
+        - "벨소리"
+        en:
+        - "Menu"
+        - "Camera zoom"
+        - "Ringtone"
+        hira:
+        - "めにゅー"
+        - "かめらずーむ"
+        - "ちゃくしんおん"
+      answerIndex: 0
+  - id: "yucho-app"
+    title:
+      ja: "ゆうちょ通帳アプリの基本操作"
+      ko: "유초 통장 앱 기본 조작"
+      en: "Basic use of the Japan Post Bankbook app"
+      hira: "ゆうちょつうちょうあぷりのきほんそうさ"
+    description:
+      ja: "ゆうちょ通帳アプリで情報を確認する基本操作を学びます。"
+      ko: "유초 통장 앱에서 정보를 확인하는 기본 조작을 배웁니다."
+      en: "Learn basic operations for checking information in the Japan Post Bankbook\
+        \ app."
+      hira: "ゆうちょつうちょうあぷりで、じょうほうをかくにんするきほんそうさをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "13分"
+      ko: "13분"
+      en: "13 min"
+      hira: "13ふん"
+    steps:
+      ja:
+      - "ゆうちょ通帳アプリを開く"
+      - "ログイン画面を確認する"
+      - "確認したい項目を選ぶ"
+      - "表示された内容を確認する"
+      ko:
+      - "유초 통장 앱을 연다"
+      - "로그인 화면을 확인한다"
+      - "확인하고 싶은 항목을 선택한다"
+      - "표시된 내용을 확인한다"
+      en:
+      - "Open the Japan Post Bankbook app"
+      - "Check the login screen"
+      - "Choose the item you want to check"
+      - "Check the displayed information"
+      hira:
+      - "ゆうちょつうちょうあぷりをひらく"
+      - "ろぐいんがめんをかくにんする"
+      - "かくにんしたいこうもくをえらぶ"
+      - "ひょうじされたないようをかくにんする"
+    outcome:
+      ja: "公式アプリで残高と入出金明細を確認し、安全に終了できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "公式ストアから入れたアプリか、提供元名を確認する"
+      - "ログイン後に残高と直近の入出金明細を確認する"
+      - "端末認証と通知設定を確認し、アプリを安全に終了する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "暗証番号・パスワード・SMS認証コードは誰にも伝えません。送金や支払いは、店名・相手・金額を確認できた場合だけ確定してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "ゆうちょ通帳アプリで情報を見る前に確認する画面はどれですか？"
+        ko: "유초 통장 앱에서 정보를 보기 전에 확인하는 화면은 무엇인가요?"
+        en: "Which screen do you check before viewing information in the Japan Post\
+          \ Bankbook app?"
+        hira: "ゆうちょつうちょうあぷりでじょうほうをみるまえにかくにんするがめんはどれですか？"
+      choices:
+        ja:
+        - "ログイン画面"
+        - "動画再生画面"
+        - "地図画面"
+        ko:
+        - "로그인 화면"
+        - "동영상 재생 화면"
+        - "지도 화면"
+        en:
+        - "Login screen"
+        - "Video playback screen"
+        - "Map screen"
+        hira:
+        - "ろぐいんがめん"
+        - "どうがさいせいがめん"
+        - "ちずがめん"
+      answerIndex: 0
+  - id: "money-safety"
+    title:
+      ja: "不審な通知を見分ける"
+      ko: "수상한 알림 구별하기"
+      en: "Identify suspicious notifications"
+      hira: "あやしいつうちをみわける"
+    description:
+      ja: "金融アプリを安全に使うため、不審な通知を見分ける方法を学びます。"
+      ko: "금융 앱을 안전하게 사용하기 위해 수상한 알림을 구별하는 방법을 배웁니다."
+      en: "Learn how to identify suspicious notifications when using finance apps\
+        \ safely."
+      hira: "おかねのあぷりをあんぜんにつかうため、あやしいつうちをみわけるほうほうをまなびます。"
+    level:
+      ja: "初級"
+      ko: "초급"
+      en: "Beginner"
+      hira: "しょきゅう"
+    time:
+      ja: "14分"
+      ko: "14분"
+      en: "14 min"
+      hira: "14ふん"
+    steps:
+      ja:
+      - "通知の送信元を確認する"
+      - "不自然な表現がないか確認する"
+      - "URLをすぐに開かない"
+      - "不安な場合は公式アプリや公式サイトから確認する"
+      ko:
+      - "알림을 보낸 곳을 확인한다"
+      - "어색한 표현이 있는지 확인한다"
+      - "URL을 바로 열지 않는다"
+      - "불안할 때는 공식 앱이나 공식 사이트에서 확인한다"
+      en:
+      - "Check who sent the notification"
+      - "Check whether the message sounds unnatural"
+      - "Do not open the URL immediately"
+      - "If you feel unsure, check through the official app or official website"
+      hira:
+      - "つうちのそうしんもとをかくにんする"
+      - "ふしぜんなひょうげんがないかかくにんする"
+      - "URLをすぐにひらかない"
+      - "ふあんなときは、こうしきあぷりやこうしきさいとからかくにんする"
+    outcome:
+      ja: "不審な通知を開かず、公式窓口で確認して報告・削除できます。"
+      ko: "안전한 연습용 정보로 직접 조작하고, 결과를 스스로 확인할 수 있습니다."
+      en: "You will be able to complete the task with safe practice data and verify\
+        \ the result yourself."
+      hira: "あんぜんなれんしゅうようのないようで、じぶんでそうさして、けっかをかくにんできるようになります。"
+    practiceTasks:
+      ja:
+      - "不審な通知の送信元・URL・期限を紙に書き出して怪しい点を探す"
+      - "通知内のリンクを使わず、公式アプリのお知らせ欄から同じ情報を探す"
+      - "詐欺メール診断を使い、家族や公式窓口へ相談する手順を確認する"
+      ko:
+      - "연습용 정보로 처음부터 끝까지 조작한다"
+      - "표시된 결과가 맞는지 확인한다"
+      - "화면이 다르면 뒤로 돌아가 메뉴 이름을 찾는다"
+      en:
+      - "Complete the steps using safe practice information"
+      - "Check that the expected result appears"
+      - "If your screen differs, go back and look for a similarly named menu"
+      hira:
+      - "れんしゅうようのないようで、さいしょからさいごまでそうさする"
+      - "おもったとおりのけっかになったか、かくにんする"
+      - "がめんがちがうときは、ひとつもどって、にたなまえをさがす"
+    safetyTip:
+      ja: "暗証番号・パスワード・SMS認証コードは誰にも伝えません。送金や支払いは、店名・相手・金額を確認できた場合だけ確定してください。"
+      ko: "비밀번호·인증번호·결제 정보는 다른 사람에게 보내지 마세요. 화면 이름은 기종과 앱 버전에 따라 다를 수 있습니다."
+      en: "Never share passwords, verification codes, or payment details. Screen names\
+        \ may vary by device and app version."
+      hira: "ぱすわーど・にんしょうばんごう・おかねのじょうほうは、ほかのひとにおくらないでください。がめんのなまえは、きしゅによってちがうことがありま\
+        す。"
+    quiz:
+      question:
+        ja: "不審な通知が届いたとき、すぐにしてはいけないことはどれですか？"
+        ko: "수상한 알림이 왔을 때 바로 하면 안 되는 것은 무엇인가요?"
+        en: "What should you not do immediately when you receive a suspicious notification?"
+        hira: "あやしいつうちがとどいたとき、すぐにしてはいけないことはどれですか？"
+      choices:
+        ja:
+        - "URLをすぐに開く"
+        - "送信元を確認する"
+        - "公式アプリから確認する"
+        ko:
+        - "URL을 바로 연다"
+        - "보낸 곳을 확인한다"
+        - "공식 앱에서 확인한다"
+        en:
+        - "Open the URL immediately"
+        - "Check the sender"
+        - "Check through the official app"
+        hira:
+        - "URLをすぐにひらく"
+        - "そうしんもとをかくにんする"
+        - "こうしきあぷりからかくにんする"
+      answerIndex: 0

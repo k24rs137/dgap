@@ -18,14 +18,18 @@ public class User {
     @Column(nullable = false, unique = true, length = 40)
     private String userId;
 
+    @Column(nullable = false, length = 40)
+    private String displayName;
+
     @Column(nullable = false, length = 100)
     private String password;
 
     public User() {
     }
 
-    public User(String userId, String password) {
+    public User(String userId, String displayName, String password) {
         this.userId = userId;
+        this.displayName = displayName;
         this.password = password;
     }
 
@@ -41,12 +45,20 @@ public class User {
         return password;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public void setPassword(String password) {

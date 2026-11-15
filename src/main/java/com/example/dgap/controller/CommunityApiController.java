@@ -2,7 +2,6 @@ package com.example.dgap.controller;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dgap.dto.ApiError;
+import com.example.dgap.dto.CommunityDto;
 import com.example.dgap.model.CommunityLike;
 import com.example.dgap.model.CommunityPost;
 import com.example.dgap.model.User;
@@ -23,6 +24,7 @@ import com.example.dgap.repository.CommunityPostRepository;
 import com.example.dgap.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/community/posts")
@@ -41,33 +43,27 @@ public class CommunityApiController {
 
     @GetMapping
     @Transactional(readOnly = true)
-    public List<Map<String, Object>> posts(HttpSession session) {
+    public List<CommunityDto.Post> posts(HttpSession session) {
         User currentUser = currentUser(session);
         return postRepository.findAllByOrderByCreatedAtDesc().stream()
                 .limit(100)
-                .map(post -> Map.<String, Object>of(
-                        "id", post.getId(),
-                        "user", post.getUser().getUserId(),
-                        "text", post.getText(),
-                        "createdAt", post.getCreatedAt().toString(),
-                        "likes", likeRepository.countByPost(post),
-                        "liked", currentUser != null && likeRepository.existsByPostAndUser(post, currentUser),
-                        "owned", currentUser != null && post.getUser().getId().equals(currentUser.getId())))
+                .map(post -> new CommunityDto.Post(
+                        post.getId(), post.getUser().getDisplayName(), post.getText(),
+                        post.getCreatedAt().toString(), likeRepository.countByPost(post),
+                        currentUser != null && likeRepository.existsByPostAndUser(post, currentUser),
+                        currentUser != null && post.getUser().getId().equals(currentUser.getId())))
                 .toList();
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Map<String, String> body, HttpSession session) {
+    public ResponseEntity<?> create(@Valid @RequestBody CommunityDto.CreatePostRequest body,
+            HttpSession session) {
         User user = currentUser(session);
         if (user == null) return unauthorized();
-        String text = body.getOrDefault("text", "").trim();
-        if (text.isEmpty() || text.length() > 1000) {
-            return ResponseEntity.badRequest().body(Map.of(
-                    "success", false,
-                    "message", "投稿は1〜1000文字で入力してください。"));
-        }
-        CommunityPost post = postRepository.save(new CommunityPost(user, text, Instant.now()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("success", true, "id", post.getId()));
+        CommunityPost post = postRepository.save(
+                new CommunityPost(user, body.text().trim(), Instant.now()));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CommunityDto.Created(true, post.getId()));
     }
 
     @DeleteMapping("/{id}")
@@ -78,11 +74,12 @@ public class CommunityApiController {
         CommunityPost post = postRepository.findById(id).orElse(null);
         if (post == null) return ResponseEntity.notFound().build();
         if (!post.getUser().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("success", false));
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                    .body(ApiError.of("この投稿は削除できません。"));
         }
         likeRepository.deleteByPost(post);
         postRepository.delete(post);
-        return ResponseEntity.ok(Map.of("success", true));
+        return ResponseEntity.ok(new CommunityDto.Action(true));
     }
 
     @PostMapping("/{id}/like")
@@ -98,7 +95,7 @@ public class CommunityApiController {
         } else {
             likeRepository.save(new CommunityLike(post, user));
         }
-        return ResponseEntity.ok(Map.of("success", true, "liked", !liked));
+        return ResponseEntity.ok(new CommunityDto.Like(true, !liked));
     }
 
     private User currentUser(HttpSession session) {
@@ -106,7 +103,7 @@ public class CommunityApiController {
                 .orElse(null);
     }
 
-    private ResponseEntity<Map<String, Object>> unauthorized() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("success", false));
+    private ResponseEntity<ApiError> unauthorized() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ApiError.of("ログインが必要です。"));
     }
 }

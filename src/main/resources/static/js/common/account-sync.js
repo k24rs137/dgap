@@ -8,10 +8,10 @@
         "/lesson/yucho-app", "/lesson/money-safety"
     ];
 
-    window.dgapAccount = { authenticated: false, userId: null };
+    window.dgapAccount = { authenticated: false, userId: null, displayName: null };
 
     async function jsonRequest(url, options) {
-        const response = await fetch(url, Object.assign({ credentials: "same-origin" }, options));
+        const response = await window.dgapFetch(url, options);
         if (!response.ok) return null;
         return response.json();
     }
@@ -37,7 +37,7 @@
     };
 
     window.dgapLogout = async function () {
-        await fetch("/api/logout", { method: "POST", credentials: "same-origin" });
+        await window.dgapFetch("/api/logout", { method: "POST" });
         sessionStorage.removeItem("dgapAccountHydrated");
         sessionStorage.removeItem("dgapAccountSignature");
         localStorage.removeItem("loggedIn");
@@ -49,7 +49,11 @@
         const session = await jsonRequest("/api/session");
         if (!session || !session.authenticated) return;
 
-        window.dgapAccount = { authenticated: true, userId: session.userId };
+        window.dgapAccount = {
+            authenticated: true,
+            userId: session.userId,
+            displayName: session.displayName
+        };
         const data = await jsonRequest("/api/me/learning");
         if (!data) return;
 
@@ -65,20 +69,24 @@
         sessionStorage.setItem("dgapAccountHydrated", hydrationKey);
         sessionStorage.setItem("dgapAccountSignature", signature);
 
-        updateAccountDisplay(session.userId);
+        updateAccountDisplay(session.displayName || session.userId);
         if (previousHydration !== hydrationKey || (previousSignature && previousSignature !== signature)) {
             location.reload();
         }
     }
 
-    function updateAccountDisplay(userId) {
+    function updateAccountDisplay(displayName) {
         const status = document.getElementById("loginStatus");
-        if (status) status.textContent = userId + "さんでログイン中";
+        if (status) status.textContent = displayName + "さんでログイン中";
         const loginLink = document.getElementById("loginLink");
         const registerLink = document.getElementById("registerLink");
+        const myPageLink = document.getElementById("myPageLink");
+        const mobileMyPageLink = document.getElementById("mobileMyPageLink");
         const logoutButton = document.getElementById("topLogoutButton");
         if (loginLink) loginLink.style.display = "none";
         if (registerLink) registerLink.style.display = "none";
+        if (myPageLink) myPageLink.style.display = "inline-flex";
+        if (mobileMyPageLink) mobileMyPageLink.style.display = "block";
         if (logoutButton) {
             logoutButton.style.display = "inline-block";
             logoutButton.addEventListener("click", window.dgapLogout, { once: true });

@@ -1,9 +1,7 @@
 package com.example.dgap.controller;
 
 import java.time.Instant;
-import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -14,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dgap.dto.ApiError;
+import com.example.dgap.dto.AuthDto;
 import com.example.dgap.model.User;
 import com.example.dgap.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -25,7 +27,6 @@ public class AuthController {
     public static final String SESSION_USER_ID = "authenticatedUserId";
     private static final String LOGIN_FAILURES = "loginFailures";
     private static final String LOGIN_BLOCKED_UNTIL = "loginBlockedUntil";
-    private static final Pattern USER_ID_PATTERN = Pattern.compile("[a-z0-9._-]{3,40}");
 
     private final UserService userService;
 
@@ -34,42 +35,35 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> register(
-            @RequestBody Map<String, String> body, HttpSession session) {
-        String userId = UserService.normalizeUserId(body.get("userId"));
-        String password = body.get("password");
-        String validationError = validateCredentials(userId, password);
-        if (validationError != null) {
-            return error(HttpStatus.BAD_REQUEST, validationError);
-        }
-
+    public ResponseEntity<?> register(@Valid @RequestBody AuthDto.Registration body,
+            HttpSession session, HttpServletRequest request) {
+        String userId = UserService.normalizeUserId(body.userId());
         try {
-            User user = userService.register(userId, password);
+            User user = userService.register(userId, body.displayName(), body.password());
             if (user == null) {
                 return error(HttpStatus.CONFLICT, "このユーザーIDはすでに使用されています。");
             }
+            request.changeSessionId();
             session.setAttribute(SESSION_USER_ID, user.getUserId());
             session.setMaxInactiveInterval(60 * 60 * 8);
-            return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
-                    "success", true,
-                    "userId", user.getUserId(),
-                    "message", "会員登録が完了しました。"));
+            return ResponseEntity.status(HttpStatus.CREATED).body(
+                    new AuthDto.Action(true, user.getUserId(), user.getDisplayName(),
+                            "会員登録が完了しました。"));
         } catch (DataIntegrityViolationException exception) {
             return error(HttpStatus.CONFLICT, "このユーザーIDはすでに使用されています。");
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(
-            @RequestBody Map<String, String> body, HttpSession session) {
+    public ResponseEntity<?> login(@Valid @RequestBody AuthDto.Credentials body,
+            HttpSession session, HttpServletRequest request) {
         Long blockedUntil = (Long) session.getAttribute(LOGIN_BLOCKED_UNTIL);
         if (blockedUntil != null && blockedUntil > Instant.now().toEpochMilli()) {
             return error(HttpStatus.TOO_MANY_REQUESTS, "試行回数が多すぎます。1分後に再度お試しください。");
         }
 
-        String userId = UserService.normalizeUserId(body.get("userId"));
-        String password = body.get("password");
-        if (!userService.login(userId, password)) {
+        String userId = UserService.normalizeUserId(body.userId());
+        if (!userService.login(userId, body.password())) {
             int failures = ((Integer) Optional.ofNullable(
                     session.getAttribute(LOGIN_FAILURES)).orElse(0)) + 1;
             session.setAttribute(LOGIN_FAILURES, failures);
@@ -81,43 +75,36 @@ public class AuthController {
             return error(HttpStatus.UNAUTHORIZED, "ユーザーIDまたはパスワードが正しくありません。");
         }
 
+        request.changeSessionId();
         session.setAttribute(SESSION_USER_ID, userId);
         session.setAttribute(LOGIN_FAILURES, 0);
         session.removeAttribute(LOGIN_BLOCKED_UNTIL);
         session.setMaxInactiveInterval(60 * 60 * 8);
-        return ResponseEntity.ok(Map.of(
-                "success", true,
-                "userId", userId,
-                "message", "ログインしました。"));
+        String displayName = userService.findByUserId(userId)
+                .map(User::getDisplayName).orElse(userId);
+        return ResponseEntity.ok(new AuthDto.Action(
+                true, userId, displayName, "ログインしました。"));
     }
 
     @GetMapping("/session")
-    public ResponseEntity<Map<String, Object>> session(HttpSession session) {
+    public ResponseEntity<AuthDto.Session> session(HttpSession session) {
         String userId = (String) session.getAttribute(SESSION_USER_ID);
         if (userId == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("authenticated", false));
+            return ResponseEntity.ok(new AuthDto.Session(false, null, null));
         }
-        return ResponseEntity.ok(Map.of("authenticated", true, "userId", userId));
+        return userService.findByUserId(userId)
+                .map(user -> ResponseEntity.ok(new AuthDto.Session(
+                        true, user.getUserId(), user.getDisplayName())))
+                .orElseGet(() -> ResponseEntity.ok(new AuthDto.Session(false, null, null)));
     }
 
     @PostMapping("/logout")
-    public Map<String, Object> logout(HttpSession session) {
+    public AuthDto.Logout logout(HttpSession session) {
         session.invalidate();
-        return Map.of("success", true);
+        return new AuthDto.Logout(true);
     }
 
-    private String validateCredentials(String userId, String password) {
-        if (!USER_ID_PATTERN.matcher(userId).matches()) {
-            return "ユーザーIDは3〜40文字の半角英数字・ピリオド・ハイフン・アンダースコアで入力してください。";
-        }
-        if (password == null || password.length() < 8 || password.length() > 72) {
-            return "パスワードは8〜72文字で入力してください。";
-        }
-        return null;
-    }
-
-    private ResponseEntity<Map<String, Object>> error(HttpStatus status, String message) {
-        return ResponseEntity.status(status).body(Map.of("success", false, "message", message));
+    private ResponseEntity<ApiError> error(HttpStatus status, String message) {
+        return ResponseEntity.status(status).body(ApiError.of(message));
     }
 }

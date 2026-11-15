@@ -1,0 +1,194 @@
+/* ==============================
+   Language and accessibility controls
+================================ */
+
+html[data-font-size="normal"] {
+    font-size: 16px;
+}
+
+html[data-font-size="large"] {
+    font-size: 18px;
+}
+
+html[data-font-size="xlarge"] {
+    font-size: 20px;
+}
+
+.language-control,
+.font-size-control {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.font-size-control {
+    padding: 4px;
+    background: #eef3fb;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+}
+
+.font-size-button {
+    min-width: 44px;
+    min-height: 36px;
+    padding: 6px 10px;
+
+    color: var(--color-text);
+    background: transparent;
+
+    border: 0;
+    border-radius: 10px;
+
+    font-weight: 800;
+    cursor: pointer;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.font-size-button:hover {
+    transform: translateY(-2px);
+    background: white;
+}
+
+.font-size-button.is-active,
+.dgap-language-button.is-active {
+    color: white;
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary),
+            #3b82f6
+        );
+}
+
+.dgap-language-button.is-active {
+    box-shadow:
+        0 10px 22px rgba(37, 99, 235, 0.22);
+}
+
+html[data-font-size="large"] .hero-description,
+html[data-font-size="xlarge"] .hero-description,
+html[data-font-size="large"] .section-heading p,
+html[data-font-size="xlarge"] .section-heading p,
+html[data-font-size="large"] .category-card p,
+html[data-font-size="xlarge"] .category-card p,
+html[data-font-size="large"] .feature-card p,
+html[data-font-size="xlarge"] .feature-card p {
+    line-height: 1.9;
+}
+
+@media (max-width: 1120px) {
+    .language-control {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .font-size-control {
+        display: none;
+    }
+}
+/* ==============================
+   Always visible accessibility toolbar
+================================ */
+
+.accessibility-toolbar {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+
+    width: 100%;
+    padding: 12px 20px;
+
+    background: #f8fbff;
+    border-top: 1px solid #dbe3ee;
+    border-bottom: 1px solid #dbe3ee;
+}
+
+.accessibility-group {
+    display: inline-flex !important;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.accessibility-label {
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 900;
+}
+
+.accessibility-button {
+    min-height: 38px;
+    padding: 7px 13px;
+
+    color: #172033;
+    background: #ffffff;
+
+    border: 1px solid #dbe3ee;
+    border-radius: 999px;
+
+    font-weight: 800;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease,
+        color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.accessibility-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.accessibility-button.is-active {
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-color: transparent;
+}
+
+html[data-font-size="normal"] {
+    font-size: 16px;
+}
+
+html[data-font-size="large"] {
+    font-size: 18px;
+}
+
+html[data-font-size="xlarge"] {
+    font-size: 20px;
+}
+
+/* 以前の非表示設定を上書きする */
+@media (max-width: 1120px) {
+    .accessibility-toolbar,
+    .accessibility-group {
+        display: flex !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .accessibility-toolbar {
+        justify-content: flex-start;
+        padding: 12px 14px;
+    }
+
+    .accessibility-group {
+        width: 100%;
+    }
+
+    .accessibility-button {
+        min-height: 42px;
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+}

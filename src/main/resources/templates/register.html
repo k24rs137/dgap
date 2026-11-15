@@ -6,39 +6,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lang == 'ko' ? '회원가입' : (lang == 'en' ? 'Sign up' : (lang == 'hira' ? 'かいいんとうろく' : '会員登録'))}">会員登録</title>
-    <link rel="stylesheet" th:href="@{/style.css(v='20261005-1')}">
+    <th:block th:replace="~{fragments/layout :: assets}"></th:block>
 </head>
 <body class="designed-page auth-redesign-page register-redesign-page">
 
 <main class="auth-split-shell register-shell">
-
-    <section class="auth-brand-panel register-brand-panel reveal">
-        <a class="site-logo auth-logo" th:href="@{/(lang=${lang})}">
-            <span class="site-logo-mark">D</span>
-            <span>D-Gap</span>
-        </a>
-        <div class="auth-orbit register-orbit">
-            <span></span><span></span><span></span>
-            <strong>JOIN</strong>
-        </div>
-        <h1 th:text="${lang == 'ko' ? '학습을 시작해볼까요?' : (lang == 'en' ? 'Start your learning journey' : (lang == 'hira' ? 'がくしゅうをはじめよう' : '学習を始めよう'))}">学習を始めよう</h1>
-        <p th:text="${lang == 'ko' ? '회원가입하면 학습 진행 상황을 저장할 수 있습니다.' : (lang == 'en' ? 'Create an account to save your learning progress.' : (lang == 'hira' ? 'とうろくすると、がくしゅうのすすみぐあいをほぞんできます。' : '登録すると、学習の進み具合を保存できます。'))}">登録すると学習進捗を保存できます。</p>
-    </section>
 
     <section class="auth-form-panel reveal" data-tilt-card>
         <p class="designed-kicker" th:text="${lang == 'ko' ? 'NEW ACCOUNT' : (lang == 'en' ? 'NEW ACCOUNT' : (lang == 'hira' ? 'あたらしいあかうんと' : 'NEW ACCOUNT'))}">NEW ACCOUNT</p>
         <h2 th:text="${lang == 'ko' ? '회원가입' : (lang == 'en' ? 'Sign up' : (lang == 'hira' ? 'かいいんとうろく' : '会員登録'))}">会員登録</h2>
 
         <label class="auth-label" for="registerId" th:text="${lang == 'ko' ? '사용할 아이디' : (lang == 'en' ? 'User ID' : (lang == 'hira' ? 'つかうID' : '使用するID'))}">使用するID</label>
-        <input class="auth-input" type="text" id="registerId"
+        <input class="auth-input" type="text" id="registerId" minlength="3" maxlength="40"
+               pattern="[A-Za-z0-9._-]{3,40}" autocomplete="username" required
                th:placeholder="${lang == 'ko' ? '아이디를 입력하세요' : (lang == 'en' ? 'Enter a user ID' : (lang == 'hira' ? 'IDをにゅうりょくしてください' : 'IDを入力してください'))}">
+        <p class="auth-field-help"
+           th:text="${lang == 'ko' ? '로그인에 사용합니다. 등록 후에는 변경할 수 없습니다.' : (lang == 'en' ? 'Used to log in and cannot be changed after registration.' : (lang == 'hira' ? 'ろぐいんに つかいます。とうろくした あとは かえられません。' : 'ログインに使用します。登録後は変更できません。'))}">ログインに使用します。登録後は変更できません。</p>
+
+        <label class="auth-label" for="registerDisplayName"
+               th:text="${lang == 'ko' ? '사용자 이름' : (lang == 'en' ? 'Display name' : (lang == 'hira' ? 'ひょうじする なまえ' : 'ユーザー名'))}">ユーザー名</label>
+        <input class="auth-input" type="text" id="registerDisplayName" maxlength="40"
+               autocomplete="name" required
+               th:placeholder="${lang == 'ko' ? '화면에 표시할 이름을 입력하세요' : (lang == 'en' ? 'Enter the name shown to others' : (lang == 'hira' ? 'がめんに だす なまえを いれてください' : '画面に表示する名前を入力してください'))}">
+        <p class="auth-field-help"
+           th:text="${lang == 'ko' ? '마이페이지와 커뮤니티에 표시됩니다. 나중에 변경할 수 있습니다.' : (lang == 'en' ? 'Shown on your page and community posts. You can change it later.' : (lang == 'hira' ? 'まいぺーじと こみゅにてぃに でます。あとで かえられます。' : 'マイページやコミュニティに表示されます。後から変更できます。'))}">マイページやコミュニティに表示されます。</p>
 
         <label class="auth-label" for="registerPassword" th:text="${lang == 'ko' ? '비밀번호' : (lang == 'en' ? 'Password' : (lang == 'hira' ? 'ぱすわーど' : 'パスワード'))}">パスワード</label>
-        <input class="auth-input" type="password" id="registerPassword"
+        <input class="auth-input" type="password" id="registerPassword" minlength="8" maxlength="72"
+               autocomplete="new-password" required
                th:placeholder="${lang == 'ko' ? '비밀번호를 입력하세요' : (lang == 'en' ? 'Enter a password' : (lang == 'hira' ? 'ぱすわーどをにゅうりょくしてください' : 'パスワードを入力してください'))}">
 
         <label class="auth-label" for="registerPasswordConfirm" th:text="${lang == 'ko' ? '비밀번호 확인' : (lang == 'en' ? 'Confirm password' : (lang == 'hira' ? 'ぱすわーどかくにん' : 'パスワード確認'))}">パスワード確認</label>
-        <input class="auth-input" type="password" id="registerPasswordConfirm"
+        <input class="auth-input" type="password" id="registerPasswordConfirm" minlength="8" maxlength="72"
+               autocomplete="new-password" required
                th:placeholder="${lang == 'ko' ? '다시 입력하세요' : (lang == 'en' ? 'Enter the password again' : (lang == 'hira' ? 'もういちどにゅうりょくしてください' : 'もう一度入力してください'))}">
 
         <button type="button" id="registerButton" class="auth-main-button" data-ripple
@@ -55,9 +55,7 @@
     </section>
 
 </main>
-
-<script th:src="@{/account-sync.js(v='20260930')}"></script>
-<script th:src="@{/auth.js(v='20260930')}"></script>
-<script th:src="@{/script.js(v='20261005-1')}"></script>
+<script th:src="@{/js/features/auth.js(v='20261114')}"></script>
+<th:block th:replace="~{fragments/layout :: scripts}"></th:block>
 </body>
 </html>

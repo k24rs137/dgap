@@ -21,7 +21,7 @@ public class UserService {
     }
 
     @Transactional
-    public User register(String userId, String password) {
+    public User register(String userId, String displayName, String password) {
 
         userId = normalizeUserId(userId);
 
@@ -32,6 +32,7 @@ public class UserService {
         User user = new User();
 
         user.setUserId(userId);
+        user.setDisplayName(normalizeDisplayName(displayName));
         user.setPassword(passwordEncoder.encode(password));
 
         return userRepository.save(user);
@@ -59,7 +60,21 @@ public class UserService {
                 : userRepository.findByUserId(normalizeUserId(userId));
     }
 
+    @Transactional
+    public Optional<User> changeDisplayName(String userId, String displayName) {
+        Optional<User> foundUser = findByUserId(userId);
+        foundUser.ifPresent(user -> {
+            user.setDisplayName(normalizeDisplayName(displayName));
+            userRepository.save(user);
+        });
+        return foundUser;
+    }
+
     public static String normalizeUserId(String userId) {
         return userId == null ? "" : userId.trim().toLowerCase();
+    }
+
+    public static String normalizeDisplayName(String displayName) {
+        return displayName == null ? "" : displayName.trim().replaceAll("(?U)\\s+", " ");
     }
 }

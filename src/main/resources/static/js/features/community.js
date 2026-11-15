@@ -8,7 +8,7 @@ const postList = document.getElementById("postList");
 const logoutButton = document.getElementById("logoutButton");
 
 async function communityRequest(url, options) {
-    const response = await fetch(url, Object.assign({ credentials: "same-origin" }, options));
+    const response = await window.dgapFetch(url, options);
     if (!response.ok) {
         let message = "操作に失敗しました。";
         try { message = (await response.json()).message || message; } catch (error) { /* noop */ }
@@ -78,8 +78,8 @@ async function initializeCommunity() {
         notLoggedInArea.style.display = "none";
         loggedInArea.style.display = "block";
         userWelcome.textContent = communityLang === "en"
-            ? "Welcome, " + session.userId + "."
-            : session.userId + "さん、ようこそ。";
+            ? "Welcome, " + (session.displayName || session.userId) + "."
+            : (session.displayName || session.userId) + "さん、ようこそ。";
         await showPosts();
     } catch (error) {
         notLoggedInArea.style.display = "block";

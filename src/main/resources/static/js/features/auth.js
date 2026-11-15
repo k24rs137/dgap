@@ -1,7 +1,7 @@
 const authLang = new URLSearchParams(location.search).get("lang") || "ja";
 
 async function sendAuthRequest(url, payload) {
-    const response = await fetch(url, {
+    const response = await window.dgapFetch(url, {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
@@ -14,7 +14,13 @@ async function sendAuthRequest(url, payload) {
         result = { message: "サーバーから正しい応答を受け取れませんでした。" };
     }
     if (!response.ok) {
-        throw new Error(result.message || "処理に失敗しました。");
+        const unavailableMessage = !result.message || result.message === "No message available";
+        if (response.status === 403 && unavailableMessage) {
+            throw new Error(authLang === "en"
+                ? "Your security session expired. Reload the page and try again."
+                : "セキュリティ情報の有効期限が切れました。ページを再読み込みして、もう一度お試しください。");
+        }
+        throw new Error(unavailableMessage ? "処理に失敗しました。" : result.message);
     }
     return result;
 }
@@ -29,6 +35,7 @@ const registerButton = document.getElementById("registerButton");
 if (registerButton) {
     registerButton.addEventListener("click", async function () {
         const id = document.getElementById("registerId").value.trim();
+        const displayName = document.getElementById("registerDisplayName").value.trim();
         const password = document.getElementById("registerPassword").value;
         const confirm = document.getElementById("registerPasswordConfirm").value;
         const message = document.getElementById("registerMessage");
@@ -39,7 +46,7 @@ if (registerButton) {
         }
         registerButton.disabled = true;
         try {
-            const result = await sendAuthRequest("/api/register", { userId: id, password });
+            const result = await sendAuthRequest("/api/register", { userId: id, displayName, password });
             localStorage.removeItem("loggedIn");
             localStorage.removeItem("userId");
             sessionStorage.removeItem("dgapAccountHydrated");
