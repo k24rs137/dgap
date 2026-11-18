@@ -7,15 +7,16 @@ categories:
     en: "Smartphone Use"
     hira: "すまーとふぉんそうさ"
   description:
-    ja: "スマートフォンの基本操作を学べます。"
+    ja: "電源や文字入力からWi-Fi、アプリ、通知、容量管理、QRコード、トラブル解決まで、日常で必要なスマートフォン操作を順番に学べます。"
     ko: "스마트폰의 기본 조작을 배울 수 있습니다."
     en: "Learn basic smartphone operations."
     hira: "すまーとふぉんのきほんそうさをまなべます。"
   steps:
     ja:
-    - "電源の入れ方・切り方を確認する"
-    - "文字入力や音量調整を練習する"
-    - "カメラや電話など基本アプリを使う"
+    - "入門：電源・ホーム画面・文字入力を身につける"
+    - "初級：電話・写真・Wi-Fi・アプリを安全に使う"
+    - "中級：通知・空き容量・見やすさを自分で設定する"
+    - "実践：QRコードを安全に使い、よくあるトラブルを解決する"
     ko:
     - "전원을 켜고 끄는 방법을 확인한다"
     - "문자 입력과 음량 조절을 연습한다"
@@ -41,7 +42,7 @@ categories:
       en: "Learn how to turn on a smartphone and unlock the screen."
       hira: "すまーとふぉんのでんげんをいれて、ろっくをかいじょするほうほうをまなびます。"
     level:
-      ja: "初級"
+      ja: "入門"
       ko: "초급"
       en: "Beginner"
       hira: "しょきゅう"
@@ -133,7 +134,7 @@ categories:
       en: "Learn how to type text and create a sentence on a smartphone."
       hira: "すまーとふぉんでもじをにゅうりょくして、ぶんしょうをつくるほうほうをまなびます。"
     level:
-      ja: "初級"
+      ja: "入門"
       ko: "초급"
       en: "Beginner"
       hira: "しょきゅう"
@@ -504,6 +505,150 @@ categories:
         - "ぎゃらりーあぷり"
         - "ほんやくあぷり"
         - "せっていあぷり"
+      answerIndex: 0
+  - id: "smartphone-home"
+    title: {ja: "ホーム画面と基本ジェスチャー", ko: "홈 화면과 기본 제스처", en: "Home screen and basic gestures", hira: "ほーむがめんと きほんそうさ"}
+    description: {ja: "ホーム画面へ戻る、アプリを切り替える、タップ・長押し・スワイプを使い分ける方法を学びます。", ko: "홈 화면으로 돌아가고 앱을 전환하며 탭·길게 누르기·스와이프를 구분하는 방법을 배웁니다.", en: "Learn to return home, switch apps, and use tap, press-and-hold, and swipe gestures.", hira: "ほーむがめんへ もどる、あぷりを きりかえる、たっぷ・ながおし・すわいぷを まなびます。"}
+    level: {ja: "入門", ko: "입문", en: "Starter", hira: "にゅうもん"}
+    time: {ja: "15分", ko: "15분", en: "15 min", hira: "15ふん"}
+    steps:
+      ja: ["ホーム画面へ戻るボタンまたはジェスチャーを確認する", "アイコンを1回タップしてアプリを開く", "画面を下から上へスワイプしてアプリ一覧を表示する", "最近使ったアプリを表示して切り替える", "長押しと通常のタップの違いを確認する"]
+      ko: ["홈 화면으로 돌아가는 버튼이나 제스처를 확인한다", "아이콘을 한 번 눌러 앱을 연다", "화면을 아래에서 위로 밀어 앱 목록을 연다", "최근 앱을 열어 전환한다", "길게 누르기와 일반 탭의 차이를 확인한다"]
+      en: ["Find the Home button or Home gesture", "Tap an icon once to open an app", "Swipe up to show the app list", "Open recent apps and switch between them", "Compare a normal tap with a press-and-hold"]
+      hira: ["ほーむへ もどる ぼたんや そうさを かくにんする", "あいこんを 1かい おして あぷりを ひらく", "したから うえへ ゆびを うごかして あぷりいちらんを ひらく", "さいきんの あぷりを きりかえる", "たっぷと ながおしの ちがいを かくにんする"]
+    outcome: {ja: "迷ったときにホームへ戻り、目的のアプリを開いて別のアプリへ切り替えられます。", ko: "길을 잃었을 때 홈으로 돌아가 원하는 앱을 열고 다른 앱으로 전환할 수 있습니다.", en: "You can return Home, open the app you need, and switch to another app.", hira: "まよったときに ほーむへ もどり、ひつような あぷりを ひらいて きりかえられます。"}
+    practiceTasks:
+      ja: ["時計アプリを開いてホーム画面へ戻る", "カメラと設定アプリを順番に開き、最近使ったアプリから切り替える", "安全なアイコンを長押しし、メニューを閉じる"]
+      ko: ["시계 앱을 열고 홈 화면으로 돌아간다", "카메라와 설정 앱을 열고 최근 앱에서 전환한다", "안전한 아이콘을 길게 누른 뒤 메뉴를 닫는다"]
+      en: ["Open Clock and return Home", "Open Camera and Settings, then switch through recent apps", "Press and hold a safe icon, then close its menu"]
+      hira: ["とけいあぷりを ひらいて ほーむへ もどる", "かめらと せっていを ひらき、さいきんの あぷりから きりかえる", "あいこんを ながおしして めにゅーを とじる"]
+    safetyTip: {ja: "長押しメニューに『削除』『アンインストール』が出ても、意味が分からない場合は押さずに画面の外側をタップして閉じます。", ko: "길게 누른 메뉴에 삭제가 보여도 모르면 누르지 말고 바깥을 눌러 닫으세요.", en: "If a press-and-hold menu shows Delete or Uninstall and you are unsure, tap outside to close it.", hira: "『さくじょ』が でても、わからないときは おさずに がめんの そとを おして とじます。"}
+    prerequisites: {ja: ["電源が入り、ロックを解除できる", "机に座り、端末を両手で安全に持てる"], ko: ["전원을 켜고 잠금을 해제할 수 있다", "기기를 안전하게 잡을 수 있다"], en: ["You can turn on and unlock the phone", "You can hold the device safely"], hira: ["でんげんを いれて ろっくを はずせる", "あんぜんに すまほを もてる"]}
+    deviceNotes: {ja: ["iPhoneは画面下端から上へ動かす機種とホームボタンがある機種があります。", "Androidは画面下の3ボタンまたはジェスチャー操作を使います。"], ko: ["iPhone은 홈 버튼 또는 아래에서 위로 미는 방식을 사용합니다.", "Android는 3개 버튼 또는 제스처를 사용합니다."], en: ["iPhone uses either a Home button or a swipe-up gesture.", "Android uses three navigation buttons or gestures."], hira: ["iPhoneは ほーむぼたん、または したから うえへ うごかします。", "Androidは 3つの ぼたん、または じぇすちゃーを つかいます。"]}
+    troubleshooting: {ja: ["アプリが閉じない → 一度ホーム画面へ戻り、最近使ったアプリから閉じます。", "画面が動かない → 指を離して5秒待ち、同じ操作をゆっくり1回だけ行います。"], ko: ["앱이 닫히지 않음 → 홈으로 돌아가 최근 앱에서 닫습니다.", "화면이 움직이지 않음 → 5초 기다린 뒤 천천히 한 번 다시 합니다."], en: ["App will not close → Return Home and close it from recent apps.", "Screen does not move → Wait five seconds and try once, slowly."], hira: ["あぷりが とじない → ほーむへ もどり、さいきんの あぷりから とじます。", "がめんが うごかない → 5びょう まって、ゆっくり 1かい そうさします。"]}
+    quiz:
+      question: {ja: "操作に迷ったとき、最初に戻るとよい場所はどこですか？", ko: "조작이 어려울 때 먼저 돌아갈 곳은 어디인가요?", en: "Where should you return first if you get lost?", hira: "そうさに まよったとき、さいしょに もどる ばしょは どこですか？"}
+      choices: {ja: ["ホーム画面", "支払い画面", "初期化画面"], ko: ["홈 화면", "결제 화면", "초기화 화면"], en: ["Home screen", "Payment screen", "Factory reset screen"], hira: ["ほーむがめん", "しはらいがめん", "しょきかがめん"]}
+      answerIndex: 0
+  - id: "wifi-connect"
+    title: {ja: "安全なWi-Fiに接続する", ko: "안전한 Wi-Fi 연결", en: "Connect to safe Wi-Fi", hira: "あんぜんな Wi-Fiに つなぐ"}
+    description: {ja: "自宅など信頼できるWi-Fiを選び、パスワードを入力して接続状態を確認します。", ko: "신뢰할 수 있는 Wi-Fi를 선택하고 비밀번호를 입력해 연결을 확인합니다.", en: "Choose a trusted Wi-Fi network, enter its password, and verify the connection.", hira: "あんぜんな Wi-Fiを えらび、ぱすわーどを いれて つながったか かくにんします。"}
+    level: {ja: "初級", ko: "초급", en: "Beginner", hira: "しょきゅう"}
+    time: {ja: "18分", ko: "18분", en: "18 min", hira: "18ふん"}
+    steps:
+      ja: ["設定からWi-Fiを開く", "ルーターに書かれたネットワーク名と同じものを選ぶ", "Wi-Fiパスワードを大文字・小文字に注意して入力する", "接続済み表示とWi-Fiマークを確認する", "ブラウザで安全なページを開いて通信を確認する"]
+      ko: ["설정에서 Wi-Fi를 연다", "공유기에 적힌 네트워크 이름을 선택한다", "대소문자를 확인하며 비밀번호를 입력한다", "연결됨과 Wi-Fi 표시를 확인한다", "브라우저에서 안전한 페이지를 연다"]
+      en: ["Open Wi-Fi in Settings", "Choose the network name printed on your router", "Enter the Wi-Fi password with correct letter case", "Confirm Connected and the Wi-Fi icon", "Open a safe page to test the connection"]
+      hira: ["せっていから Wi-Fiを ひらく", "るーたーに かかれた なまえを えらぶ", "おおもじと こもじに きをつけて ぱすわーどを いれる", "せつぞくずみと Wi-Fiまーくを かくにんする", "あんぜんな ぺーじを ひらく"]
+    outcome: {ja: "正しいWi-Fiを見分けて接続し、つながらない場合も基本確認ができます。", ko: "올바른 Wi-Fi를 골라 연결하고 기본 문제를 확인할 수 있습니다.", en: "You can identify and connect to the correct Wi-Fi and perform basic checks if it fails.", hira: "ただしい Wi-Fiを えらんで つなぎ、つながらないときも かくにんできます。"}
+    practiceTasks: {ja: ["ルーターのネットワーク名を紙に書いて設定画面と照合する", "パスワードを見ながら1文字ずつ入力し、表示ボタンで確認する", "接続後に機内モードではないこととWi-Fiマークを確認する"], ko: ["공유기 이름과 설정 화면을 비교한다", "비밀번호를 한 글자씩 입력한다", "연결 후 Wi-Fi 표시를 확인한다"], en: ["Compare the router label with Settings", "Enter the password one character at a time", "Confirm the Wi-Fi icon after connecting"], hira: ["るーたーの なまえと せっていがめんを くらべる", "ぱすわーどを 1もじずつ いれる", "つながったあと Wi-Fiまーくを かくにんする"]}
+    safetyTip: {ja: "店や駅の無料Wi-Fiでは、銀行・買い物・個人情報の入力を避けます。知らないWi-Fiに自動接続しません。", ko: "무료 Wi-Fi에서는 은행·결제·개인정보 입력을 피하세요.", en: "Avoid banking, payments, and personal information on public Wi-Fi. Do not auto-join unknown networks.", hira: "むりょうの Wi-Fiでは、ぎんこう・しはらい・こじんじょうほうを いれません。"}
+    prerequisites: {ja: ["設定アプリを開ける", "自宅Wi-Fiのネットワーク名とパスワードを確認できる"], ko: ["설정 앱을 열 수 있다", "Wi-Fi 이름과 비밀번호를 확인할 수 있다"], en: ["You can open Settings", "You have the Wi-Fi name and password"], hira: ["せっていあぷりを ひらける", "Wi-Fiの なまえと ぱすわーどが わかる"]}
+    deviceNotes: {ja: ["iPhoneは『設定 → Wi-Fi』、Androidは『設定 → ネットワークとインターネット』などから開きます。", "Androidでは項目名が『接続』『Wi-Fiとネットワーク』の場合があります。"], ko: ["iPhone은 설정 → Wi-Fi에서 엽니다.", "Android는 네트워크·연결 등의 이름을 사용합니다."], en: ["On iPhone, open Settings → Wi-Fi.", "On Android, look for Network, Connections, or Wi-Fi."], hira: ["iPhoneは せってい → Wi-Fiです。", "Androidは ねっとわーく、せつぞく などの なまえです。"]}
+    troubleshooting: {ja: ["パスワードが違う → 0とO、1とl、大文字・小文字を確認します。", "接続済みなのに開けない → Wi-Fiを一度切って入れ直し、ルーターの電源も確認します。"], ko: ["비밀번호 오류 → 숫자와 영문, 대소문자를 확인합니다.", "연결됐지만 안 됨 → Wi-Fi와 공유기를 다시 확인합니다."], en: ["Wrong password → Check similar characters and letter case.", "Connected but offline → Toggle Wi-Fi and check the router."], hira: ["ぱすわーどが ちがう → にた もじと おおもじ・こもじを かくにんします。", "つながらない → Wi-Fiを きって いれなおします。"]}
+    quiz:
+      question: {ja: "無料Wi-Fiで避けたほうがよい操作はどれですか？", ko: "무료 Wi-Fi에서 피해야 할 것은 무엇인가요?", en: "What should you avoid on public Wi-Fi?", hira: "むりょう Wi-Fiで しないほうが よいことは どれですか？"}
+      choices: {ja: ["銀行口座へログインする", "天気を見る", "地図を見る"], ko: ["은행 계좌 로그인", "날씨 보기", "지도 보기"], en: ["Sign in to online banking", "Check the weather", "View a map"], hira: ["ぎんこうへ ろぐいんする", "てんきを みる", "ちずを みる"]}
+      answerIndex: 0
+  - id: "app-install"
+    title: {ja: "アプリを安全に追加・更新・削除する", ko: "앱을 안전하게 설치·업데이트·삭제", en: "Safely install, update, and remove apps", hira: "あぷりを あんぜんに いれる・こうしんする・けす"}
+    description: {ja: "公式ストアで提供元と権限を確認し、アプリを追加・更新・削除する方法を学びます。", ko: "공식 스토어에서 제공자와 권한을 확인하고 앱을 관리합니다.", en: "Use the official store to check the provider and permissions before managing apps.", hira: "こうしきすとあで つくった ひとと けんげんを かくにんして、あぷりを かんりします。"}
+    level: {ja: "初級", ko: "초급", en: "Beginner", hira: "しょきゅう"}
+    time: {ja: "22分", ko: "22분", en: "22 min", hira: "22ふん"}
+    steps:
+      ja: ["App StoreまたはGoogle Playを開く", "アプリ名だけでなく提供元・評価・更新日を確認する", "求められる権限が目的に合うか確認する", "インストール後に公式アプリか再確認する", "更新と削除の場所を確認する"]
+      ko: ["App Store 또는 Google Play를 연다", "앱 이름·제공자·평가·업데이트 날짜를 확인한다", "필요 권한을 확인한다", "설치 후 공식 앱인지 다시 확인한다", "업데이트와 삭제 위치를 확인한다"]
+      en: ["Open App Store or Google Play", "Check the app name, provider, reviews, and update date", "Check whether requested permissions make sense", "Verify the official app after installation", "Find where to update and remove the app"]
+      hira: ["App Storeか Google Playを ひらく", "あぷりの なまえ・つくった ひと・ひょうか・こうしんびを かくにんする", "ひつような けんげんを かくにんする", "こうしきあぷりか もういちど かくにんする", "こうしんと さくじょの ばしょを かくにんする"]
+    outcome: {ja: "偽アプリを避け、必要なアプリだけを安全に追加・更新・削除できます。", ko: "가짜 앱을 피하고 필요한 앱을 안전하게 관리할 수 있습니다.", en: "You can avoid fake apps and safely manage only the apps you need.", hira: "にせあぷりを さけて、ひつような あぷりを あんぜんに かんりできます。"}
+    practiceTasks: {ja: ["自治体など無料の公式アプリを検索し、提供元を確認する", "インストール前の権限説明を読み、不要な権限がないか確認する", "使っていない練習用アプリの削除画面まで進み、確定前に戻る"], ko: ["무료 공식 앱의 제공자를 확인한다", "설치 전 권한을 읽는다", "삭제 확인 전 단계까지 연습한다"], en: ["Check the provider of a free official app", "Read permissions before installation", "Practice reaching the uninstall confirmation without confirming"], hira: ["むりょうの こうしきあぷりの つくった ひとを かくにんする", "いれるまえに けんげんを よむ", "けす かくにんがめんまで すすみ、もどる"]}
+    safetyTip: {ja: "広告やSMSのリンクからアプリを入れず、必ず公式ストアを直接開きます。有料表示や定期購入を確定する前に金額を確認します。", ko: "광고나 문자 링크가 아니라 공식 스토어를 직접 여세요.", en: "Open the official store directly instead of installing through ads or message links.", hira: "こうこくや SMSの りんくではなく、こうしきすとあを じぶんで ひらきます。"}
+    prerequisites: {ja: ["Wi-Fiへ接続できる", "Apple IDまたはGoogleアカウントの本人確認方法を把握している"], ko: ["Wi-Fi에 연결할 수 있다", "계정 인증 방법을 알고 있다"], en: ["You can connect to Wi-Fi", "You know how your store account verifies you"], hira: ["Wi-Fiに つなげる", "あかうんとの ほんにんかくにんが わかる"]}
+    deviceNotes: {ja: ["iPhoneはApp Store、AndroidはGoogle Playを使用します。", "削除方法は、アイコン長押しまたは設定のアプリ一覧から行います。"], ko: ["iPhone은 App Store, Android는 Google Play를 사용합니다.", "삭제는 아이콘 길게 누르기 또는 설정에서 합니다."], en: ["iPhone uses App Store; Android uses Google Play.", "Remove apps by pressing the icon or through Settings."], hira: ["iPhoneは App Store、Androidは Google Playです。", "あいこんの ながおし、または せっていから けします。"]}
+    troubleshooting: {ja: ["インストールできない → 通信、空き容量、アカウント認証を順に確認します。", "似た名前が多い → 公式サイトに掲載されたストアリンクと提供元名を照合します。"], ko: ["설치 안 됨 → 통신·저장 공간·계정 인증을 확인합니다.", "비슷한 이름 → 공식 사이트의 제공자와 비교합니다."], en: ["Cannot install → Check connection, storage, and account verification.", "Similar app names → Compare the provider with the official website."], hira: ["いれられない → つうしん・あきようりょう・あかうんとを かくにんします。", "にた なまえ → こうしきさいとの つくった ひとと くらべます。"]}
+    quiz:
+      question: {ja: "アプリを入れる前に最も重要な確認はどれですか？", ko: "앱 설치 전 가장 중요한 확인은 무엇인가요?", en: "What is most important before installing an app?", hira: "あぷりを いれるまえに、たいせつな かくにんは どれですか？"}
+      choices: {ja: ["公式ストアの提供元と権限", "アイコンの色だけ", "広告の大きさ"], ko: ["공식 스토어의 제공자와 권한", "아이콘 색만", "광고 크기"], en: ["Provider and permissions in the official store", "Only the icon color", "The size of the ad"], hira: ["こうしきすとあの つくった ひとと けんげん", "あいこんの いろだけ", "こうこくの おおきさ"]}
+      answerIndex: 0
+  - id: "notification-control"
+    title: {ja: "通知を整理して大切な情報を見逃さない", ko: "알림을 정리해 중요한 정보 확인", en: "Organize notifications", hira: "つうちを せいりする"}
+    description: {ja: "不要な通知を減らし、電話や家族からの連絡など必要な通知を残す方法を学びます。", ko: "불필요한 알림을 줄이고 필요한 알림을 남기는 방법을 배웁니다.", en: "Reduce unwanted alerts while keeping important calls and messages.", hira: "いらない つうちを へらして、たいせつな つうちを のこします。"}
+    level: {ja: "中級", ko: "중급", en: "Intermediate", hira: "ちゅうきゅう"}
+    time: {ja: "17分", ko: "17분", en: "17 min", hira: "17ふん"}
+    steps:
+      ja: ["通知一覧を開いて送信元アプリを確認する", "不要な通知を長押しして設定を開く", "アプリごとに通知のオン・オフを選ぶ", "電話・メッセージ・防災など重要な通知を残す", "おやすみモードの時間と例外を確認する"]
+      ko: ["알림 목록에서 앱을 확인한다", "불필요한 알림을 길게 눌러 설정을 연다", "앱별로 알림을 켜거나 끈다", "전화·메시지·재난 알림은 남긴다", "방해 금지 시간과 예외를 확인한다"]
+      en: ["Check which app sent each notification", "Press and hold an unwanted alert to open settings", "Turn notifications on or off per app", "Keep calls, messages, and emergency alerts", "Check Do Not Disturb times and exceptions"]
+      hira: ["つうちを ひらいて、どの あぷりか かくにんする", "いらない つうちを ながおしして せっていを ひらく", "あぷりごとに つうちを えらぶ", "でんわ・めっせーじ・ぼうさいは のこす", "おやすみもーどを かくにんする"]
+    outcome: {ja: "通知の送信元を判断し、必要な連絡だけに気づきやすい状態を作れます。", ko: "필요한 알림을 쉽게 확인할 수 있도록 설정할 수 있습니다.", en: "You can make important alerts easier to notice without turning off everything.", hira: "たいせつな つうちに きづきやすい せっていに できます。"}
+    practiceTasks: {ja: ["直近10件の通知を必要・不要に分ける", "広告通知だけを止め、電話とメッセージ通知は残す", "おやすみモード中も家族の着信を受ける設定場所を確認する"], ko: ["최근 알림을 필요·불필요로 나눈다", "광고 알림만 끈다", "방해 금지 예외를 확인한다"], en: ["Sort recent alerts into needed and unwanted", "Turn off only promotional alerts", "Find exceptions for family calls during Do Not Disturb"], hira: ["さいきんの つうちを ひつよう・いらないに わける", "こうこくだけを とめる", "おやすみもーどの れいがいを かくにんする"]}
+    safetyTip: {ja: "防災・災害、電話、認証に使うSMSまで一括でオフにしないよう、送信元を1件ずつ確認します。", ko: "재난·전화·인증 문자까지 모두 끄지 않도록 하나씩 확인하세요.", en: "Check alerts one by one so you do not disable emergency, call, or verification messages.", hira: "ぼうさい・でんわ・にんしょう SMSまで まとめて けさないように します。"}
+    prerequisites: {ja: ["画面上部から通知一覧を開ける", "必要な連絡に使うアプリが分かる"], ko: ["알림 목록을 열 수 있다", "필요한 연락 앱을 알고 있다"], en: ["You can open the notification panel", "You know which apps carry important messages"], hira: ["つうちいちらんを ひらける", "たいせつな れんらくの あぷりが わかる"]}
+    deviceNotes: {ja: ["iPhoneは『設定 → 通知』、Androidは『設定 → 通知』または『アプリと通知』です。", "通知を左右へ動かして設定を開ける機種もあります。"], ko: ["iPhone과 Android 모두 설정의 알림에서 관리합니다.", "알림을 옆으로 밀어 설정을 열 수 있습니다."], en: ["Both iPhone and Android manage alerts under Settings → Notifications.", "Some devices let you swipe an alert sideways to open settings."], hira: ["iPhoneも Androidも せっていの つうちから かんりします。", "つうちを よこへ うごかして せっていを ひらく きしゅも あります。"]}
+    troubleshooting: {ja: ["必要な通知が来ない → アプリ内設定と端末設定の両方を確認します。", "夜中も鳴る → おやすみモードの開始・終了時刻と例外を確認します。"], ko: ["알림이 안 옴 → 앱과 기기 설정을 모두 확인합니다.", "밤에도 울림 → 방해 금지 시간과 예외를 확인합니다."], en: ["Important alert missing → Check both app and phone settings.", "Alerts sound at night → Check Do Not Disturb schedule and exceptions."], hira: ["つうちが こない → あぷりと すまほの りょうほうを かくにんします。", "よるも なる → おやすみもーどの じかんを かくにんします。"]}
+    quiz:
+      question: {ja: "通知を整理するとき、残すべきものはどれですか？", ko: "알림 정리 시 남겨야 하는 것은 무엇인가요?", en: "Which notification should you keep?", hira: "つうちを せいりするとき、のこすものは どれですか？"}
+      choices: {ja: ["防災や家族からの連絡", "不要な広告だけ", "送信元不明の宣伝"], ko: ["재난·가족 연락", "불필요한 광고", "출처 불명 홍보"], en: ["Emergency and family messages", "Unwanted promotions", "Unknown advertisements"], hira: ["ぼうさいや かぞくの れんらく", "いらない こうこく", "だれからか わからない せんでん"]}
+      answerIndex: 0
+  - id: "storage-cleanup"
+    title: {ja: "空き容量を確認して安全に整理する", ko: "저장 공간을 확인하고 안전하게 정리", en: "Check and safely free storage", hira: "あきようりょうを かくにんして せいりする"}
+    description: {ja: "写真やアプリが増えたときに容量を確認し、大切なデータを消さずに整理します。", ko: "저장 공간을 확인하고 중요한 데이터를 지우지 않으며 정리합니다.", en: "Check storage and free space without deleting important data.", hira: "ようりょうを かくにんして、たいせつな でーたを けさずに せいりします。"}
+    level: {ja: "中級", ko: "중급", en: "Intermediate", hira: "ちゅうきゅう"}
+    time: {ja: "20分", ko: "20분", en: "20 min", hira: "20ふん"}
+    steps:
+      ja: ["設定からストレージまたは端末容量を開く", "写真・動画・アプリの使用量を確認する", "不要なダウンロードと重複写真から確認する", "削除前にクラウドや別端末への保存状況を確認する", "削除後に最近削除した項目と空き容量を確認する"]
+      ko: ["설정에서 저장 공간을 연다", "사진·동영상·앱 사용량을 확인한다", "다운로드와 중복 사진부터 확인한다", "삭제 전 백업을 확인한다", "삭제 후 휴지통과 여유 공간을 확인한다"]
+      en: ["Open Storage in Settings", "Review space used by photos, videos, and apps", "Check downloads and duplicate photos first", "Confirm backup before deleting", "Check Recently Deleted and free space afterward"]
+      hira: ["せっていから すとれーじを ひらく", "しゃしん・どうが・あぷりの ようりょうを みる", "だうんろーどと おなじ しゃしんから かくにんする", "けすまえに ほぞんずみか かくにんする", "けしたあと ごみばこと あきようりょうを みる"]
+    outcome: {ja: "容量不足の原因を見つけ、バックアップを確認してから安全に空き容量を増やせます。", ko: "용량 부족 원인을 찾아 백업 후 안전하게 공간을 확보할 수 있습니다.", en: "You can identify what uses storage and safely free space after checking backup.", hira: "ようりょうぶそくの げんいんを みつけ、ほぞんを かくにんして あきを ふやせます。"}
+    practiceTasks: {ja: ["ストレージ画面で最も容量を使う項目を3つ確認する", "ダウンロードフォルダから不要な練習用ファイルを1つ選ぶ", "削除前に写真のバックアップ状態と最近削除した項目を確認する"], ko: ["용량이 큰 항목 3개를 확인한다", "불필요한 연습 파일을 고른다", "사진 백업과 휴지통을 확인한다"], en: ["Find the three largest storage categories", "Choose one unneeded practice download", "Check photo backup and Recently Deleted before removal"], hira: ["ようりょうが おおきい 3つを かくにんする", "いらない れんしゅうふぁいるを えらぶ", "しゃしんの ほぞんと ごみばこを かくにんする"]}
+    safetyTip: {ja: "連絡先・家族写真・認証アプリは、保存先と復元方法が分からない状態で削除しません。『すべて削除』を急いで押さないでください。", ko: "연락처·가족 사진·인증 앱은 백업을 모르면 삭제하지 마세요.", en: "Do not delete contacts, family photos, or authenticator apps unless you know how they are backed up and restored.", hira: "れんらくさき・かぞくの しゃしん・にんしょうあぷりは、ほぞんが わからないまま けしません。"}
+    prerequisites: {ja: ["設定アプリを開ける", "大切な写真や連絡先の保存先を家族などと確認できる"], ko: ["설정을 열 수 있다", "중요 데이터의 백업 위치를 확인할 수 있다"], en: ["You can open Settings", "You can confirm where important data is backed up"], hira: ["せっていを ひらける", "たいせつな でーたの ほぞんさきを かくにんできる"]}
+    deviceNotes: {ja: ["iPhoneは『設定 → 一般 → iPhoneストレージ』です。", "Androidは『設定 → ストレージ』または『デバイスケア』などです。"], ko: ["iPhone은 일반 → iPhone 저장 공간입니다.", "Android는 저장 공간 또는 디바이스 케어입니다."], en: ["On iPhone: Settings → General → iPhone Storage.", "On Android: Settings → Storage or Device Care."], hira: ["iPhoneは せってい → いっぱん → すとれーじです。", "Androidは せってい → すとれーじ などです。"]}
+    troubleshooting: {ja: ["消したのに増えない → 『最近削除した項目』『ゴミ箱』を確認します。", "何を消せばよいか分からない → 大きい動画やダウンロードから確認し、アプリのデータは勝手に消しません。"], ko: ["삭제해도 공간이 안 늘어남 → 휴지통을 확인합니다.", "무엇을 지울지 모름 → 큰 동영상과 다운로드부터 확인합니다."], en: ["Space did not increase → Check Recently Deleted or Trash.", "Unsure what to remove → Start with large videos and downloads, not app data."], hira: ["けしても あきが ふえない → ごみばこを かくにんします。", "なにを けすか わからない → おおきい どうがと だうんろーどから みます。"]}
+    quiz:
+      question: {ja: "大切な写真を削除する前に必要なことはどれですか？", ko: "중요한 사진 삭제 전 필요한 것은 무엇인가요?", en: "What should you do before deleting important photos?", hira: "たいせつな しゃしんを けすまえに、ひつようなことは どれですか？"}
+      choices: {ja: ["バックアップと復元方法を確認する", "すべて一括削除する", "ゴミ箱もすぐ空にする"], ko: ["백업과 복원 방법 확인", "모두 한꺼번에 삭제", "휴지통 즉시 비우기"], en: ["Confirm backup and recovery", "Delete everything at once", "Empty Trash immediately"], hira: ["ほぞんと もどしかたを かくにんする", "ぜんぶ まとめて けす", "ごみばこも すぐ からにする"]}
+      answerIndex: 0
+  - id: "accessibility-settings"
+    title: {ja: "文字・音・画面を見やすく設定する", ko: "글자·소리·화면을 보기 쉽게 설정", en: "Make text, sound, and display easier to use", hira: "もじ・おと・がめんを みやすくする"}
+    description: {ja: "文字サイズ、明るさ、読み上げ、拡大などを自分に合う状態へ調整します。", ko: "글자 크기·밝기·읽어주기·확대를 자신에게 맞게 조정합니다.", en: "Adjust text size, brightness, spoken content, and zoom for your needs.", hira: "もじの おおきさ・あかるさ・よみあげ・かくだいを じぶんに あわせます。"}
+    level: {ja: "中級", ko: "중급", en: "Intermediate", hira: "ちゅうきゅう"}
+    time: {ja: "19分", ko: "19분", en: "19 min", hira: "19ふん"}
+    steps:
+      ja: ["現在の文字サイズと画面の明るさを確認する", "文字サイズを1段階ずつ変えて読み比べる", "太字・高コントラスト・拡大機能を試す", "読み上げ機能の開始と停止を確認する", "使いやすい設定をメモして保存する"]
+      ko: ["현재 글자 크기와 밝기를 확인한다", "글자 크기를 한 단계씩 바꾼다", "굵은 글씨·고대비·확대를 시험한다", "읽어주기 시작과 중지를 확인한다", "편한 설정을 기록한다"]
+      en: ["Check current text size and brightness", "Compare text sizes one step at a time", "Try bold text, contrast, and zoom", "Start and stop spoken content", "Record the settings that feel comfortable"]
+      hira: ["いまの もじのおおきさと あかるさを みる", "もじを 1だんかいずつ かえる", "ふとじ・こまかい ちがい・かくだいを ためす", "よみあげを はじめて とめる", "つかいやすい せっていを めもする"]
+    outcome: {ja: "無理なく読めて聞き取りやすい表示を選び、元の設定にも戻せます。", ko: "읽고 듣기 편한 설정을 선택하고 원래대로 되돌릴 수 있습니다.", en: "You can choose comfortable settings and return to the previous setup.", hira: "よみやすく ききやすい せっていを えらび、もとにも もどせます。"}
+    practiceTasks: {ja: ["文字サイズを標準・大の2種類で読み比べる", "拡大機能をオンにして、このページの見出しを拡大する", "読み上げを開始し、音量を調整して停止する"], ko: ["두 가지 글자 크기를 비교한다", "확대 기능을 시험한다", "읽어주기와 음량을 시험한다"], en: ["Compare standard and large text", "Use zoom on this page heading", "Start spoken content, adjust volume, and stop it"], hira: ["ふつうと おおきい もじを くらべる", "この ぺーじを かくだいする", "よみあげと おんりょうを ためす"]}
+    safetyTip: {ja: "緊急時に操作できないほど表示を大きくしすぎないよう、変更は1段階ずつ行い、戻し方も確認します。", ko: "한 단계씩 변경하고 원래대로 돌아가는 방법도 확인하세요.", en: "Change one setting at a time and confirm how to undo it.", hira: "1だんかいずつ かえて、もとに もどす ほうほうも かくにんします。"}
+    prerequisites: {ja: ["設定アプリを開ける", "音量ボタンを操作できる"], ko: ["설정을 열 수 있다", "음량 버튼을 사용할 수 있다"], en: ["You can open Settings", "You can use the volume buttons"], hira: ["せっていを ひらける", "おんりょうぼたんを つかえる"]}
+    deviceNotes: {ja: ["iPhoneは『画面表示と明るさ』『アクセシビリティ』から設定します。", "Androidは『ディスプレイ』『ユーザー補助』などから設定します。"], ko: ["iPhone은 디스플레이와 손쉬운 사용에서 설정합니다.", "Android는 디스플레이와 접근성에서 설정합니다."], en: ["On iPhone, use Display & Brightness and Accessibility.", "On Android, use Display and Accessibility."], hira: ["iPhoneは がめんひょうじと あくせしびりてぃです。", "Androidは でぃすぷれいと ゆーざーほじょです。"]}
+    troubleshooting: {ja: ["文字が大きすぎて戻せない → 画面を横向きにするか、家族に設定画面までの操作を頼みます。", "読み上げが止まらない → 音量を下げ、同じ読み上げ操作をもう一度行います。"], ko: ["글자가 너무 큼 → 화면을 가로로 돌리거나 도움을 받습니다.", "읽기가 안 멈춤 → 음량을 낮추고 같은 동작을 다시 합니다."], en: ["Text is too large → Rotate the phone or ask for help reaching Settings.", "Speech will not stop → Lower volume and repeat the spoken-content gesture."], hira: ["もじが おおきすぎる → よこむきにするか、たすけを たのみます。", "よみあげが とまらない → おんりょうを さげて、おなじ そうさを します。"]}
+    quiz:
+      question: {ja: "設定を安全に変更する方法はどれですか？", ko: "설정을 안전하게 변경하는 방법은 무엇인가요?", en: "What is a safe way to change display settings?", hira: "せっていを あんぜんに かえる ほうほうは どれですか？"}
+      choices: {ja: ["1項目ずつ変えて戻し方も確認する", "全部同時に最大にする", "戻し方を確認せず終了する"], ko: ["하나씩 바꾸고 되돌리는 법도 확인", "모두 동시에 최대로 변경", "되돌리는 법 없이 종료"], en: ["Change one item at a time and learn how to undo it", "Set everything to maximum", "Finish without checking how to undo"], hira: ["1つずつ かえて もどしかたも かくにんする", "ぜんぶ どうじに さいだいにする", "もどしかたを みない"]}
+      answerIndex: 0
+  - id: "qr-troubleshooting"
+    title: {ja: "QRコードを安全に使い、困った画面から戻る", ko: "QR 코드를 안전하게 사용하고 문제 화면에서 돌아가기", en: "Use QR codes safely and recover from problem screens", hira: "QRこーどを あんぜんに つかい、こまった がめんから もどる"}
+    description: {ja: "QRコードの読み取り先を確認し、怪しいページや動かない画面に遭遇したときの対処を練習します。", ko: "QR 코드 주소를 확인하고 수상한 페이지나 멈춘 화면에 대처합니다.", en: "Check QR destinations and practice recovering from suspicious or frozen screens.", hira: "QRこーどの いきさきを かくにんし、あやしい ぺーじや うごかない がめんに たいおうします。"}
+    level: {ja: "実践", ko: "실전", en: "Practice", hira: "じっせん"}
+    time: {ja: "24分", ko: "24분", en: "24 min", hira: "24ふん"}
+    steps:
+      ja: ["カメラで練習用QRコードを画面内に入れる", "表示されたURLと運営者名を開く前に確認する", "不審な場合は開かずに閉じる", "開いたページから戻る・タブを閉じる操作を確認する", "画面が固まった場合にホームへ戻りアプリを再起動する"]
+      ko: ["카메라로 연습용 QR 코드를 비춘다", "열기 전에 URL과 운영자를 확인한다", "수상하면 열지 않고 닫는다", "페이지에서 뒤로 가거나 탭을 닫는다", "화면이 멈추면 홈으로 돌아가 앱을 다시 연다"]
+      en: ["Scan a practice QR code with the camera", "Check the URL and organization before opening", "Close it without opening if suspicious", "Practice going back and closing the tab", "If frozen, return Home and restart the app"]
+      hira: ["かめらで れんしゅう QRこーどを よむ", "ひらくまえに URLと つくった ところを みる", "あやしいときは ひらかず とじる", "もどる・たぶを とじる そうさを する", "うごかないときは ほーむへ もどり あぷりを ひらきなおす"]
+    outcome: {ja: "QRコードをすぐ開かず安全性を確認し、怪しい・固まった画面から自力で戻れます。", ko: "QR 코드를 열기 전 확인하고 문제 화면에서 스스로 돌아갈 수 있습니다.", en: "You can check a QR destination and safely recover from suspicious or frozen screens.", hira: "QRこーどの いきさきを かくにんし、あやしい・うごかない がめんから もどれます。"}
+    practiceTasks: {ja: ["学校や自治体など信頼できる練習用QRコードを読み取る", "開く前のURL表示でhttpsと組織名を確認する", "不審ページを想定し、戻る・タブを閉じる・ホームへ戻るを順に練習する"], ko: ["신뢰할 수 있는 연습 QR 코드를 읽는다", "열기 전 URL과 조직 이름을 확인한다", "뒤로·탭 닫기·홈으로 돌아가기를 연습한다"], en: ["Scan a trusted practice QR code", "Check https and the organization before opening", "Practice Back, close tab, and return Home"], hira: ["あんぜんな れんしゅう QRこーどを よむ", "ひらくまえに httpsと そしきめいを みる", "もどる・たぶを とじる・ほーむへ もどるを れんしゅうする"]}
+    safetyTip: {ja: "QRコードは読み取るだけで安全とは限りません。支払い・ログイン・アプリ導入を求められたら閉じ、公式サイトを自分で検索します。", ko: "QR 코드도 수상할 수 있습니다. 결제·로그인·앱 설치를 요구하면 닫으세요.", en: "QR codes can be malicious. Close pages that unexpectedly request payment, login, or app installation.", hira: "QRこーども あやしいことが あります。しはらい・ろぐいん・あぷりを もとめられたら とじます。"}
+    prerequisites: {ja: ["カメラアプリを開ける", "ホーム画面へ戻る操作ができる"], ko: ["카메라를 열 수 있다", "홈 화면으로 돌아갈 수 있다"], en: ["You can open Camera", "You can return Home"], hira: ["かめらを ひらける", "ほーむへ もどれる"]}
+    deviceNotes: {ja: ["多くのiPhone・Androidは標準カメラでQRコードを読み取れます。", "読み取れない場合はカメラ設定のQRコード項目を確認し、広告のQRアプリは入れません。"], ko: ["대부분 기본 카메라로 QR 코드를 읽을 수 있습니다.", "안 되면 카메라 설정을 확인하고 광고 앱은 설치하지 마세요."], en: ["Most iPhones and Android phones scan QR codes in the standard Camera app.", "If it fails, check Camera settings instead of installing an advertised scanner."], hira: ["たいていは ふつうの かめらで QRこーどを よめます。", "よめないときは かめらせっていを みて、こうこくの あぷりは いれません。"]}
+    troubleshooting: {ja: ["QRコードを認識しない → レンズを拭き、明るい場所で少し距離を変えます。", "警告や全画面広告で戻れない → 個人情報を入力せず、ホームへ戻ってブラウザのタブを閉じます。"], ko: ["인식 안 됨 → 렌즈를 닦고 거리와 밝기를 바꿉니다.", "광고에서 못 나감 → 정보를 입력하지 말고 홈으로 돌아가 탭을 닫습니다."], en: ["QR not recognized → Clean the lens and adjust distance and lighting.", "Cannot leave an ad → Enter no information, return Home, and close the browser tab."], hira: ["よめない → れんずを ふき、あかるさと きょりを かえます。", "こうこくから もどれない → なにも いれず、ほーむへ もどって たぶを とじます。"]}
+    quiz:
+      question: {ja: "QRコードを読み取った直後に確認するものはどれですか？", ko: "QR 코드를 읽은 직후 확인할 것은 무엇인가요?", en: "What should you check immediately after scanning a QR code?", hira: "QRこーどを よんだあと、すぐ かくにんするものは どれですか？"}
+      choices: {ja: ["開く前のURLと運営者", "画面の色だけ", "広告の残り時間"], ko: ["열기 전 URL과 운영자", "화면 색만", "광고 남은 시간"], en: ["The URL and organization before opening", "Only the page color", "The ad countdown"], hira: ["ひらくまえの URLと つくった ところ", "がめんの いろだけ", "こうこくの のこりじかん"]}
       answerIndex: 0
 - id: "sns"
   title:

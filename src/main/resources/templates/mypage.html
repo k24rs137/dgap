@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${lang == 'ko' ? '마이페이지 | D-Gap' : (lang == 'en' ? 'My page | D-Gap' : (lang == 'hira' ? 'まいぺーじ | D-Gap' : 'マイページ | D-Gap'))}">マイページ | D-Gap</title>
     <th:block th:replace="~{fragments/layout :: assets}"></th:block>
-    <link rel="stylesheet" th:href="@{/css/features/mypage.css(v='20261114')}">
+    <link rel="stylesheet" th:href="@{/css/features/mypage.css(v='20261117')}">
 </head>
 <body class="designed-page mypage-page">
 
@@ -68,6 +68,46 @@
                 <div>
                     <h3 th:text="${lang == 'ko' ? '모든 레슨을 완료했습니다' : (lang == 'en' ? 'All lessons completed' : (lang == 'hira' ? 'すべての れっすんが かんりょうしました' : 'すべてのレッスンを完了しました'))}">すべてのレッスンを完了しました</h3>
                     <p th:text="${lang == 'ko' ? '배운 내용을 복습해 보세요.' : (lang == 'en' ? 'Review your completed lessons to keep your skills fresh.' : (lang == 'hira' ? 'まなんだ ないようを ふくしゅうしましょう。' : '学んだ内容を復習して、知識を定着させましょう。'))}">学んだ内容を復習しましょう。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mypage-section mypage-review-section reveal" aria-labelledby="mypageReviewTitle">
+            <div class="mypage-section-heading mypage-review-heading">
+                <div>
+                    <p class="section-label">TODAY'S REVIEW</p>
+                    <h2 id="mypageReviewTitle"
+                        th:text="${lang == 'en' ? 'Review for today' : (lang == 'ko' ? '오늘의 복습' : (lang == 'hira' ? 'きょうの ふくしゅう' : '今日の復習'))}">今日の復習</h2>
+                    <p th:text="${lang == 'en' ? 'Lessons you missed are shown sooner; completed lessons return after seven days.' : (lang == 'ko' ? '틀린 내용은 빨리, 완료한 내용은 7일 후에 다시 확인합니다.' : (lang == 'hira' ? 'まちがえた ないようは はやく、できた ないようは 7にちごに ふくしゅうします。' : '間違えた内容はすぐに、できた内容は7日後にもう一度確認します。'))}">復習の説明</p>
+                </div>
+                <div class="mypage-learning-stats" aria-label="学習成果">
+                    <span><strong th:text="${myPage.assessedCount}">0</strong><small th:text="${lang == 'en' ? 'checks' : (lang == 'ko' ? '이해도 확인' : '理解度チェック')}">理解度チェック</small></span>
+                    <span><strong th:text="${myPage.improvedCount}">0</strong><small th:text="${lang == 'en' ? 'improved' : (lang == 'ko' ? '향상' : '理解が向上')}">理解が向上</small></span>
+                    <span><strong th:text="${myPage.missionCompletedCount}">0</strong><small th:text="${lang == 'en' ? 'missions' : (lang == 'ko' ? '미션 완료' : 'ミッション完了')}">ミッション完了</small></span>
+                </div>
+            </div>
+
+            <div class="mypage-review-list" th:if="${!#lists.isEmpty(myPage.reviewLessons)}">
+                <article class="mypage-review-card" th:each="item : ${myPage.reviewLessons}">
+                    <div>
+                        <span class="mypage-review-due" th:text="${lang == 'en' ? 'Due ' + item.dueDate : (lang == 'ko' ? item.dueDate + ' 복습' : item.dueDate + ' 復習予定')}">復習予定</span>
+                        <h3 th:text="${item.title}">レッスン</h3>
+                        <p th:text="${item.description}">説明</p>
+                    </div>
+                    <a class="design-button design-button-solid"
+                       th:href="${item.url + '?lang=' + lang + '&review=1'}"
+                       ><span class="action-icon action-icon-text" aria-hidden="true">↻</span><span th:text="${lang == 'en' ? 'Review now' : (lang == 'ko' ? '지금 복습' : (lang == 'hira' ? 'いま ふくしゅう' : '今すぐ復習する'))}">今すぐ復習する</span></a>
+                </article>
+            </div>
+
+            <div class="mypage-review-empty" th:if="${#lists.isEmpty(myPage.reviewLessons)}">
+                <span aria-hidden="true">✓</span>
+                <div>
+                    <strong th:text="${lang == 'en' ? 'No review is due today.' : (lang == 'ko' ? '오늘 복습은 완료되었습니다.' : (lang == 'hira' ? 'きょうの ふくしゅうは おわりました。' : '今日の復習は完了しています。'))}">今日の復習は完了しています。</strong>
+                    <p th:if="${myPage.nextReviewDate != null}"
+                       th:text="${lang == 'en' ? 'Next review: ' + myPage.nextReviewDate : (lang == 'ko' ? '다음 복습: ' + myPage.nextReviewDate : '次の復習予定：' + myPage.nextReviewDate)}">次の復習予定</p>
+                    <p th:if="${myPage.nextReviewDate == null}"
+                       th:text="${lang == 'en' ? 'Complete an after-lesson check to schedule a review.' : (lang == 'ko' ? '학습 후 확인을 완료하면 복습이 예약됩니다.' : '学習後の理解度チェックを行うと復習が予約されます。')}">理解度チェックで復習が予約されます。</p>
                 </div>
             </div>
         </section>

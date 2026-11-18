@@ -2,6 +2,79 @@
     background: #f4f8ff;
 }
 
+.mypage-review-section {
+    border-color: #b8dbd4;
+    background: linear-gradient(145deg, #f3fcfa, #fff);
+}
+
+.mypage-review-heading {
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.mypage-review-heading > div:first-child > p:last-child {
+    max-width: 650px;
+    color: #52677f;
+    line-height: 1.7;
+}
+
+.mypage-learning-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(90px, 1fr));
+    gap: 10px;
+}
+
+.mypage-learning-stats span {
+    min-width: 100px;
+    padding: 13px 10px;
+    border: 1px solid #cce8e2;
+    border-radius: 14px;
+    background: #fff;
+    text-align: center;
+}
+
+.mypage-learning-stats strong,
+.mypage-learning-stats small { display: block; }
+.mypage-learning-stats strong { color: #08775e; font-size: 1.45rem; }
+.mypage-learning-stats small { margin-top: 3px; color: #52677f; font-weight: 750; }
+
+.mypage-review-list { display: grid; gap: 14px; margin-top: 22px; }
+.mypage-review-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px;
+    border: 1px solid #cce8e2;
+    border-radius: 18px;
+    background: #fff;
+}
+.mypage-review-card h3 { margin: 7px 0; color: #102039; }
+.mypage-review-card p { margin: 0; color: #52677f; line-height: 1.55; }
+.mypage-review-due { color: #9a4c00; font-size: .85rem; font-weight: 850; }
+.mypage-review-card .design-button { flex: 0 0 auto; }
+
+.mypage-review-empty {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 18px;
+    background: #e8f8f4;
+    color: #126d59;
+}
+.mypage-review-empty > span { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: #fff; font-weight: 900; }
+.mypage-review-empty p { margin: 5px 0 0; color: #3f6f65; }
+
+@media (max-width: 760px) {
+    .mypage-review-heading,
+    .mypage-review-card { display: block; }
+    .mypage-learning-stats { margin-top: 18px; grid-template-columns: repeat(3, 1fr); }
+    .mypage-learning-stats span { min-width: 0; }
+    .mypage-review-card .design-button { width: 100%; margin-top: 16px; text-align: center; }
+}
+
 .mypage-main {
     min-height: 70vh;
 }

@@ -1,6 +1,7 @@
 package com.example.dgap.service;
 
 import java.time.ZoneId;
+import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,9 +17,11 @@ import com.example.dgap.dto.MyPageDto;
 import com.example.dgap.model.FavoriteLesson;
 import com.example.dgap.model.LearningProgress;
 import com.example.dgap.model.Lesson;
+import com.example.dgap.model.LessonActivity;
 import com.example.dgap.model.User;
 import com.example.dgap.repository.FavoriteLessonRepository;
 import com.example.dgap.repository.LearningProgressRepository;
+import com.example.dgap.repository.LessonActivityRepository;
 
 @Service
 public class MyPageService {
@@ -29,15 +32,18 @@ public class MyPageService {
     private final LessonCatalogService catalogService;
     private final LearningProgressRepository progressRepository;
     private final FavoriteLessonRepository favoriteRepository;
+    private final LessonActivityRepository activityRepository;
 
     public MyPageService(UserService userService,
             LessonCatalogService catalogService,
             LearningProgressRepository progressRepository,
-            FavoriteLessonRepository favoriteRepository) {
+            FavoriteLessonRepository favoriteRepository,
+            LessonActivityRepository activityRepository) {
         this.userService = userService;
         this.catalogService = catalogService;
         this.progressRepository = progressRepository;
         this.favoriteRepository = favoriteRepository;
+        this.activityRepository = activityRepository;
     }
 
     @Transactional(readOnly = true)
@@ -63,6 +69,8 @@ public class MyPageService {
         Set<String> favoriteKeys = favoriteRepository.findByUser(user).stream()
                 .map(FavoriteLesson::getLessonKey)
                 .collect(Collectors.toSet());
+        List<LessonActivity> activities = activityRepository.findByUser(user);
+        Instant now = Instant.now();
 
         int totalCount = lessons.size();
         int completedCount = completedKeys.size();
@@ -79,6 +87,30 @@ public class MyPageService {
                 .filter(lesson -> favoriteKeys.contains(lesson.getUrl()))
                 .map(lesson -> lessonItem(lesson, lang))
                 .toList();
+        List<MyPageDto.ReviewItem> reviewLessons = activities.stream()
+                .filter(item -> item.getReviewDueAt() != null && !item.getReviewDueAt().isAfter(now))
+                .filter(item -> lessonsByUrl.containsKey(item.getLessonKey()))
+                .sorted((left, right) -> left.getReviewDueAt().compareTo(right.getReviewDueAt()))
+                .map(item -> {
+                    Lesson lesson = lessonsByUrl.get(item.getLessonKey());
+                    return new MyPageDto.ReviewItem(
+                            lesson.getTitleByLang(lang), lesson.getDescriptionByLang(lang),
+                            lesson.getUrl(), DATE_FORMAT.format(item.getReviewDueAt()));
+                })
+                .toList();
+        String nextReviewDate = activities.stream()
+                .map(LessonActivity::getReviewDueAt)
+                .filter(date -> date != null && date.isAfter(now))
+                .min(Instant::compareTo)
+                .map(DATE_FORMAT::format)
+                .orElse(null);
+        int assessedCount = (int) activities.stream().filter(item -> item.getPostCorrect() != null).count();
+        int improvedCount = (int) activities.stream()
+                .filter(item -> Boolean.FALSE.equals(item.getPreCorrect())
+                        && Boolean.TRUE.equals(item.getPostCorrect()))
+                .count();
+        int missionCompletedCount = (int) activities.stream()
+                .filter(LessonActivity::isMissionCompleted).count();
         List<MyPageDto.HistoryItem> recentHistory = progress.stream()
                 .filter(item -> lessonsByUrl.containsKey(item.getLessonKey()))
                 .limit(5)
@@ -89,7 +121,8 @@ public class MyPageService {
                 .toList();
 
         return new MyPageDto.View(user.getUserId(), user.getDisplayName(), completedCount, totalCount,
-                progressPercent, nextLesson, favorites, recentHistory);
+                progressPercent, nextLesson, reviewLessons, nextReviewDate, assessedCount,
+                improvedCount, missionCompletedCount, favorites, recentHistory);
     }
 
     private MyPageDto.LessonItem lessonItem(Lesson lesson, String lang) {

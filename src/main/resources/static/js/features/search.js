@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchCards = document.querySelectorAll("[data-search-card]");
     const noResultBox = document.getElementById("searchNoResult");
     const searchWordText = document.getElementById("searchWordText");
+    const searchForm = document.querySelector(".search-form");
+    const historySection = document.getElementById("searchHistory");
+    const historyList = document.getElementById("searchHistoryList");
+    const clearHistoryButton = document.getElementById("clearSearchHistory");
+    const historyStorageKey = "dgapSearchHistory";
 
     if (!searchInput || searchCards.length === 0) {
         return;
@@ -18,12 +23,73 @@ document.addEventListener("DOMContentLoaded", function () {
     searchInput.value = keywordFromUrl;
 
     filterSearchCards(keywordFromUrl);
+    if (keywordFromUrl.trim()) addSearchHistory(keywordFromUrl);
+    renderSearchHistory();
 
     searchInput.addEventListener("input", function () {
         filterSearchCards(searchInput.value);
     });
 
+    if (searchForm) {
+        searchForm.addEventListener("submit", function () {
+            addSearchHistory(searchInput.value);
+        });
+    }
+
+    if (clearHistoryButton) {
+        clearHistoryButton.addEventListener("click", function () {
+            localStorage.removeItem(historyStorageKey);
+            renderSearchHistory();
+            searchInput.focus();
+        });
+    }
+
     initializeVoiceSearch(searchInput);
+
+    function getSearchHistory() {
+        try {
+            const stored = JSON.parse(localStorage.getItem(historyStorageKey));
+            return Array.isArray(stored)
+                ? stored.filter(item => typeof item === "string" && item.trim()).slice(0, 5)
+                : [];
+        } catch (error) {
+            return [];
+        }
+    }
+
+    function addSearchHistory(value) {
+        const keyword = String(value || "").trim().slice(0, 100);
+        if (!keyword) return;
+        const history = getSearchHistory().filter(
+            item => item.toLocaleLowerCase() !== keyword.toLocaleLowerCase()
+        );
+        localStorage.setItem(historyStorageKey, JSON.stringify([keyword, ...history].slice(0, 5)));
+        renderSearchHistory();
+    }
+
+    function renderSearchHistory() {
+        if (!historySection || !historyList) return;
+        const history = getSearchHistory();
+        historySection.hidden = history.length === 0;
+        historyList.replaceChildren();
+
+        history.forEach(function (keyword) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "search-history-item";
+            button.textContent = keyword;
+            button.addEventListener("click", function () {
+                searchInput.value = keyword;
+                filterSearchCards(keyword);
+                const url = new URL(window.location.href);
+                url.searchParams.set("keyword", keyword);
+                window.history.replaceState({}, "", url);
+                addSearchHistory(keyword);
+                searchInput.focus();
+            });
+            historyList.appendChild(button);
+        });
+    }
 
     function filterSearchCards(keyword) {
         const normalizedKeyword = normalizeText(keyword);
@@ -204,6 +270,7 @@ document.addEventListener("DOMContentLoaded", function () {
             hasOutcome = true;
             input.value = transcript;
             input.dispatchEvent(new Event("input", { bubbles: true }));
+            addSearchHistory(transcript);
             showVoiceStatus(text.recognized + transcript, false);
             input.focus();
         });

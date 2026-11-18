@@ -57,8 +57,13 @@ body.search-page {
 }
 
 .search-form {
+    display: block;
     max-width: 860px;
     margin-top: 34px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .search-input-label {
@@ -180,6 +185,68 @@ body.search-page {
 
 .voice-search-note[hidden] {
     display: none;
+}
+
+.search-history {
+    max-width: 860px;
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid #dbeafe;
+    border-radius: 16px;
+}
+
+.search-history[hidden] {
+    display: none;
+}
+
+.search-history-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.search-history-heading h2 {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.search-history-clear {
+    min-height: 36px;
+    padding: 6px 10px;
+    color: #475569;
+    background: transparent;
+    border: 0;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
+.search-history-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.search-history-item {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 13px;
+    color: var(--color-primary-dark);
+    background: white;
+    border: 1px solid #cfe0f8;
+    border-radius: 999px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.search-history-item::before {
+    content: "↺";
+    color: #64748b;
 }
 
 @keyframes voice-listening-pulse {
@@ -415,8 +482,22 @@ body.search-page {
         width: min(calc(100% - 28px), var(--content-width));
     }
 
+    .search-hero-inner h1 {
+        font-size: clamp(32px, 9.5vw, 40px);
+        overflow-wrap: anywhere;
+    }
+
+    .search-hero-text {
+        overflow-wrap: anywhere;
+    }
+
     .search-input-area {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
     }
 
     .search-submit-button {
@@ -425,6 +506,10 @@ body.search-page {
 
     .voice-search-button {
         width: 100%;
+    }
+
+    .search-history {
+        padding: 14px;
     }
 
     .search-result-heading {

@@ -18,9 +18,11 @@ import com.example.dgap.dto.AccountDto;
 import com.example.dgap.dto.LearningDto;
 import com.example.dgap.model.FavoriteLesson;
 import com.example.dgap.model.LearningProgress;
+import com.example.dgap.model.LessonActivity;
 import com.example.dgap.model.User;
 import com.example.dgap.repository.FavoriteLessonRepository;
 import com.example.dgap.repository.LearningProgressRepository;
+import com.example.dgap.repository.LessonActivityRepository;
 import com.example.dgap.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -32,13 +34,16 @@ public class UserDataController {
     private final UserService userService;
     private final LearningProgressRepository progressRepository;
     private final FavoriteLessonRepository favoriteRepository;
+    private final LessonActivityRepository activityRepository;
 
     public UserDataController(UserService userService,
             LearningProgressRepository progressRepository,
-            FavoriteLessonRepository favoriteRepository) {
+            FavoriteLessonRepository favoriteRepository,
+            LessonActivityRepository activityRepository) {
         this.userService = userService;
         this.progressRepository = progressRepository;
         this.favoriteRepository = favoriteRepository;
+        this.activityRepository = activityRepository;
     }
 
     @GetMapping("/learning")
@@ -53,6 +58,12 @@ public class UserDataController {
                 progress.stream().limit(30)
                         .map(item -> new LearningDto.HistoryItem(
                                 item.getTitle(), item.getCompletedAt().toString()))
+                        .toList(),
+                activityRepository.findByUser(user).stream()
+                        .map(item -> new LearningDto.ActivityItem(
+                                item.getLessonKey(), item.getPreCorrect(), item.getPostCorrect(),
+                                item.isMissionCompleted(), instantText(item.getReviewDueAt()),
+                                instantText(item.getReviewedAt())))
                         .toList()));
     }
 
@@ -91,6 +102,31 @@ public class UserDataController {
         return ResponseEntity.ok(new LearningDto.Saved(true));
     }
 
+    @PostMapping("/activity")
+    @Transactional
+    public ResponseEntity<?> activity(@Valid @RequestBody LearningDto.ActivityRequest body,
+            HttpSession session) {
+        User user = currentUser(session);
+        if (user == null) return unauthorized();
+
+        Instant now = Instant.now();
+        LessonActivity item = activityRepository.findByUserAndLessonKey(user, body.key())
+                .orElseGet(() -> new LessonActivity(user, body.key()));
+        if (body.preCorrect() != null) item.setPreCorrect(body.preCorrect());
+        if (body.postCorrect() != null) {
+            item.setPostCorrect(body.postCorrect());
+            item.setReviewDueAt(body.postCorrect() ? now.plusSeconds(7 * 24 * 60 * 60L) : now);
+        }
+        if (body.missionCompleted() != null) item.setMissionCompleted(body.missionCompleted());
+        if (Boolean.TRUE.equals(body.reviewCompleted())) {
+            item.setReviewedAt(now);
+            item.setReviewDueAt(now.plusSeconds(14 * 24 * 60 * 60L));
+        }
+        item.setUpdatedAt(now);
+        activityRepository.save(item);
+        return ResponseEntity.ok(new LearningDto.Saved(true));
+    }
+
     @PatchMapping("/display-name")
     public ResponseEntity<?> changeDisplayName(
             @Valid @RequestBody AccountDto.ChangeDisplayNameRequest body,
@@ -111,6 +147,10 @@ public class UserDataController {
     private String cleanTitle(String value) {
         String title = value == null || value.isBlank() ? "レッスン" : value.trim();
         return title.substring(0, Math.min(title.length(), 200));
+    }
+
+    private String instantText(Instant value) {
+        return value == null ? null : value.toString();
     }
 
     private ResponseEntity<ApiError> unauthorized() {

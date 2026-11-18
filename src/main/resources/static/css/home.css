@@ -43,6 +43,10 @@
     gap: 44px;
 }
 
+.hero-inner > * {
+    min-width: 0;
+}
+
 .hero-label,
 .section-label {
     margin: 0 0 16px;
@@ -230,7 +234,7 @@
 .demo-progress-track span {
     display: block;
 
-    width: 60%;
+    width: var(--progress, 0%);
     height: 100%;
 
     background:
@@ -243,6 +247,27 @@
     border-radius: inherit;
 
     animation: progress-animation 1.2s ease-out both;
+}
+
+.demo-signin-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 12px 14px;
+    color: #475569;
+    background: #f7f9fd;
+    border: 1px solid #e9eef6;
+    border-radius: 14px;
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+.demo-signin-note a {
+    flex: 0 0 auto;
+    color: var(--color-primary-dark);
+    font-weight: 900;
 }
 
 @keyframes progress-animation {
@@ -754,11 +779,25 @@
     }
 
     .hero-content h1 {
-        font-size: clamp(2.2rem, 12vw, 3.3rem);
+        font-size: clamp(34px, 10.5vw, 44px);
+        letter-spacing: -0.045em;
+        overflow-wrap: anywhere;
+    }
+
+    .hero-content {
+        text-align: left;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        overflow-wrap: anywhere;
     }
 
     .hero-buttons {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .hero-buttons .button {
@@ -766,6 +805,22 @@
     }
 
     .hero-support {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .demo-card {
+        min-width: 0;
+        align-items: flex-start;
+    }
+
+    .demo-card > div:last-child {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .demo-signin-note {
         align-items: flex-start;
         flex-direction: column;
     }

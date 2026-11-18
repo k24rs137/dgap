@@ -69,17 +69,36 @@ class ApplicationFlowTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"key\":\"/lesson/gmail\",\"favorite\":true}"))
                 .andExpect(status().isOk());
+        mvc.perform(post("/api/me/activity").with(csrf()).session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"key\":\"/lesson/gmail\",\"preCorrect\":false,\"postCorrect\":true,\"missionCompleted\":true}"))
+                .andExpect(status().isOk());
+        mvc.perform(post("/api/me/activity").with(csrf()).session(session)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"key\":\"/lesson/google-search\",\"preCorrect\":true,\"postCorrect\":false,\"missionCompleted\":false}"))
+                .andExpect(status().isOk());
         mvc.perform(get("/api/me/learning").session(session))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.completed[0]").value("/lesson/gmail"))
-                .andExpect(jsonPath("$.favorites[0]").value("/lesson/gmail"));
+                .andExpect(jsonPath("$.favorites[0]").value("/lesson/gmail"))
+                .andExpect(jsonPath("$.activities.length()").value(2));
+
+        mvc.perform(get("/").param("lang", "ja").session(session))
+                .andExpect(status().isOk())
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("続きから学ぶ")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("4%")))
+                .andExpect(content().string(org.hamcrest.Matchers.not(
+                        org.hamcrest.Matchers.containsString(">60%</strong>"))));
 
         mvc.perform(get("/mypage").param("lang", "ja").session(session))
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Flow Learnerさんのマイページ")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Gmail")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("<strong>1</strong>")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("<span> / 17</span>")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("<span> / 24</span>")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("今日の復習")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("/lesson/google-search?lang=ja&amp;review=1")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("理解が向上")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"changeDisplayNameForm\"")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("<strong id=\"currentUserId\">flow-user</strong>")));
 
@@ -134,6 +153,7 @@ class ApplicationFlowTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Gmail")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"voiceSearchButton\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"searchHistory\"")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Voice search")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("browser’s speech recognition service")));
     }
@@ -146,8 +166,17 @@ class ApplicationFlowTests {
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("自分宛てに件名『送信練習』")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("安全・注意ポイント")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("操作練習モード")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("学ぶ前の理解度チェック")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("自分の端末で実生活ミッション")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("今はスキップ")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("学習後の理解度チェック")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("data-favorite-star")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString(">☆</span>")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("aria-pressed=\"false\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("completion-mark")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("data-lesson-key=\"/lesson/gmail\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("/js/features/practice.js?v=20261114")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("/js/features/practice.js?v=20261117")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("/js/features/lesson-path.js?v=20261117")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("トップページへ戻る")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("href=\"/?lang=ja\"")))
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("12分")));
@@ -158,7 +187,13 @@ class ApplicationFlowTests {
         mvc.perform(get("/").param("lang", "ja"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("href=\"/fraud?lang=ja\"")))
-                .andExpect(content().string(org.hamcrest.Matchers.containsString("詐欺メール診断")));
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("詐欺メール診断")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"accessibilityToggle\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"accessibilityPanel\" hidden")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("id=\"onboardingWelcome\"")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("data-onboarding-restart")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("/js/features/onboarding.js?v=20261116")))
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("学習を始める")));
 
         mvc.perform(get("/search").param("lang", "en"))
                 .andExpect(status().isOk())

@@ -1,7 +1,10 @@
 (function () {
     const lessonKeys = [
         "/lesson/smartphone-power", "/lesson/smartphone-input", "/lesson/phone-call",
-        "/lesson/camera-photo", "/lesson/gallery-view", "/lesson/line-message",
+        "/lesson/camera-photo", "/lesson/gallery-view", "/lesson/smartphone-home",
+        "/lesson/wifi-connect", "/lesson/app-install", "/lesson/notification-control",
+        "/lesson/storage-cleanup", "/lesson/accessibility-settings", "/lesson/qr-troubleshooting",
+        "/lesson/line-message",
         "/lesson/kakao-message", "/lesson/sns-privacy", "/lesson/google-search",
         "/lesson/gmail", "/lesson/google-map", "/lesson/youtube-watch",
         "/lesson/google-translate", "/lesson/payment-app", "/lesson/smbc-app",
@@ -36,6 +39,16 @@
         });
     };
 
+    window.dgapSaveActivity = async function (key, activity) {
+        if (window.dgapAccountReady) await window.dgapAccountReady;
+        if (!window.dgapAccount.authenticated) return;
+        await jsonRequest("/api/me/activity", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ key, ...activity })
+        });
+    };
+
     window.dgapLogout = async function () {
         await window.dgapFetch("/api/logout", { method: "POST" });
         sessionStorage.removeItem("dgapAccountHydrated");
@@ -61,6 +74,19 @@
         (data.completed || []).forEach(key => localStorage.setItem(key, "done"));
         localStorage.setItem("favoriteLessons", JSON.stringify(data.favorites || []));
         localStorage.setItem("learningHistory", JSON.stringify(data.history || []));
+        const activities = {};
+        (data.activities || []).forEach(item => {
+            activities[item.key] = {
+                preCorrect: item.preCorrect,
+                preSelected: item.preCorrect == null ? null : "saved",
+                postCorrect: item.postCorrect,
+                missionCompleted: item.missionCompleted,
+                reviewDueAt: item.reviewDueAt,
+                reviewedAt: item.reviewedAt,
+                missions: item.missionCompleted ? [true, true, true] : []
+            };
+        });
+        localStorage.setItem("dgapLessonActivities", JSON.stringify(activities));
 
         const signature = JSON.stringify(data);
         const hydrationKey = session.userId;

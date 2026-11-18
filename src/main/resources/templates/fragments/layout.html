@@ -3,12 +3,13 @@
 <head>
     <th:block th:fragment="assets">
         <meta name="_csrf" th:content="${_csrf.token}">
-        <link rel="stylesheet" th:href="@{/css/base.css(v='20261114')}">
-        <link rel="stylesheet" th:href="@{/css/components.css(v='20261114')}">
-        <link rel="stylesheet" th:href="@{/css/home.css(v='20261114')}">
-        <link rel="stylesheet" th:href="@{/css/accessibility.css(v='20261114')}">
-        <link rel="stylesheet" th:href="@{/css/search.css(v='20261114')}">
-        <link rel="stylesheet" th:href="@{/css/pages.css(v='20261114')}">
+        <link rel="stylesheet" th:href="@{/css/base.css(v='20261116')}">
+        <link rel="stylesheet" th:href="@{/css/components.css(v='20261117b')}">
+        <link rel="stylesheet" th:href="@{/css/home.css(v='20261116')}">
+        <link rel="stylesheet" th:href="@{/css/accessibility.css(v='20261116')}">
+        <link rel="stylesheet" th:href="@{/css/search.css(v='20261117b')}">
+        <link rel="stylesheet" th:href="@{/css/onboarding.css(v='20261116')}">
+        <link rel="stylesheet" th:href="@{/css/pages.css(v='20261117b')}">
         <script th:src="@{/js/common/security.js(v='20261114')}"></script>
     </th:block>
 </head>
@@ -21,13 +22,24 @@
         </a>
         <nav class="desktop-nav" aria-label="メインメニュー">
             <a th:href="@{/(lang=${lang})}" th:text="${lang == 'ko' ? '홈' : (lang == 'en' ? 'Home' : (lang == 'hira' ? 'ほーむ' : 'トップ'))}">トップ</a>
+            <a data-onboarding="learning-link" th:href="@{/(lang=${lang})} + '#learning'" th:text="${lang == 'ko' ? '학습' : (lang == 'en' ? 'Learn' : (lang == 'hira' ? 'がくしゅう' : '学習'))}">学習</a>
             <a th:href="@{/diagnosis(lang=${lang})}" th:text="${lang == 'ko' ? '문제 진단' : (lang == 'en' ? 'Trouble check' : (lang == 'hira' ? 'こまりごとしんだん' : '困りごと診断'))}">困りごと診断</a>
-            <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
             <a th:href="@{/community(lang=${lang})}" th:text="${lang == 'ko' ? '커뮤니티' : (lang == 'en' ? 'Community' : (lang == 'hira' ? 'こみゅにてぃ' : 'コミュニティ'))}">コミュニティ</a>
-            <a th:href="@{/fraud(lang=${lang})}" th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
+            <details class="desktop-more-menu">
+                <summary data-onboarding="more-menu" th:text="${lang == 'ko' ? '더보기' : (lang == 'en' ? 'More' : (lang == 'hira' ? 'そのほか' : 'その他'))}">その他</summary>
+                <div class="desktop-more-panel">
+                    <a th:href="@{/ai(lang=${lang})}" th:text="${lang == 'ko' ? '학습 상담 내비' : (lang == 'en' ? 'Lesson navigator' : (lang == 'hira' ? 'そうだんなび' : '相談ナビ'))}">相談ナビ</a>
+                    <a th:href="@{/fraud(lang=${lang})}" th:text="${lang == 'ko' ? '사기 메일 진단' : (lang == 'en' ? 'Scam email check' : (lang == 'hira' ? 'あぶないめーるしんだん' : '詐欺メール診断'))}">詐欺メール診断</a>
+                    <a data-onboarding-restart th:href="@{/(lang=${lang},guide='1')}"
+                       th:text="${lang == 'ko' ? '사용 방법' : (lang == 'en' ? 'How to use D-Gap' : (lang == 'hira' ? 'つかいかた' : '使い方'))}">使い方</a>
+                </div>
+            </details>
         </nav>
         <div class="header-actions">
-            <a class="header-search" th:href="@{/search(lang=${lang})}" th:text="${lang == 'ko' ? '검색' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさく' : '検索'))}">検索</a>
+            <a class="header-search icon-label" th:href="@{/search(lang=${lang})}">
+                <svg class="action-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m21 20-4.6-4.6a7.5 7.5 0 1 0-1 1L20 21a.7.7 0 0 0 1-1ZM5.5 10.5a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"/></svg>
+                <span th:text="${lang == 'ko' ? '검색' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさく' : '検索'))}">検索</span>
+            </a>
             <span id="loginStatus"></span>
             <a id="myPageLink" class="button button-small" style="display:none"
                th:href="@{/mypage(lang=${lang})}"
@@ -36,32 +48,42 @@
                th:text="${lang == 'ko' ? '로그인' : (lang == 'en' ? 'Log in' : (lang == 'hira' ? 'ろぐいん' : 'ログイン'))}">ログイン</a>
             <button id="topLogoutButton" type="button" class="button button-small" style="display:none"
                     th:text="${lang == 'ko' ? '로그아웃' : (lang == 'en' ? 'Log out' : (lang == 'hira' ? 'ろぐあうと' : 'ログアウト'))}">ログアウト</button>
-            <button type="button" class="mobile-menu-button" id="dgapMenuButton"
+            <button type="button" class="mobile-menu-button" id="dgapMenuButton" data-onboarding="mobile-menu"
                     aria-controls="dgapMobileMenu" aria-expanded="false">メニュー</button>
         </div>
     </div>
-    <div class="accessibility-toolbar">
-        <div class="accessibility-group">
-            <span class="accessibility-label">表示言語</span>
-            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ja">日本語</button>
-            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ko">한국어</button>
-            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="en">English</button>
-            <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="hira">ひらがな</button>
-        </div>
-        <div class="accessibility-group">
-            <span class="accessibility-label">文字サイズ</span>
-            <button type="button" class="accessibility-button font-size-button" data-font-size="normal">標準</button>
-            <button type="button" class="accessibility-button font-size-button" data-font-size="large">大</button>
-            <button type="button" class="accessibility-button font-size-button" data-font-size="xlarge">特大</button>
+    <div class="accessibility-controls">
+        <button type="button" class="accessibility-toggle" id="accessibilityToggle" data-onboarding="display-settings"
+                aria-controls="accessibilityPanel" aria-expanded="false">
+            <span aria-hidden="true">Aa</span>
+            <span th:text="${lang == 'ko' ? '화면 설정' : (lang == 'en' ? 'Display settings' : (lang == 'hira' ? 'ひょうじ せってい' : '表示設定'))}">表示設定</span>
+        </button>
+        <div class="accessibility-toolbar" id="accessibilityPanel" hidden>
+            <div class="accessibility-group">
+                <span class="accessibility-label">表示言語</span>
+                <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ja">日本語</button>
+                <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="ko">한국어</button>
+                <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="en">English</button>
+                <button type="button" class="accessibility-button dgap-language-button" data-dgap-lang="hira">ひらがな</button>
+            </div>
+            <div class="accessibility-group">
+                <span class="accessibility-label">文字サイズ</span>
+                <button type="button" class="accessibility-button font-size-button" data-font-size="normal">標準</button>
+                <button type="button" class="accessibility-button font-size-button" data-font-size="large">大</button>
+                <button type="button" class="accessibility-button font-size-button" data-font-size="xlarge">特大</button>
+            </div>
         </div>
     </div>
     <nav class="mobile-nav" id="dgapMobileMenu" aria-label="スマートフォン用メニュー">
         <a th:href="@{/(lang=${lang})}">トップ</a>
+        <a data-onboarding="learning-link" th:href="@{/(lang=${lang})} + '#learning'">学習</a>
         <a th:href="@{/diagnosis(lang=${lang})}">困りごと診断</a>
-        <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
         <a th:href="@{/community(lang=${lang})}">コミュニティ</a>
+        <a th:href="@{/ai(lang=${lang})}">相談ナビ</a>
         <a th:href="@{/fraud(lang=${lang})}">詐欺メール診断</a>
         <a th:href="@{/search(lang=${lang})}">検索</a>
+        <a data-onboarding-restart th:href="@{/(lang=${lang},guide='1')}"
+           th:text="${lang == 'ko' ? '사용 방법' : (lang == 'en' ? 'How to use D-Gap' : (lang == 'hira' ? 'つかいかた' : '使い方'))}">使い方</a>
         <a id="mobileMyPageLink" style="display:none" th:href="@{/mypage(lang=${lang})}"
            th:text="${lang == 'ko' ? '마이페이지' : (lang == 'en' ? 'My page' : (lang == 'hira' ? 'まいぺーじ' : 'マイページ'))}">マイページ</a>
     </nav>
@@ -76,12 +98,13 @@
 </footer>
 
 <th:block th:fragment="scripts">
-    <script th:src="@{/js/common/account-sync.js(v='20261114')}"></script>
-    <script th:src="@{/js/features/learning.js(v='20261114')}"></script>
-    <script th:src="@{/js/common/ui.js(v='20261114')}"></script>
-    <script th:src="@{/js/features/translations.js(v='20261114')}"></script>
-    <script th:src="@{/js/features/accessibility.js(v='20261114')}"></script>
-    <script th:src="@{/js/features/search.js(v='20261114')}"></script>
+    <script th:src="@{/js/common/account-sync.js(v='20261117')}"></script>
+    <script th:src="@{/js/features/learning.js(v='20261117b')}"></script>
+    <script th:src="@{/js/common/ui.js(v='20261116')}"></script>
+    <script th:src="@{/js/features/translations.js(v='20261117b')}"></script>
+    <script th:src="@{/js/features/accessibility.js(v='20261117b')}"></script>
+    <script th:src="@{/js/features/search.js(v='20261116')}"></script>
+    <script th:src="@{/js/features/onboarding.js(v='20261116')}"></script>
     <script th:src="@{/js/common/effects.js(v='20261114')}"></script>
 </th:block>
 </body>

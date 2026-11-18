@@ -15,7 +15,7 @@ class LessonCatalogTests {
         assertThat(catalog.getCategories()).hasSize(4);
         assertThat(catalog.getCategories())
                 .flatExtracting(category -> category.getLessons())
-                .hasSize(17)
+                .hasSize(24)
                 .allSatisfy(lesson -> {
                     assertThat(lesson.getTitleByLang("ja")).isNotBlank();
                     assertThat(lesson.getTitleByLang("ko")).isNotBlank();
@@ -24,6 +24,24 @@ class LessonCatalogTests {
                     assertThat(lesson.getStepsByLang("ja")).isNotEmpty();
                     assertThat(lesson.getQuizChoicesByLang("en")).isNotEmpty();
                 });
+    }
+
+    @Test
+    void providesADeepSmartphoneCourseWithPracticalGuidance() {
+        var smartphone = catalog.getCategories().stream()
+                .filter(category -> category.getUrl().equals("/category/smartphone"))
+                .findFirst().orElseThrow();
+        assertThat(smartphone.getLessons()).hasSize(12);
+
+        Lesson troubleshooting = smartphone.getLessons().stream()
+                .filter(lesson -> lesson.getUrl().equals("/lesson/qr-troubleshooting"))
+                .findFirst().orElseThrow();
+
+        assertThat(troubleshooting.getLevelByLang("ja")).isEqualTo("実践");
+        assertThat(troubleshooting.getPrerequisitesByLang("ja")).isNotEmpty();
+        assertThat(troubleshooting.getDeviceNotesByLang("ja")).isNotEmpty();
+        assertThat(troubleshooting.getTroubleshootingByLang("ja")).isNotEmpty();
+        assertThat(troubleshooting.getPracticeTasksByLang("ja")).hasSizeGreaterThanOrEqualTo(3);
     }
 
     @Test

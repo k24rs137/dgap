@@ -61,9 +61,26 @@
             <div class="check-area redesigned-check reveal">
                 <label>
                     <input type="checkbox" id="completeCheck">
+                    <span class="completion-mark" aria-hidden="true">✓</span>
                     <span th:text="${lang == 'ko' ? '이 카테고리 학습을 완료했습니다' : (lang == 'en' ? 'I have completed this category' : (lang == 'hira' ? 'このかてごりのがくしゅうをかんりょうした' : 'このカテゴリの学習を完了した'))}">このカテゴリの学習を完了した</span>
                 </label>
                 <p id="completeMessage" class="complete-message"></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="design-section course-roadmap-section" th:if="${category.url == '/category/smartphone'}">
+        <div class="design-section-inner">
+            <div class="section-heading reveal">
+                <p class="section-label">COURSE ROADMAP</p>
+                <h2 th:text="${lang == 'ko' ? '기초부터 실전까지 순서대로 학습' : (lang == 'en' ? 'Learn from the basics to real-life use' : (lang == 'hira' ? 'きほんから じっせんまで じゅんばんに まなぶ' : '基礎から実践まで順番に学ぶ'))}">基礎から実践まで順番に学ぶ</h2>
+                <p th:text="${lang == 'ko' ? '처음 사용하는 분은 01부터 순서대로 진행하는 것을 권장합니다.' : (lang == 'en' ? 'If you are new to smartphones, start at lesson 01 and continue in order.' : (lang == 'hira' ? 'はじめての ひとは、01から じゅんばんに すすめるのが おすすめです。' : 'はじめての方は、01から順番に進めるのがおすすめです。'))}">はじめての方は、01から順番に進めるのがおすすめです。</p>
+            </div>
+            <div class="course-roadmap-grid">
+                <article class="course-roadmap-card reveal"><span>1</span><strong th:text="${lang == 'ko' ? '입문' : (lang == 'en' ? 'Starter' : (lang == 'hira' ? 'にゅうもん' : '入門'))}">入門</strong><p th:text="${lang == 'en' ? 'Power, screen, and typing' : '電源・画面・文字入力'}">電源・画面・文字入力</p></article>
+                <article class="course-roadmap-card reveal"><span>2</span><strong th:text="${lang == 'ko' ? '초급' : (lang == 'en' ? 'Beginner' : (lang == 'hira' ? 'しょきゅう' : '初級'))}">初級</strong><p th:text="${lang == 'en' ? 'Calls, photos, Wi-Fi, and apps' : '電話・写真・Wi-Fi・アプリ'}">電話・写真・Wi-Fi・アプリ</p></article>
+                <article class="course-roadmap-card reveal"><span>3</span><strong th:text="${lang == 'ko' ? '중급' : (lang == 'en' ? 'Intermediate' : (lang == 'hira' ? 'ちゅうきゅう' : '中級'))}">中級</strong><p th:text="${lang == 'en' ? 'Notifications, storage, and display' : '通知・容量・見やすさ'}">通知・容量・見やすさ</p></article>
+                <article class="course-roadmap-card reveal"><span>4</span><strong th:text="${lang == 'ko' ? '실전' : (lang == 'en' ? 'Practice' : (lang == 'hira' ? 'じっせん' : '実践'))}">実践</strong><p th:text="${lang == 'en' ? 'QR codes and troubleshooting' : 'QRコード・トラブル解決'}">QRコード・トラブル解決</p></article>
             </div>
         </div>
     </section>

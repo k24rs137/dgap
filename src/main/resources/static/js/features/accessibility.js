@@ -1,7 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
+    initializeDisplaySettingsToggle();
     initializeDgapLanguageSwitch();
     initializeDgapFontSizeSwitch();
 });
+
+function initializeDisplaySettingsToggle() {
+    const toggle = document.getElementById("accessibilityToggle");
+    const panel = document.getElementById("accessibilityPanel");
+    if (!toggle || !panel) return;
+
+    toggle.addEventListener("click", () => {
+        const willOpen = panel.hidden;
+        panel.hidden = !willOpen;
+        toggle.setAttribute("aria-expanded", String(willOpen));
+        if (willOpen) {
+            const selectedControl = panel.querySelector(".is-active");
+            if (selectedControl) selectedControl.focus();
+        }
+    });
+
+    panel.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        panel.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.focus();
+    });
+}
 
 function getInitialDgapLanguage() {
     const urlParams =

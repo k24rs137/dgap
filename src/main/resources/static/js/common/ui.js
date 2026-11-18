@@ -3,7 +3,36 @@ document.addEventListener("DOMContentLoaded", () => {
     initializeDgapSmoothScroll();
     initializeDgapRippleButtons();
     initializeDgapMobileMenu();
+    initializeCurrentNavigation();
+    initializeDesktopMoreMenu();
 });
+
+function initializeCurrentNavigation() {
+    const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+    document.querySelectorAll(".desktop-nav a, .mobile-nav a, .header-search").forEach((link) => {
+        const url = new URL(link.href, window.location.origin);
+        const linkPath = url.pathname.replace(/\/$/, "") || "/";
+        const isLearningAnchor = url.hash === "#learning";
+        const isCurrent = linkPath === currentPath &&
+            (currentPath !== "/" || (isLearningAnchor ? window.location.hash === "#learning" : !window.location.hash));
+        if (isCurrent) link.setAttribute("aria-current", "page");
+    });
+}
+
+function initializeDesktopMoreMenu() {
+    const menu = document.querySelector(".desktop-more-menu");
+    if (!menu) return;
+
+    document.addEventListener("pointerdown", (event) => {
+        if (!menu.contains(event.target)) menu.removeAttribute("open");
+    });
+
+    menu.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        menu.removeAttribute("open");
+        menu.querySelector("summary").focus();
+    });
+}
 
 
 function initializeDgapScrollReveal() {

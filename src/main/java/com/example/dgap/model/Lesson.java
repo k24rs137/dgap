@@ -13,6 +13,9 @@ public class Lesson {
     private final Map<String, String> outcomes;
     private final Map<String, List<String>> practiceTasks;
     private final Map<String, String> safetyTips;
+    private final Map<String, List<String>> prerequisites;
+    private final Map<String, List<String>> deviceNotes;
+    private final Map<String, List<String>> troubleshooting;
     private final Map<String, String> quizQuestions;
     private final Map<String, List<String>> quizChoices;
     private final Quiz quiz;
@@ -21,6 +24,8 @@ public class Lesson {
             String url, Map<String, String> levels, Map<String, String> times,
             Map<String, List<String>> steps, Map<String, String> outcomes,
             Map<String, List<String>> practiceTasks, Map<String, String> safetyTips,
+            Map<String, List<String>> prerequisites, Map<String, List<String>> deviceNotes,
+            Map<String, List<String>> troubleshooting,
             Map<String, String> quizQuestions, Map<String, List<String>> quizChoices,
             int answerIndex) {
         this.titles = Map.copyOf(titles);
@@ -32,6 +37,9 @@ public class Lesson {
         this.outcomes = Map.copyOf(outcomes);
         this.practiceTasks = Map.copyOf(practiceTasks);
         this.safetyTips = Map.copyOf(safetyTips);
+        this.prerequisites = Map.copyOf(prerequisites);
+        this.deviceNotes = Map.copyOf(deviceNotes);
+        this.troubleshooting = Map.copyOf(troubleshooting);
         this.quizQuestions = Map.copyOf(quizQuestions);
         this.quizChoices = Map.copyOf(quizChoices);
         this.quiz = new Quiz(
@@ -112,6 +120,18 @@ public class Lesson {
 
     public String getSafetyTipByLang(String lang) {
         return localized(safetyTips, lang);
+    }
+
+    public List<String> getPrerequisitesByLang(String lang) {
+        return localizedList(prerequisites, lang);
+    }
+
+    public List<String> getDeviceNotesByLang(String lang) {
+        return localizedList(deviceNotes, lang);
+    }
+
+    public List<String> getTroubleshootingByLang(String lang) {
+        return localizedList(troubleshooting, lang);
     }
 
     public String getQuizQuestionByLang(String lang) {

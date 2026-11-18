@@ -85,18 +85,43 @@ function getDgapFavoriteAddText() {
 
 function getDgapFavoriteRemoveText() {
     if (lang === "ko") {
-        return "즐겨찾기 해제";
+        return "즐겨찾기 완료";
     }
 
     if (lang === "en") {
-        return "Remove from favorites";
+        return "Favorited";
     }
 
     if (lang === "hira") {
-        return "おきにいりをはずす";
+        return "おきにいりずみ";
     }
 
-    return "お気に入り解除";
+    return "お気に入り済み";
+}
+
+function updateFavoriteButton(button, active) {
+    const label = button.querySelector("[data-favorite-label]");
+    const star = button.querySelector("[data-favorite-star]");
+    if (label) label.textContent = active ? getDgapFavoriteRemoveText() : getDgapFavoriteAddText();
+    if (star) star.textContent = active ? "★" : "☆";
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+    button.setAttribute("aria-label", active ? getDgapFavoriteRemoveActionText() : getDgapFavoriteAddText());
+    button.title = active ? getDgapFavoriteRemoveActionText() : getDgapFavoriteAddText();
+}
+
+function getDgapFavoriteRemoveActionText() {
+    if (lang === "ko") return "즐겨찾기에서 삭제";
+    if (lang === "en") return "Remove from favorites";
+    if (lang === "hira") return "おきにいりから はずす";
+    return "お気に入りから外す";
+}
+
+function getDgapFavoriteFeedback(active) {
+    if (lang === "ko") return active ? "즐겨찾기에 추가했습니다." : "즐겨찾기에서 삭제했습니다.";
+    if (lang === "en") return active ? "Added to favorites." : "Removed from favorites.";
+    if (lang === "hira") return active ? "おきにいりに ついかしました。" : "おきにいりから はずしました。";
+    return active ? "お気に入りに追加しました。" : "お気に入りから外しました。";
 }
 
 if (checkbox) {
@@ -125,6 +150,7 @@ localStorage.setItem(
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
             localStorage.setItem(key, "done");
+            localStorage.setItem(`dgapCompletedAt:${key}`, new Date().toISOString());
             if (window.dgapSaveProgress) {
                 window.dgapSaveProgress(key, true, document.querySelector("h1").textContent);
             }
@@ -134,6 +160,7 @@ localStorage.setItem(
             }
         } else {
             localStorage.removeItem(key);
+            localStorage.removeItem(`dgapCompletedAt:${key}`);
             if (window.dgapSaveProgress) {
                 window.dgapSaveProgress(key, false, document.querySelector("h1").textContent);
             }
@@ -154,6 +181,13 @@ if (progressText) {
     "/lesson/phone-call",
     "/lesson/camera-photo",
     "/lesson/gallery-view",
+    "/lesson/smartphone-home",
+    "/lesson/wifi-connect",
+    "/lesson/app-install",
+    "/lesson/notification-control",
+    "/lesson/storage-cleanup",
+    "/lesson/accessibility-settings",
+    "/lesson/qr-troubleshooting",
     "/lesson/line-message",
     "/lesson/kakao-message",
     "/lesson/sns-privacy",
@@ -195,52 +229,6 @@ if (lessonStatuses) {
             status.textContent = getDgapDoneStatusText();
         }
     });
-    const quizArea = document.getElementById("quizArea");
-const quizMessage = document.getElementById("quizMessage");
-
-if (quizArea) {
-    const answer = quizArea.dataset.answer;
-    const choices = document.querySelectorAll(".quiz-choice");
-
-    choices.forEach(function (choice) {
-        choice.addEventListener("click", function () {
-            const selected = choice.dataset.index;
-
-            if (selected === answer) {
-    quizMessage.textContent =
-        lang === "ko"
-            ? "정답입니다! 학습 완료로 저장했습니다."
-            : lang === "en"
-            ? "Correct! Saved as learning completed."
-            : lang === "ja"
-            ? "正解です！学習完了として保存しました。"
-            : "せいかいです！がくしゅうかんりょうとしてほぞんしました。";
-
-    const completeCheck =
-        document.getElementById("completeCheck");
-
-    if (completeCheck) {
-        completeCheck.checked = true;
-
-        const key = completeCheck.dataset.key;
-        localStorage.setItem(key, "done");
-        if (window.dgapSaveProgress) {
-            window.dgapSaveProgress(key, true, document.querySelector("h1").textContent);
-        }
-    }
-} else {
-                quizMessage.textContent =
-                    lang === "ko"
-                        ? "다시 한번 생각해 보세요."
-                        : lang === "en"
-                        ? "Please think again."
-                        : lang === "ja"
-                        ? "もう一度考えてみましょう。"
-                        : "もういちどかんがえてみましょう。";
-            }
-        });
-    });
-}
 const favoriteButton = document.getElementById("favoriteButton");
 
 if (favoriteButton) {
@@ -249,9 +237,7 @@ if (favoriteButton) {
     const favorites =
         JSON.parse(localStorage.getItem("favoriteLessons")) || [];
 
-    if (favorites.includes(favoriteKey)) {
-        favoriteButton.textContent = getDgapFavoriteRemoveText();
-    }
+    updateFavoriteButton(favoriteButton, favorites.includes(favoriteKey));
 
     favoriteButton.addEventListener("click", function () {
         const favorites =
@@ -271,7 +257,9 @@ if (favoriteButton) {
                 window.dgapSaveFavorite(favoriteKey, false);
             }
 
-            favoriteButton.textContent = getDgapFavoriteAddText();
+            updateFavoriteButton(favoriteButton, false);
+            const status = document.getElementById("favoriteStatus");
+            if (status) status.textContent = getDgapFavoriteFeedback(false);
 
         } else {
             favorites.push(favoriteKey);
@@ -284,7 +272,9 @@ if (favoriteButton) {
                 window.dgapSaveFavorite(favoriteKey, true);
             }
 
-            favoriteButton.textContent = getDgapFavoriteRemoveText();
+            updateFavoriteButton(favoriteButton, true);
+            const status = document.getElementById("favoriteStatus");
+            if (status) status.textContent = getDgapFavoriteFeedback(true);
         }
     });
 }
@@ -441,14 +431,22 @@ if (speakButton) {
                 : "ja-JP";
 
         speech.rate = 0.9;
+        speech.onend = function () {
+            speakButton.setAttribute("aria-pressed", "false");
+            stopSpeakButton.disabled = true;
+        };
 
         speechSynthesis.cancel();
         speechSynthesis.speak(speech);
+        speakButton.setAttribute("aria-pressed", "true");
+        stopSpeakButton.disabled = false;
     });
 }
 
 if (stopSpeakButton) {
     stopSpeakButton.addEventListener("click", function () {
         speechSynthesis.cancel();
+        speakButton.setAttribute("aria-pressed", "false");
+        stopSpeakButton.disabled = true;
     });
 }

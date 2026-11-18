@@ -46,13 +46,31 @@
 
                 <div class="hero-buttons">
 
-                    <button type="button"
-                            class="button button-primary button-large"
+                    <button type="button" th:unless="${authenticated}"
+                            class="button button-primary button-large hero-primary-action"
+                            data-home-action="start"
                             data-scroll-target="#learning"
                             data-ripple>
                         学習を始める
                         <span aria-hidden="true">→</span>
                     </button>
+
+                    <a th:if="${authenticated && homeDashboard.nextLesson != null}"
+                       class="button button-primary button-large hero-primary-action"
+                       data-home-action="continue"
+                       th:href="${homeDashboard.nextLesson.url + '?lang=' + lang}"
+                       data-ripple>
+                        <span th:text="${lang == 'ko' ? '이어서 학습하기' : (lang == 'en' ? 'Continue learning' : (lang == 'hira' ? 'つづきから まなぶ' : '続きから学ぶ'))}">続きから学ぶ</span>
+                        <span aria-hidden="true">→</span>
+                    </a>
+
+                    <a th:if="${authenticated && homeDashboard.nextLesson == null}"
+                       class="button button-primary button-large hero-primary-action"
+                       data-home-action="review"
+                       href="#learning" data-ripple>
+                        <span class="action-icon action-icon-text" aria-hidden="true">↻</span>
+                        <span th:text="${lang == 'ko' ? '학습 복습하기' : (lang == 'en' ? 'Review lessons' : (lang == 'hira' ? 'れっすんを ふくしゅうする' : 'レッスンを復習する'))}">レッスンを復習する</span>
+                    </a>
 
                     <a class="button button-secondary button-large"
                        th:href="@{/diagnosis(lang=${lang})}"
@@ -114,15 +132,20 @@
                             </div>
                         </div>
 
-                        <div class="demo-progress">
+                        <div class="demo-progress" th:if="${authenticated}">
                             <div class="demo-progress-info">
                                 <span>学習の進み具合</span>
-                                <strong>60%</strong>
+                                <strong th:text="${homeDashboard.progressPercent + '%'}">0%</strong>
                             </div>
 
                             <div class="demo-progress-track">
-                                <span></span>
+                                <span th:style="'--progress: ' + ${homeDashboard.progressPercent} + '%'" ></span>
                             </div>
+                        </div>
+
+                        <div class="demo-signin-note" th:unless="${authenticated}">
+                            <span>ログインすると学習の進捗を保存できます。</span>
+                            <a th:href="@{/login(lang=${lang})}">ログイン</a>
                         </div>
 
                     </div>
@@ -163,7 +186,7 @@
 
             <div class="category-grid">
 
-                <a class="category-card reveal"
+                <a class="category-card reveal" data-onboarding="first-category"
                    th:href="@{/category/smartphone(lang=${lang})}">
 
                     <div class="category-number">01</div>
@@ -394,6 +417,47 @@
     </section>
 
 </main>
+
+<div class="onboarding-welcome" id="onboardingWelcome" hidden>
+    <section class="onboarding-welcome-card" role="dialog" aria-modal="true"
+             aria-labelledby="onboardingWelcomeTitle" aria-describedby="onboardingWelcomeDescription">
+        <div class="onboarding-brand" aria-hidden="true">D-Gap GUIDE</div>
+        <h2 id="onboardingWelcomeTitle" data-onboarding-text="welcomeTitle">D-Gapの使い方を一緒に確認しますか？</h2>
+        <p id="onboardingWelcomeDescription" data-onboarding-text="welcomeDescription">約30秒で、基本的な使い方を実際に操作しながら確認できます。</p>
+        <ul class="onboarding-welcome-points">
+            <li data-onboarding-text="welcomePoint1">文字サイズと言語の変更</li>
+            <li data-onboarding-text="welcomePoint2">メニューから学習を探す方法</li>
+            <li data-onboarding-text="welcomePoint3">学習カテゴリの選び方</li>
+        </ul>
+        <p class="onboarding-welcome-note" data-onboarding-text="welcomeNote">案内はいつでも「その他 → 使い方」からもう一度確認できます。</p>
+        <div class="onboarding-welcome-actions">
+            <button type="button" class="button button-primary" id="onboardingStart"
+                    data-onboarding-text="start">案内を始める</button>
+            <button type="button" class="button button-secondary" id="onboardingWelcomeSkip"
+                    data-onboarding-text="skip">スキップ</button>
+        </div>
+    </section>
+</div>
+
+<div class="onboarding-tour" id="onboardingTour" hidden>
+    <div class="onboarding-shade" aria-hidden="true"></div>
+    <div class="onboarding-spotlight" id="onboardingSpotlight" aria-hidden="true"></div>
+    <section class="onboarding-popover" id="onboardingPopover" role="dialog"
+             aria-labelledby="onboardingStepTitle" aria-describedby="onboardingStepDescription">
+        <div class="onboarding-popover-top">
+            <span class="onboarding-progress" id="onboardingProgress">1 / 4</span>
+            <button type="button" class="onboarding-skip" id="onboardingSkip"
+                    data-onboarding-text="skip">スキップ</button>
+        </div>
+        <h2 id="onboardingStepTitle">表示設定を開いてみましょう</h2>
+        <p id="onboardingStepDescription">強調されている「表示設定」をタップしてください。</p>
+        <p class="onboarding-action-hint" id="onboardingActionHint">↑ 強調された場所をタップ</p>
+        <div class="onboarding-popover-actions">
+            <button type="button" class="onboarding-back" id="onboardingBack">戻る</button>
+        </div>
+    </section>
+    <p class="visually-hidden" id="onboardingLiveRegion" role="status" aria-live="polite"></p>
+</div>
 
 <footer th:replace="~{fragments/layout :: footer}"></footer>
 <th:block th:replace="~{fragments/layout :: scripts}"></th:block>

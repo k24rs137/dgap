@@ -14,6 +14,8 @@ public final class MyPageDto {
 
     public record HistoryItem(String title, String url, String completedDate) {}
 
+    public record ReviewItem(String title, String description, String url, String dueDate) {}
+
     public record View(
             String userId,
             String displayName,
@@ -21,6 +23,11 @@ public final class MyPageDto {
             int totalCount,
             int progressPercent,
             LessonItem nextLesson,
+            List<ReviewItem> reviewLessons,
+            String nextReviewDate,
+            int assessedCount,
+            int improvedCount,
+            int missionCompletedCount,
             List<LessonItem> favorites,
             List<HistoryItem> recentHistory) {}
 }

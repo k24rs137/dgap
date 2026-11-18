@@ -75,7 +75,8 @@
                     <button class="button button-primary search-submit-button"
                             type="submit"
                             data-ripple>
-                        検索する
+                        <svg class="action-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m21 20-4.6-4.6a7.5 7.5 0 1 0-1 1L20 21a.7.7 0 0 0 1-1ZM5.5 10.5a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"/></svg>
+                        <span th:text="${lang == 'ko' ? '검색하기' : (lang == 'en' ? 'Search' : (lang == 'hira' ? 'けんさくする' : '検索する'))}">検索する</span>
                     </button>
                 </div>
 
@@ -84,6 +85,16 @@
                    th:text="${lang == 'ko' ? '음성은 브라우저의 음성 인식 서비스에서 처리될 수 있습니다.' : (lang == 'en' ? 'Your voice may be processed by your browser’s speech recognition service.' : (lang == 'hira' ? 'こえは ぶらうざの おんせいにんしき さーびすで しょりされる ことが あります。' : '音声はブラウザの音声認識サービスで処理される場合があります。'))}">音声はブラウザの音声認識サービスで処理される場合があります。</p>
 
             </form>
+
+            <section class="search-history" id="searchHistory" aria-labelledby="searchHistoryTitle" hidden>
+                <div class="search-history-heading">
+                    <h2 id="searchHistoryTitle"
+                        th:text="${lang == 'ko' ? '최근 검색' : (lang == 'en' ? 'Recent searches' : (lang == 'hira' ? 'さいきんの けんさく' : '最近の検索'))}">最近の検索</h2>
+                    <button type="button" class="search-history-clear" id="clearSearchHistory"
+                            th:text="${lang == 'ko' ? '모두 삭제' : (lang == 'en' ? 'Clear all' : (lang == 'hira' ? 'ぜんぶ けす' : 'すべて削除'))}">すべて削除</button>
+                </div>
+                <div class="search-history-list" id="searchHistoryList"></div>
+            </section>
 
             <div class="search-keywords"
                  aria-label="おすすめ検索ワード">
@@ -147,7 +158,7 @@
 
                 <a class="search-result-card reveal"
                    data-search-card
-                   data-keywords="スマホ スマートフォン 携帯 電話 カメラ 文字入力 入力 画面 操作 基本 smartphone phone camera typing"
+                   data-keywords="スマホ スマートフォン 携帯 電話 カメラ 文字入力 入力 画面 操作 基本 ホーム ジェスチャー Wi-Fi wifi アプリ インストール 更新 削除 通知 容量 ストレージ 文字サイズ 読み上げ QRコード トラブル smartphone phone camera typing app storage notification accessibility qr troubleshooting"
                    th:href="@{/category/smartphone(lang=${lang})}">
 
                     <div class="search-result-icon">

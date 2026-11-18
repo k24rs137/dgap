@@ -65,6 +65,9 @@ public class LessonCatalogService {
                 required(data.outcome(), "lesson outcome"),
                 required(data.practiceTasks(), "lesson practice tasks"),
                 required(data.safetyTip(), "lesson safety tip"),
+                optional(data.prerequisites()),
+                optional(data.deviceNotes()),
+                optional(data.troubleshooting()),
                 required(quiz.question(), "quiz question"),
                 required(quiz.choices(), "quiz choices"),
                 quiz.answerIndex());
@@ -73,6 +76,10 @@ public class LessonCatalogService {
     private <T> T required(T value, String field) {
         if (value == null) throw new IllegalStateException("Missing " + field + " in lesson catalog.");
         return value;
+    }
+
+    private Map<String, List<String>> optional(Map<String, List<String>> value) {
+        return value == null ? Map.of() : value;
     }
 
     private record CatalogFile(List<CategoryData> categories) {}
@@ -94,6 +101,9 @@ public class LessonCatalogService {
             Map<String, String> outcome,
             Map<String, List<String>> practiceTasks,
             Map<String, String> safetyTip,
+            Map<String, List<String>> prerequisites,
+            Map<String, List<String>> deviceNotes,
+            Map<String, List<String>> troubleshooting,
             QuizData quiz) {}
 
     private record QuizData(
